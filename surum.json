@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.17",
+  "surum": "1.0.18",
   "tarih": "2026-10-12",
   "notlar": [
-    "Giriş: kullanıcı adı büyük/küçük harf ve baştaki/sondaki boşluğa takılmaz"
+    "Giriş ekranında 'Kayıt ol'; Kullanıcılar sayfasında kayıt olanlar (tarih, bilgisayar), yönetici yap/satışa çevir; kayıt kaybını önleyen senkron düzeltmesi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.18",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Giriş ekranında 'Kayıt ol'; Kullanıcılar sayfasında kayıt olanlar (tarih, bilgisayar), yönetici yap/satışa çevir; kayıt kaybını önleyen senkron düzeltmesi"
+      ]
+    },
     {
       "surum": "1.0.17",
       "tarih": "2026-10-12",
@@ -136,5 +143,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "0fb37aff8f64618f6fdce3788bcaba77b5839273051b265975a4ed70ef0a1cc3"
+  "sha256": "770f50f9b8d586e79e0124da0fdfc0c51bbefe8c9274daef4d8fa1a552d3553d"
 }
