@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.7",
+  "surum": "1.0.8",
   "tarih": "2026-10-12",
   "notlar": [
-    "Fiyat sorgulama için F4 kısayolu eklendi (göz düğmesi ipucunda yazar)"
+    "Giriş ekranında 'Beni hatırla': kullanıcı adı ve şifre hazır gelir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.8",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Giriş ekranında 'Beni hatırla': kullanıcı adı ve şifre hazır gelir"
+      ]
+    },
     {
       "surum": "1.0.7",
       "tarih": "2026-10-12",
@@ -66,5 +73,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "7aa1b1134de906a1e74a8123aebbf97870bf4c05ea35338b6eb59859a07a4ed9"
+  "sha256": "e4de3cdf9055ad24e6eaea5ec741a45ffac76dabc3ccf676ff52b722aff73c3f"
 }
