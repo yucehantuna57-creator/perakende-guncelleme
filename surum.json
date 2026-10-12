@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.11",
+  "surum": "1.0.12",
   "tarih": "2026-10-12",
   "notlar": [
-    "Ürün eklerken 'Kategori yok' seçeneği: her ürün bir kategoriye eklenmek zorunda değil"
+    "Raporlar: yeni gösterge paneli (dönem seçimi, fiş/satış/tahsilat halka grafikleri, günlük satış grafiği, kasa seçimi)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.12",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Raporlar: yeni gösterge paneli (dönem seçimi, fiş/satış/tahsilat halka grafikleri, günlük satış grafiği, kasa seçimi)"
+      ]
+    },
     {
       "surum": "1.0.11",
       "tarih": "2026-10-12",
@@ -94,5 +101,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "eb374cf6f891d56083b46f851ebe4161327bdc4743a99c12303db02bc1ab2397"
+  "sha256": "8236d653e09e8591760549298780d471279c7a4b88e67437cd56c8585eddeafd"
 }
