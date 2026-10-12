@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.3",
+  "surum": "1.0.4",
   "tarih": "2026-10-12",
   "notlar": [
-    "Göz düğmesi: kasada fiyat sorgu kutusu, barkod okutunca ürün fiyatı görünür"
+    "Fiyat sorgu kutusunun kapatma düğmesi kutucuk şeklinde"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.4",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Fiyat sorgu kutusunun kapatma düğmesi kutucuk şeklinde"
+      ]
+    },
     {
       "surum": "1.0.3",
       "tarih": "2026-10-12",
@@ -37,5 +44,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f4170f3f3e0641f6e947fcf5ca4a25ad39aacb99067c8897a077882ce8b35521"
+  "sha256": "74b01ea17298ee57e13403948f5c47e3324c8831c3037ddadd96d0af60cfebf0"
 }
