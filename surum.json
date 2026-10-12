@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.12",
+  "surum": "1.0.13",
   "tarih": "2026-10-12",
   "notlar": [
-    "Raporlar: yeni gösterge paneli (dönem seçimi, fiş/satış/tahsilat halka grafikleri, günlük satış grafiği, kasa seçimi)"
+    "Kategori ayarları: kategorinin içine '+ Ürün ekle' düğmesi (mevcut ürünleri seç veya yeni ürün oluştur), kategori silerken 'Kategorisiz bırak' seçeneği"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.13",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Kategori ayarları: kategorinin içine '+ Ürün ekle' düğmesi (mevcut ürünleri seç veya yeni ürün oluştur), kategori silerken 'Kategorisiz bırak' seçeneği"
+      ]
+    },
     {
       "surum": "1.0.12",
       "tarih": "2026-10-12",
@@ -101,5 +108,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "8236d653e09e8591760549298780d471279c7a4b88e67437cd56c8585eddeafd"
+  "sha256": "16359f32c139c5f1465aef0e58c6d786fc84e2744a99c5339be1afc5ceedc19f"
 }
