@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.14",
+  "surum": "1.0.15",
   "tarih": "2026-10-12",
   "notlar": [
-    "Ürünler sayfasında gerçek 'Sil' düğmesi: silinen ürün listelerden, kategoriden ve kasadan kalkar, geri gelmez"
+    "Ayarlar > Deneme verilerini sıfırla: ürün, kategori, stok, satış ve müşteri kayıtlarını temizler (önce otomatik yedek, kullanıcılar ve ayarlar kalır)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.15",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Ayarlar > Deneme verilerini sıfırla: ürün, kategori, stok, satış ve müşteri kayıtlarını temizler (önce otomatik yedek, kullanıcılar ve ayarlar kalır)"
+      ]
+    },
     {
       "surum": "1.0.14",
       "tarih": "2026-10-12",
@@ -115,5 +122,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "a79042948012e44cd641aec1bf6262031519561bbd6358c58825a604e2747e7a"
+  "sha256": "da892166904d41ad02c9af3c8e64e01c3a6318c0d9068aec1c594eb615686cc5"
 }
