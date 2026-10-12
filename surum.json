@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.10",
+  "surum": "1.0.11",
   "tarih": "2026-10-12",
   "notlar": [
-    "Güncelleme denetimi her zaman en yeni sürümü görür (GitHub önbelleği atlanır)"
+    "Ürün eklerken 'Kategori yok' seçeneği: her ürün bir kategoriye eklenmek zorunda değil"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.11",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Ürün eklerken 'Kategori yok' seçeneği: her ürün bir kategoriye eklenmek zorunda değil"
+      ]
+    },
     {
       "surum": "1.0.10",
       "tarih": "2026-10-12",
@@ -87,5 +94,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "0835d2f60ecab81e2968413e2465eb18df5071c15be916c027ce5b2580843da5"
+  "sha256": "eb374cf6f891d56083b46f851ebe4161327bdc4743a99c12303db02bc1ab2397"
 }
