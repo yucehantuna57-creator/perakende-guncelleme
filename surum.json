@@ -1,12 +1,17 @@
 {
-  "surum": "1.0.1",
+  "surum": "1.0.2",
   "tarih": "2026-10-12",
   "notlar": [
-    "Güncelleme denetimi düzeltildi",
-    "Güncellemeden önce veri tabanı yedeği alınır",
-    "İnternetten (GitHub) güncelleme desteği"
+    "Güncelleme ayarı sadeleştirildi, adres uygulamanın içine gömüldü"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.2",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Güncelleme ayarı sadeleştirildi, adres uygulamanın içine gömüldü"
+      ]
+    },
     {
       "surum": "1.0.1",
       "tarih": "2026-10-12",
@@ -25,5 +30,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "81e19598badf20ad99c2e79c360929313b0a4e60d007174317d59291307fe2d9"
+  "sha256": "6f9521d2da59194986327f95beca2428af907942469066cf744a600b33afef3a"
 }
