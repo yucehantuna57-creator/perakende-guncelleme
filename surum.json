@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.18",
+  "surum": "1.0.19",
   "tarih": "2026-10-12",
   "notlar": [
-    "Giriş ekranında 'Kayıt ol'; Kullanıcılar sayfasında kayıt olanlar (tarih, bilgisayar), yönetici yap/satışa çevir; kayıt kaybını önleyen senkron düzeltmesi"
+    "Kayıt olanlar merkezi listeye (Supabase) de bildirilir: kim, hangi bilgisayar, hangi işletme"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.19",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Kayıt olanlar merkezi listeye (Supabase) de bildirilir: kim, hangi bilgisayar, hangi işletme"
+      ]
+    },
     {
       "surum": "1.0.18",
       "tarih": "2026-10-12",
@@ -143,5 +150,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "770f50f9b8d586e79e0124da0fdfc0c51bbefe8c9274daef4d8fa1a552d3553d"
+  "sha256": "8dd75359c3c351a7bc1e304b0d0a3651bf662868be76b51a7d1df2cbb8760839"
 }
