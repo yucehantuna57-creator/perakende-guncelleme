@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.9",
+  "surum": "1.0.10",
   "tarih": "2026-10-12",
   "notlar": [
-    "İki kullanıcı türü: Yönetici (stok ve yönetim) ve Satış (yalnızca satış yapar)"
+    "Güncelleme denetimi her zaman en yeni sürümü görür (GitHub önbelleği atlanır)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.10",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Güncelleme denetimi her zaman en yeni sürümü görür (GitHub önbelleği atlanır)"
+      ]
+    },
     {
       "surum": "1.0.9",
       "tarih": "2026-10-12",
@@ -80,5 +87,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "767625cf3801192cb24ec7a9344d4118cfecaea31d0d9d47a6171f27ca07f731"
+  "sha256": "0835d2f60ecab81e2968413e2465eb18df5071c15be916c027ce5b2580843da5"
 }
