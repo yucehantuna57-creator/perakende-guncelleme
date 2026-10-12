@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.13",
+  "surum": "1.0.14",
   "tarih": "2026-10-12",
   "notlar": [
-    "Kategori ayarları: kategorinin içine '+ Ürün ekle' düğmesi (mevcut ürünleri seç veya yeni ürün oluştur), kategori silerken 'Kategorisiz bırak' seçeneği"
+    "Ürünler sayfasında gerçek 'Sil' düğmesi: silinen ürün listelerden, kategoriden ve kasadan kalkar, geri gelmez"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.14",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Ürünler sayfasında gerçek 'Sil' düğmesi: silinen ürün listelerden, kategoriden ve kasadan kalkar, geri gelmez"
+      ]
+    },
     {
       "surum": "1.0.13",
       "tarih": "2026-10-12",
@@ -108,5 +115,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "16359f32c139c5f1465aef0e58c6d786fc84e2744a99c5339be1afc5ceedc19f"
+  "sha256": "a79042948012e44cd641aec1bf6262031519561bbd6358c58825a604e2747e7a"
 }
