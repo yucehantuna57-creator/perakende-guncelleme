@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.2",
+  "surum": "1.0.3",
   "tarih": "2026-10-12",
   "notlar": [
-    "Güncelleme ayarı sadeleştirildi, adres uygulamanın içine gömüldü"
+    "Göz düğmesi: kasada fiyat sorgu kutusu, barkod okutunca ürün fiyatı görünür"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.3",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Göz düğmesi: kasada fiyat sorgu kutusu, barkod okutunca ürün fiyatı görünür"
+      ]
+    },
     {
       "surum": "1.0.2",
       "tarih": "2026-10-12",
@@ -30,5 +37,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "6f9521d2da59194986327f95beca2428af907942469066cf744a600b33afef3a"
+  "sha256": "f4170f3f3e0641f6e947fcf5ca4a25ad39aacb99067c8897a077882ce8b35521"
 }
