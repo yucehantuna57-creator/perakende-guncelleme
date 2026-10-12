@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.4",
+  "surum": "1.0.5",
   "tarih": "2026-10-12",
   "notlar": [
-    "Fiyat sorgu kutusunun kapatma düğmesi kutucuk şeklinde"
+    "Program açılırken güncelleme sorulur (güncellemek ister misiniz), onaylanınca otomatik güncellenip açılır",
+    "Masaüstü programının kendisi de güncellemeyle yenilenir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.5",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Program açılırken güncelleme sorulur (güncellemek ister misiniz), onaylanınca otomatik güncellenip açılır",
+        "Masaüstü programının kendisi de güncellemeyle yenilenir"
+      ]
+    },
     {
       "surum": "1.0.4",
       "tarih": "2026-10-12",
@@ -44,5 +53,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "74b01ea17298ee57e13403948f5c47e3324c8831c3037ddadd96d0af60cfebf0"
+  "sha256": "f3fc67550ee57219f18236a013b491e4574e97a73cf7e03517a1947e668942bf"
 }
