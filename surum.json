@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.8",
+  "surum": "1.0.9",
   "tarih": "2026-10-12",
   "notlar": [
-    "Giriş ekranında 'Beni hatırla': kullanıcı adı ve şifre hazır gelir"
+    "İki kullanıcı türü: Yönetici (stok ve yönetim) ve Satış (yalnızca satış yapar)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.9",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "İki kullanıcı türü: Yönetici (stok ve yönetim) ve Satış (yalnızca satış yapar)"
+      ]
+    },
     {
       "surum": "1.0.8",
       "tarih": "2026-10-12",
@@ -73,5 +80,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "e4de3cdf9055ad24e6eaea5ec741a45ffac76dabc3ccf676ff52b722aff73c3f"
+  "sha256": "767625cf3801192cb24ec7a9344d4118cfecaea31d0d9d47a6171f27ca07f731"
 }
