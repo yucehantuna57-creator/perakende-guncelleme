@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.16",
+  "surum": "1.0.17",
   "tarih": "2026-10-12",
   "notlar": [
-    "Kullanıcılar sayfasında 'Sil' düğmesi (geçmiş kaydı olmayan kullanıcılar silinebilir)"
+    "Giriş: kullanıcı adı büyük/küçük harf ve baştaki/sondaki boşluğa takılmaz"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.17",
+      "tarih": "2026-10-12",
+      "notlar": [
+        "Giriş: kullanıcı adı büyük/küçük harf ve baştaki/sondaki boşluğa takılmaz"
+      ]
+    },
     {
       "surum": "1.0.16",
       "tarih": "2026-10-12",
@@ -129,5 +136,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "042f17094ac1f0f6cf198e980cf80e11098ad357b45ad6987403da61671aeef9"
+  "sha256": "0fb37aff8f64618f6fdce3788bcaba77b5839273051b265975a4ed70ef0a1cc3"
 }
