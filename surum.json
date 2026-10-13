@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.22",
+  "surum": "1.0.23",
   "tarih": "2026-10-13",
   "notlar": [
-    "Kayıt ol: Satış veya Yönetici seçilir (yönetici için mevcut yönetici onayı gerekir); yönetici tam yetkiyle kullanıcı açabilir"
+    "Kayıt mesajı netleştirildi: kullanıcı adı yalnızca o bilgisayardaki kullanıcılarla karşılaştırılır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.23",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Kayıt mesajı netleştirildi: kullanıcı adı yalnızca o bilgisayardaki kullanıcılarla karşılaştırılır"
+      ]
+    },
     {
       "surum": "1.0.22",
       "tarih": "2026-10-13",
@@ -171,5 +178,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "661582ee886004286e2e1484087e4864b4d222db960fcf28e452fb5494aed002"
+  "sha256": "e2418a0aa7c66b1b6411820e38d5f3947dccdf1ab94fac822fdb52d697549c01"
 }
