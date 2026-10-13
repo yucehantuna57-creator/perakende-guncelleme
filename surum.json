@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.24",
+  "surum": "1.0.25",
   "tarih": "2026-10-13",
   "notlar": [
-    "Deneme verilerini sıfırlarken 'kullanıcılar da silinsin mi' seçeneği: eski örnek yönetici silinir, ilk kurulum ekranına dönülür"
+    "Örnek (deneme) ürün, kategori, kullanıcı ve müşteri verisi tamamen kaldırıldı; yeni kurulum boş başlar"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.25",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Örnek (deneme) ürün, kategori, kullanıcı ve müşteri verisi tamamen kaldırıldı; yeni kurulum boş başlar"
+      ]
+    },
     {
       "surum": "1.0.24",
       "tarih": "2026-10-13",
@@ -185,5 +192,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "c79e366595c54c13358f3cccc07748c984ba31726b2e94ae96708b63d88a07ce"
+  "sha256": "760e0d5706501950c2ab2a091fa5ad0d146ae05063121fe0c17af9ec8952bce5"
 }
