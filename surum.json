@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.31",
+  "surum": "1.0.32",
   "tarih": "2026-10-13",
   "notlar": [
-    "Kayıt ol: rol seçimi kaldırıldı, herkes tek tür (tam yetkili) hesap açar; lisans üretim paneli yalnızca tuna'da"
+    "Kayıt olurken lisans gerekirse: anahtar girilince kayıt otomatik tamamlanır ve giriş yapılır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.32",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Kayıt olurken lisans gerekirse: anahtar girilince kayıt otomatik tamamlanır ve giriş yapılır"
+      ]
+    },
     {
       "surum": "1.0.31",
       "tarih": "2026-10-13",
@@ -234,5 +241,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "ed914a6c3527900a0bd9dbdaced9531167b587d5e92dea2718f15534dac7ac52"
+  "sha256": "25861252fa0b02e8296f3167188d87cb35d8d0296cf8efa4d7a693bfd7949fe1"
 }
