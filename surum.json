@@ -1,10 +1,29 @@
 {
-  "surum": "1.0.33",
+  "surum": "1.0.34",
   "tarih": "2026-10-13",
   "notlar": [
-    "Ayarlar: Excel (.xlsx) / CSV ile toplu ürün yükleme (şablon, önizleme, yeni ürün ekleme ve mevcut ürün güncelleme)"
+    "Yedekleme ve geri yükleme ekranı",
+    "Fiş ayarları (kağıt genişliği, adres, telefon, alt not, otomatik yazdırma)",
+    "Barkod okutunca bip sesi ve '5*barkod' ile adet kısayolu",
+    "Raporlar: ürün/kasiyer/ödeme bazlı satış raporu ve Excel'e aktarma",
+    "Gün sonu / kasa hesap ekstresi (nakit sayımı, fark, yazdırma)",
+    "Web sitesi bağlantısı: ürün ve stoklar web sitesine gönderilir",
+    "Geliştirici paneli: lisans listesi, süre uzatma, açma/kapama"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.34",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Yedekleme ve geri yükleme ekranı",
+        "Fiş ayarları (kağıt genişliği, adres, telefon, alt not, otomatik yazdırma)",
+        "Barkod okutunca bip sesi ve '5*barkod' ile adet kısayolu",
+        "Raporlar: ürün/kasiyer/ödeme bazlı satış raporu ve Excel'e aktarma",
+        "Gün sonu / kasa hesap ekstresi (nakit sayımı, fark, yazdırma)",
+        "Web sitesi bağlantısı: ürün ve stoklar web sitesine gönderilir",
+        "Geliştirici paneli: lisans listesi, süre uzatma, açma/kapama"
+      ]
+    },
     {
       "surum": "1.0.33",
       "tarih": "2026-10-13",
@@ -248,5 +267,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "03c3c24c59e0b6f3e696b0b6f59d2ab121e2800d135ffd4f33f3bba1b324a651"
+  "sha256": "2b2694bdaf8d248393b83da8d783975bf22e835b6d4db2c38b19640fdcde99b8"
 }
