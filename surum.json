@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.32",
+  "surum": "1.0.33",
   "tarih": "2026-10-13",
   "notlar": [
-    "Kayıt olurken lisans gerekirse: anahtar girilince kayıt otomatik tamamlanır ve giriş yapılır"
+    "Ayarlar: Excel (.xlsx) / CSV ile toplu ürün yükleme (şablon, önizleme, yeni ürün ekleme ve mevcut ürün güncelleme)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.33",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Ayarlar: Excel (.xlsx) / CSV ile toplu ürün yükleme (şablon, önizleme, yeni ürün ekleme ve mevcut ürün güncelleme)"
+      ]
+    },
     {
       "surum": "1.0.32",
       "tarih": "2026-10-13",
@@ -241,5 +248,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "25861252fa0b02e8296f3167188d87cb35d8d0296cf8efa4d7a693bfd7949fe1"
+  "sha256": "03c3c24c59e0b6f3e696b0b6f59d2ab121e2800d135ffd4f33f3bba1b324a651"
 }
