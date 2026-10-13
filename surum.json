@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.28",
+  "surum": "1.0.29",
   "tarih": "2026-10-13",
   "notlar": [
-    "Lisans ekranına 'Giriş ekranına dön' düğmesi eklendi"
+    "Geliştirici paneli: lisans anahtarı üretici yalnızca geliştirici lisansı ve tanımlı kullanıcıyla Ayarlar'da görünür"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.29",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Geliştirici paneli: lisans anahtarı üretici yalnızca geliştirici lisansı ve tanımlı kullanıcıyla Ayarlar'da görünür"
+      ]
+    },
     {
       "surum": "1.0.28",
       "tarih": "2026-10-13",
@@ -213,5 +220,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "6947c0bae8e4abdffde01e38f8a1d79c085d22a092d517c87bf98539a09ab412"
+  "sha256": "358942d62889730f7312fa425fbe12cf093aea6b6da3fab46e928fbb985025dc"
 }
