@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.20",
-  "tarih": "2026-10-12",
+  "surum": "1.0.21",
+  "tarih": "2026-10-13",
   "notlar": [
-    "Lisans sistemi (deneme 7 gün, anahtar, süre dolunca kilit), ilk kurulum ekranı (yönetici hesabı), örnek ürün/kullanıcı kaldırıldı"
+    "Ayarlar: sürüm ve 'Güncellemeleri denetle' her kullanıcıda görünür; veri sıfırlama/yedek araçları yalnızca yönetici"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.21",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Ayarlar: sürüm ve 'Güncellemeleri denetle' her kullanıcıda görünür; veri sıfırlama/yedek araçları yalnızca yönetici"
+      ]
+    },
     {
       "surum": "1.0.20",
       "tarih": "2026-10-12",
@@ -157,5 +164,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "d822bd6ffa5347ad27fe740d786c155cead945e7e2b4ca90e8a6b5dba0930ec0"
+  "sha256": "30bced7122b650ecbf8996c3455db40efc4b9523aac2f6fb5e5b59c0cd4c12c4"
 }
