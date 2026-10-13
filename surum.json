@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.26",
+  "surum": "1.0.27",
   "tarih": "2026-10-13",
   "notlar": [
-    "Kayıt ol: Yönetici seçilince başka yöneticinin bilgisi istenmez, kişi kendi yönetici hesabını açar"
+    "Kayıt ol: yönetici kaydı yalnızca bilgisayarda hiç yönetici yokken serbest; sonrakiler Satış olarak kayıt olur"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.27",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Kayıt ol: yönetici kaydı yalnızca bilgisayarda hiç yönetici yokken serbest; sonrakiler Satış olarak kayıt olur"
+      ]
+    },
     {
       "surum": "1.0.26",
       "tarih": "2026-10-13",
@@ -199,5 +206,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "b194bd704db72d893b37e373dc6d38a87cf892696d21424629f68babb8199963"
+  "sha256": "9316647db6d9039b28e9c5f585ec65e2decd591f736c7fb6c54561aaa570db7a"
 }
