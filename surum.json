@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.23",
+  "surum": "1.0.24",
   "tarih": "2026-10-13",
   "notlar": [
-    "Kayıt mesajı netleştirildi: kullanıcı adı yalnızca o bilgisayardaki kullanıcılarla karşılaştırılır"
+    "Deneme verilerini sıfırlarken 'kullanıcılar da silinsin mi' seçeneği: eski örnek yönetici silinir, ilk kurulum ekranına dönülür"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.24",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Deneme verilerini sıfırlarken 'kullanıcılar da silinsin mi' seçeneği: eski örnek yönetici silinir, ilk kurulum ekranına dönülür"
+      ]
+    },
     {
       "surum": "1.0.23",
       "tarih": "2026-10-13",
@@ -178,5 +185,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "e2418a0aa7c66b1b6411820e38d5f3947dccdf1ab94fac822fdb52d697549c01"
+  "sha256": "c79e366595c54c13358f3cccc07748c984ba31726b2e94ae96708b63d88a07ce"
 }
