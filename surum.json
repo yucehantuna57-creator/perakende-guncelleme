@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.29",
+  "surum": "1.0.30",
   "tarih": "2026-10-13",
   "notlar": [
-    "Geliştirici paneli: lisans anahtarı üretici yalnızca geliştirici lisansı ve tanımlı kullanıcıyla Ayarlar'da görünür"
+    "Kayıt olurken lisans geçersizse lisans kilit ekranı açılır (anahtar girilebilir)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.30",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Kayıt olurken lisans geçersizse lisans kilit ekranı açılır (anahtar girilebilir)"
+      ]
+    },
     {
       "surum": "1.0.29",
       "tarih": "2026-10-13",
@@ -220,5 +227,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "358942d62889730f7312fa425fbe12cf093aea6b6da3fab46e928fbb985025dc"
+  "sha256": "ba8a5f2e5e008f65eb3ad566d70521a0dcc4e6b7009c6e747245d06035e84a93"
 }
