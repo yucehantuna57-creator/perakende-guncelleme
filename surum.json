@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.25",
+  "surum": "1.0.26",
   "tarih": "2026-10-13",
   "notlar": [
-    "Örnek (deneme) ürün, kategori, kullanıcı ve müşteri verisi tamamen kaldırıldı; yeni kurulum boş başlar"
+    "Kayıt ol: Yönetici seçilince başka yöneticinin bilgisi istenmez, kişi kendi yönetici hesabını açar"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.26",
+      "tarih": "2026-10-13",
+      "notlar": [
+        "Kayıt ol: Yönetici seçilince başka yöneticinin bilgisi istenmez, kişi kendi yönetici hesabını açar"
+      ]
+    },
     {
       "surum": "1.0.25",
       "tarih": "2026-10-13",
@@ -192,5 +199,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "760e0d5706501950c2ab2a091fa5ad0d146ae05063121fe0c17af9ec8952bce5"
+  "sha256": "b194bd704db72d893b37e373dc6d38a87cf892696d21424629f68babb8199963"
 }
