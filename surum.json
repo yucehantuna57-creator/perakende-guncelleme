@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.41",
+  "surum": "1.0.42",
   "tarih": "2026-10-16",
   "notlar": [
-    "Ayarlar'a 'SOFTNEST cari bağlantısı' eklendi: bağlantı kodu üretilir ve kopyalanır"
+    "Faturalar menüsü: imleç üstüne gelince Alış faturası / Satış faturası alt menüsü açılır, imleç çekilince kapanır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.42",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Faturalar menüsü: imleç üstüne gelince Alış faturası / Satış faturası alt menüsü açılır, imleç çekilince kapanır"
+      ]
+    },
     {
       "surum": "1.0.41",
       "tarih": "2026-10-16",
@@ -315,5 +322,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "1e3e961aa82dc14378f299b89962f9fae819d49eabff7025da49448c2957f566"
+  "sha256": "76d726e071a1cc4ce9628c10214dc74681c0683b4761c8b85692abe7f8ae457f"
 }
