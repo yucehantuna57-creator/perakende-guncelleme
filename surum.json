@@ -1,13 +1,17 @@
 {
-  "surum": "1.0.38",
+  "surum": "1.0.39",
   "tarih": "2026-10-16",
   "notlar": [
-    "Alış faturası ekranı eklendi (elle giriş, XML / Excel / PDF dosyasından yükleme)",
-    "Faturadaki farklı yazılmış ürün adları stoktaki ürünle eşleştirilir, 'aynı ürün mü?' diye sorulur, stoktaki ad geçerli olur",
-    "SOFTNEST cari faturaları buluttan otomatik gelir; stok, alış fiyatı ve tedarikçi carisine işlenir",
-    "Ürünlerde toplu silme ve stok sekmesinde stok düzenleme"
+    "Alış Faturası menüsü görünmüyordu, düzeltildi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.39",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Alış Faturası menüsü görünmüyordu, düzeltildi"
+      ]
+    },
     {
       "surum": "1.0.38",
       "tarih": "2026-10-16",
@@ -297,5 +301,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "1787192230cfe53c4a932979299fb293517ba77405ad20c7aa62aadecd7327a1"
+  "sha256": "79df44b2ab4bec76b0ab9a2e0fa5fc2f83094d4392f3ed7b18f5da9147234cae"
 }
