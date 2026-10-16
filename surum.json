@@ -1,10 +1,21 @@
 {
-  "surum": "1.0.45",
+  "surum": "1.0.46",
   "tarih": "2026-10-16",
   "notlar": [
-    "SOFTNEST cari alış faturası kaydedilemiyordu (cari tablosu kısıtı), düzeltildi; cariden gelen fatura düşmüyorsa hata artık görünüyor"
+    "Cariden gelen fatura artık onayınızı bekliyor: incelenip 'ürünlere ve cariye işlensin mi' sorusuna evet denince işleniyor",
+    "Alış faturasında Düzenle, satış fiyatı ve barkod ekleme eklendi",
+    "Tedarikçi cari ekstresinde fatura içeriği görünüyor, alacak sütunu düzeltildi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.46",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Cariden gelen fatura artık onayınızı bekliyor: incelenip 'ürünlere ve cariye işlensin mi' sorusuna evet denince işleniyor",
+        "Alış faturasında Düzenle, satış fiyatı ve barkod ekleme eklendi",
+        "Tedarikçi cari ekstresinde fatura içeriği görünüyor, alacak sütunu düzeltildi"
+      ]
+    },
     {
       "surum": "1.0.45",
       "tarih": "2026-10-16",
@@ -343,5 +354,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "d93a1ad4fc61d8249501eee31ed0a5ebabda188b968a07b575ce955fb421ba4b"
+  "sha256": "c7df6f189f614ade88dcda55e35c0edc5126d758207d15e4d70a8d1babc682f9"
 }
