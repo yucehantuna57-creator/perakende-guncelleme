@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f3a5f">
+<title>SOFTNEST-satış</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="ikon-512.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SOFTNEST">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+  :root { --bg:#f4f6fb; --kart:#fff; --yazi:#1c2433; --soluk:#6b7587; --cizgi:#dde3ee; --ana:#1f3a5f; --ana-yazi:#fff; --yesil:#1e8e4e; --kirmizi:#c0392b; --vurgu:#e8eef8; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#10141c; --kart:#1a202c; --yazi:#e8ecf4; --soluk:#8f99ad; --cizgi:#2a3244; --ana:#4a7bc8; --vurgu:#202a3d; } }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin:0; height:100%; background:var(--bg); color:var(--yazi); font:16px/1.4 system-ui, "Segoe UI", Roboto, sans-serif; overscroll-behavior: none; }
+  button, input { font:inherit; color:inherit; }
+  [hidden] { display:none !important; }
+  input { width:100%; height:46px; border:1px solid var(--cizgi); border-radius:12px; padding:0 14px; background:var(--kart); outline:none; }
+  input:focus { border-color:var(--ana); }
+  .btn { height:46px; border:1px solid var(--cizgi); border-radius:12px; background:var(--kart); padding:0 16px; cursor:pointer; font-weight:600; }
+  .btn.ana { background:var(--ana); border-color:var(--ana); color:var(--ana-yazi); }
+  .btn.yesil { background:var(--yesil); border-color:var(--yesil); color:#fff; }
+  .btn:disabled { opacity:.5; }
+  /* Giriş */
+  #giris { min-height:100%; display:flex; flex-direction:column; justify-content:center; gap:12px; padding:24px; max-width:420px; margin:0 auto; }
+  #giris .logo { text-align:center; margin-bottom:8px; } #giris .logo b { font-size:26px; letter-spacing:.02em; display:block; } #giris .logo span { color:var(--soluk); font-size:14px; }
+  .hata { color:var(--kirmizi); font-size:14px; min-height:20px; }
+  /* Uygulama */
+  #uygulama { height:100%; display:flex; flex-direction:column; }
+  header { background:var(--ana); color:#fff; padding:max(10px, env(safe-area-inset-top)) 14px 10px; display:flex; align-items:center; gap:10px; }
+  header .ad { flex:1; min-width:0; } header .ad b { display:block; font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } header .ad small { opacity:.8; font-size:12px; }
+  header button { background:rgba(255,255,255,.15); border:0; color:#fff; height:38px; border-radius:10px; padding:0 12px; font-weight:600; }
+  .durum { display:inline-block; width:9px; height:9px; border-radius:50%; background:#9aa; margin-right:5px; } .durum.acik { background:#4cd37b; } .durum.kapali { background:#f0a030; }
+  .arama { display:flex; gap:8px; padding:10px 12px 6px; }
+  .arama button { width:52px; padding:0; font-size:20px; flex:none; }
+  .cipler { display:flex; gap:8px; overflow-x:auto; padding:4px 12px 8px; scrollbar-width:none; } .cipler::-webkit-scrollbar { display:none; }
+  .cip { flex:none; border:1px solid var(--cizgi); background:var(--kart); border-radius:999px; padding:7px 14px; font-size:14px; font-weight:600; cursor:pointer; }
+  .cip.aktif { background:var(--ana); border-color:var(--ana); color:#fff; }
+  #urunler { flex:1; overflow-y:auto; padding:4px 12px 90px; display:grid; grid-template-columns:repeat(auto-fill, minmax(150px, 1fr)); gap:10px; align-content:start; }
+  .urun { background:var(--kart); border:1px solid var(--cizgi); border-radius:14px; padding:12px; text-align:left; cursor:pointer; display:flex; flex-direction:column; gap:4px; min-height:92px; }
+  .urun:active { background:var(--vurgu); } .urun .ad { font-weight:600; line-height:1.25; } .urun .fiyat { color:var(--ana); font-weight:700; font-size:17px; } .urun .stok { color:var(--soluk); font-size:12px; } .urun .stok.az { color:var(--kirmizi); }
+  .bos { grid-column:1/-1; text-align:center; color:var(--soluk); padding:36px 0; }
+  #sepet-cubuk { position:fixed; left:0; right:0; bottom:0; padding:10px 12px max(10px, env(safe-area-inset-bottom)); background:var(--bg); border-top:1px solid var(--cizgi); }
+  #sepet-cubuk button { width:100%; height:54px; border-radius:14px; background:var(--yesil); color:#fff; border:0; font-weight:700; font-size:17px; display:flex; justify-content:space-between; align-items:center; padding:0 18px; }
+  #sepet-cubuk button:disabled { background:var(--cizgi); color:var(--soluk); }
+  /* Alt sayfa / pencere */
+  .kaplama { position:fixed; inset:0; background:rgba(0,0,0,.45); display:flex; align-items:flex-end; justify-content:center; z-index:20; }
+  .sayfa { background:var(--bg); width:100%; max-width:520px; max-height:88%; border-radius:20px 20px 0 0; display:flex; flex-direction:column; overflow:hidden; }
+  .sayfa h2 { margin:0; padding:16px 16px 8px; font-size:18px; display:flex; justify-content:space-between; align-items:center; }
+  .sayfa .icerik { overflow-y:auto; padding:0 16px 12px; flex:1; } .sayfa .alt { padding:10px 16px max(14px, env(safe-area-inset-bottom)); display:flex; gap:8px; flex-wrap:wrap; border-top:1px solid var(--cizgi); }
+  .sayfa .alt .btn { flex:1; min-width:96px; }
+  .satir { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--cizgi); } .satir .bilgi { flex:1; min-width:0; } .satir .bilgi b { display:block; } .satir .bilgi small { color:var(--soluk); }
+  .adet { display:flex; align-items:center; gap:6px; } .adet button { width:36px; height:36px; border-radius:10px; border:1px solid var(--cizgi); background:var(--kart); font-size:20px; line-height:1; }
+  .toplam-satir { display:flex; justify-content:space-between; font-size:20px; font-weight:700; padding:14px 0 6px; }
+  #kamera { position:fixed; inset:0; background:#000; z-index:30; display:flex; flex-direction:column; } #kamera video { flex:1; width:100%; object-fit:cover; min-height:0; }
+  #kamera .ipucu { position:absolute; top:18%; left:10%; right:10%; height:26%; border:3px solid rgba(255,255,255,.85); border-radius:16px; box-shadow:0 0 0 999px rgba(0,0,0,.35); pointer-events:none; }
+  #kamera .alt { padding:14px; background:#000; display:flex; gap:8px; } #kamera .alt .btn { flex:1; }
+  .bildirim { position:fixed; left:50%; transform:translateX(-50%); bottom:90px; background:#222; color:#fff; padding:10px 16px; border-radius:12px; z-index:40; font-size:14px; max-width:90%; text-align:center; }
+  .fis { font-family:'Courier New', monospace; font-size:13px; white-space:pre-wrap; background:var(--kart); border:1px dashed var(--cizgi); border-radius:10px; padding:12px; }
+  @media print { body * { visibility:hidden; } #fis-yazdir, #fis-yazdir * { visibility:visible; } #fis-yazdir { position:absolute; left:0; top:0; width:100%; } }
+</style>
+</head>
+<body>
+
+<section id="giris" hidden>
+  <div class="logo"><b>SOFTNEST-satış</b><span>Mobil kasa</span></div>
+  <input id="g-anahtar" placeholder="Lisans anahtarı (örn. 1234-5678-9012)" autocomplete="off" inputmode="numeric">
+  <input id="g-kadi" placeholder="Kullanıcı adı" autocomplete="username" autocapitalize="none">
+  <input id="g-sifre" type="password" placeholder="Şifre" autocomplete="current-password">
+  <div class="hata" id="g-hata"></div>
+  <button class="btn ana" id="g-giris">Giriş yap</button>
+  <small style="color:var(--soluk);text-align:center">Lisans anahtarını ve kullanıcı bilgilerini bilgisayardaki programın Ayarlar → Telefon uygulaması bölümünden öğrenebilirsiniz.</small>
+</section>
+
+<section id="uygulama" hidden>
+  <header>
+    <div class="ad"><b id="u-isletme">SOFTNEST-satış</b><small><span class="durum" id="u-durum"></span><span id="u-durum-yazi">Eşitleniyor</span> · <span id="u-kim"></span></small></div>
+    <button id="u-satislar">Satışlarım</button>
+    <button id="u-menu">⋮</button>
+  </header>
+  <div class="arama">
+    <input id="arama" placeholder="Ürün adı veya barkod" autocomplete="off" enterkeyhint="search">
+    <button class="btn" id="kamera-ac" aria-label="Kamerayla barkod oku">📷</button>
+  </div>
+  <div class="cipler" id="cipler"></div>
+  <div id="urunler"></div>
+  <div id="sepet-cubuk"><button id="sepet-ac" disabled><span id="sepet-adet">Sepet boş</span><span id="sepet-toplam"></span></button></div>
+</section>
+
+<div id="kamera" hidden>
+  <video id="video" playsinline muted></video><div class="ipucu"></div>
+  <div class="alt"><button class="btn" id="kamera-kapat">Kapat</button></div>
+</div>
+
+<div id="kaplama" class="kaplama" hidden><div class="sayfa" id="sayfa"></div></div>
+<div id="bildirim" class="bildirim" hidden></div>
+
+<script>
+"use strict";
+const SUPA = "https://dbpbssdrwolssrdaypzw.supabase.co/rest/v1/rpc/";
+const ANAHTAR = "sb_publishable_XHbSoSAa11HFP9AAEM3esQ_ziAMPbqX";
+const DEPO = "softnest_mobil_v1";
+const $ = id => document.getElementById(id);
+const kac = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const para = n => Number(n || 0).toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " TL";
+const sayi = n => Number(n || 0).toLocaleString("tr-TR", { maximumFractionDigits: 3 });
+
+// ---------- Durum ----------
+let S = { anahtar: "", kullanici: null, cihaz: 0, sira: 0, urunler: [], kategoriler: [], musteriler: [], isletme: "", tabanStok: {}, kuyruk: [], satislarim: [], sayac: {} };
+try { const k = JSON.parse(localStorage.getItem(DEPO) || "null"); if (k) S = { ...S, ...k }; } catch (e) { /* ilk açılış */ }
+if (!S.cihaz) S.cihaz = 1 + Math.floor(Math.random() * 998);
+let sepet = [], seciliKategori = "", aramaMetni = "", cevrimici = navigator.onLine;
+function kaydet() { try { localStorage.setItem(DEPO, JSON.stringify(S)); } catch (e) { bildir("Kayıt alanı dolu"); } }
+
+function bildir(m, ms) { const b = $("bildirim"); b.textContent = m; b.hidden = false; clearTimeout(bildir.z); bildir.z = setTimeout(() => b.hidden = true, ms || 2200); }
+
+// ---------- SHA-256 (güvenli bağlam yoksa da çalışır) ----------
+function sha256(metin) {
+  const bayt = new TextEncoder().encode(metin), K = [], H = [0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a, 0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19];
+  let p = 2, n = 0; const asal = x => { for (let i = 2; i * i <= x; i++) if (x % i === 0) return false; return true; };
+  while (n < 64) { if (asal(p)) { K[n++] = (Math.cbrt(p) % 1 * 4294967296) | 0; } p++; }
+  const l = bayt.length, bl = ((l + 8) >> 6) + 1, w = new Uint32Array(bl * 16);
+  for (let i = 0; i < l; i++) w[i >> 2] |= bayt[i] << (24 - (i % 4) * 8);
+  w[l >> 2] |= 0x80 << (24 - (l % 4) * 8); w[bl * 16 - 1] = l * 8;
+  const sag = (x, c) => (x >>> c) | (x << (32 - c));
+  for (let o = 0; o < w.length; o += 16) {
+    const m = new Uint32Array(64); for (let i = 0; i < 16; i++) m[i] = w[o + i];
+    for (let i = 16; i < 64; i++) { const s0 = sag(m[i - 15], 7) ^ sag(m[i - 15], 18) ^ (m[i - 15] >>> 3), s1 = sag(m[i - 2], 17) ^ sag(m[i - 2], 19) ^ (m[i - 2] >>> 10); m[i] = (m[i - 16] + s0 + m[i - 7] + s1) | 0; }
+    let [a, b, c, d, e, f, g, h] = H;
+    for (let i = 0; i < 64; i++) {
+      const t1 = (h + (sag(e, 6) ^ sag(e, 11) ^ sag(e, 25)) + ((e & f) ^ (~e & g)) + K[i] + m[i]) | 0, t2 = ((sag(a, 2) ^ sag(a, 13) ^ sag(a, 22)) + ((a & b) ^ (a & c) ^ (b & c))) | 0;
+      h = g; g = f; f = e; e = (d + t1) | 0; d = c; c = b; b = a; a = (t1 + t2) | 0;
+    }
+    H[0] = (H[0] + a) | 0; H[1] = (H[1] + b) | 0; H[2] = (H[2] + c) | 0; H[3] = (H[3] + d) | 0; H[4] = (H[4] + e) | 0; H[5] = (H[5] + f) | 0; H[6] = (H[6] + g) | 0; H[7] = (H[7] + h) | 0;
+  }
+  return H.map(x => (x >>> 0).toString(16).padStart(8, "0")).join("");
+}
+
+// ---------- Bulut ----------
+async function rpc(ad, govde) {
+  const y = await fetch(SUPA + ad, { method: "POST", headers: { apikey: ANAHTAR, "Content-Type": "application/json" }, body: JSON.stringify(govde) });
+  if (!y.ok) throw new Error("Sunucu yanıt vermedi (" + y.status + ")");
+  return y.json();
+}
+const TELEFON_TABLOLARI = ["urunler", "kategoriler", "musteriler", "ayarlar"];
+async function cek() {
+  const guncellenen = new Set();
+  for (let tur = 0; tur < 30; tur++) {
+    const r = await rpc("bulut_al", { p_anahtar: S.anahtar, p_sonra: S.sira, p_cihaz: "tel-" + S.cihaz, p_tablolar: TELEFON_TABLOLARI });
+    if (!r.ok) throw new Error(r.hata || "Alınamadı");
+    for (const k of r.kayitlar) {
+      const id = Number(k.kid);
+      if (k.tablo === "ayarlar") { S.isletme = (k.veri && k.veri.isletmeAdi) || ""; $("u-isletme").textContent = S.isletme || "SOFTNEST-satış"; continue; }
+      const dizi = k.tablo === "urunler" ? S.urunler : k.tablo === "kategoriler" ? S.kategoriler : k.tablo === "musteriler" ? S.musteriler : null;
+      if (!dizi) continue;
+      const i = dizi.findIndex(x => x.id === id);
+      if (k.silindi) { if (i >= 0) dizi.splice(i, 1); continue; }
+      const kayit = { ...k.veri };
+      if (k.tablo === "urunler") { S.tabanStok[id] = Number(k.veri.stok || 0); guncellenen.add(id); }
+      if (i >= 0) dizi[i] = kayit; else dizi.push(kayit);
+    }
+    S.sira = r.sira;
+    if (r.kayitlar.length < 1500) break;
+  }
+  S.urunler.forEach(u => { if (guncellenen.has(u.id)) u.stok = S.tabanStok[u.id] ?? u.stok ?? 0; });
+  // Henüz buluta gitmemiş satışların stok düşümü yeniden uygulanır
+  S.kuyruk.filter(k => k.tablo === "stok_hareketleri").forEach(k => { const u = S.urunler.find(x => x.id === k.veri.urun_id); if (u && guncellenen.has(u.id)) u.stok = Math.round((u.stok + k.veri.miktar) * 1000) / 1000; });
+}
+async function it() {
+  while (S.kuyruk.length) {
+    const parca = S.kuyruk.slice(0, 300);
+    const r = await rpc("bulut_gonder", { p_anahtar: S.anahtar, p_cihaz: "tel-" + S.cihaz, p_kayitlar: parca.map(k => ({ tablo: k.tablo, kid: k.kid, veri: k.veri, silindi: false, g: k.g })) });
+    if (!r.ok) throw new Error(r.hata || "Gönderilemedi");
+    S.kuyruk.splice(0, parca.length);
+    kaydet();
+  }
+}
+let esitleniyor = false;
+async function esitle(sessiz) {
+  if (esitleniyor || !S.anahtar || !S.kullanici) return;
+  esitleniyor = true;
+  try {
+    await it(); await cek(); kaydet(); cevrimici = true; durumYaz();
+    ekranCiz();
+  } catch (e) { cevrimici = false; durumYaz(e.message); if (!sessiz) bildir("Eşitlenemedi: " + e.message); }
+  esitleniyor = false;
+}
+function durumYaz(hata) {
+  $("u-durum").className = "durum " + (cevrimici ? "acik" : "kapali");
+  $("u-durum-yazi").textContent = (cevrimici ? "Çevrimiçi" : "Çevrimdışı") + (S.kuyruk.length ? " · " + S.kuyruk.filter(k => k.tablo === "satislar").length + " satış bekliyor" : "");
+}
+
+// ---------- Giriş ----------
+async function girisYap() {
+  const anahtar = $("g-anahtar").value.trim(), kadi = $("g-kadi").value.trim(), sifre = $("g-sifre").value;
+  $("g-hata").textContent = "";
+  if (!anahtar || !kadi || !sifre) return ($("g-hata").textContent = "Tüm alanları doldurun");
+  $("g-giris").disabled = true; $("g-giris").textContent = "Giriş yapılıyor...";
+  try {
+    const r = await rpc("bulut_giris", { p_anahtar: anahtar, p_kadi: kadi, p_sifre_hash: sha256(sifre) });
+    if (!r.ok) throw new Error(r.hata || "Giriş yapılamadı");
+    if (S.anahtar && S.anahtar.replace(/\D/g, "") !== anahtar.replace(/\D/g, "")) S = { ...S, urunler: [], kategoriler: [], musteriler: [], tabanStok: {}, kuyruk: [], satislarim: [], sira: 0 };
+    S.anahtar = anahtar; S.kullanici = r.kullanici; kaydet();
+    uygulamayiAc();
+  } catch (e) { $("g-hata").textContent = e.message; }
+  $("g-giris").disabled = false; $("g-giris").textContent = "Giriş yap";
+}
+function cikis() { S.kullanici = null; sepet = []; kaydet(); kapat(); $("uygulama").hidden = true; $("giris").hidden = false; }
+function uygulamayiAc() {
+  $("giris").hidden = true; $("uygulama").hidden = false;
+  $("u-kim").textContent = S.kullanici.ad_soyad;
+  $("u-isletme").textContent = S.isletme || "SOFTNEST-satış";
+  ekranCiz(); durumYaz(); esitle(false);
+}
+
+// ---------- Kasa ----------
+function urunSuz() {
+  const q = aramaMetni.trim().toLocaleLowerCase("tr");
+  return S.urunler.filter(u => u.aktif && !u.silindi && (q ? (String(u.ad).toLocaleLowerCase("tr").includes(q) || String(u.barkod || "").includes(q)) : (!seciliKategori || String(u.kategori_id) === seciliKategori)))
+    .sort((a, b) => String(a.ad).localeCompare(String(b.ad), "tr")).slice(0, 200);
+}
+function ekranCiz() {
+  $("cipler").innerHTML = `<button class="cip ${seciliKategori === "" ? "aktif" : ""}" data-k="">Tümü</button>` + S.kategoriler.map(k => `<button class="cip ${seciliKategori === String(k.id) ? "aktif" : ""}" data-k="${k.id}">${kac(k.ad)}</button>`).join("");
+  const l = urunSuz();
+  $("urunler").innerHTML = l.length ? l.map(u => `<button class="urun" data-u="${u.id}"><span class="ad">${kac(u.ad)}</span><span class="fiyat">${para(u.satis_fiyati)}</span><span class="stok ${u.stok <= 0 ? "az" : ""}">Stok: ${sayi(u.stok)}</span></button>`).join("")
+    : `<div class="bos">${S.urunler.length ? "Ürün bulunamadı" : (esitleniyor ? "Ürünler yükleniyor..." : "Henüz ürün yok. Bilgisayardaki programda Ayarlar → Telefon uygulaması bağlantısını açın.")}</div>`;
+  const adet = sepet.reduce((t, s) => t + s.adet, 0), top = sepet.reduce((t, s) => t + s.adet * s.fiyat, 0);
+  $("sepet-ac").disabled = !adet;
+  $("sepet-adet").textContent = adet ? `Sepet · ${sayi(adet)} ürün` : "Sepet boş";
+  $("sepet-toplam").textContent = adet ? para(top) : "";
+}
+function sepeteEkle(u, adet) {
+  const s = sepet.find(x => x.id === u.id);
+  if (s) s.adet += adet || 1; else sepet.push({ id: u.id, ad: u.ad, fiyat: u.satis_fiyati, adet: adet || 1 });
+  bip(true); if (navigator.vibrate) navigator.vibrate(30);
+  ekranCiz();
+}
+let sesB = null;
+function bip(ok) { try { sesB = sesB || new (window.AudioContext || window.webkitAudioContext)(); const o = sesB.createOscillator(), g = sesB.createGain(); o.frequency.value = ok ? 1000 : 240; g.gain.value = 0.05; o.connect(g); g.connect(sesB.destination); o.start(); o.stop(sesB.currentTime + (ok ? 0.07 : 0.22)); } catch (e) { /* sessiz */ } }
+function barkodIsle(metin) {
+  let adet = 1; metin = String(metin || "").trim(); if (!metin) return false;
+  const m = /^(\d{1,3})\s*[*xX]\s*(.+)$/.exec(metin);
+  if (m && !S.urunler.find(u => u.barkod === metin)) { adet = Math.max(1, Number(m[1])); metin = m[2].trim(); }
+  const u = S.urunler.find(x => x.barkod === metin && x.aktif && !x.silindi);
+  if (!u) { bip(false); return false; }
+  sepeteEkle(u, adet); return true;
+}
+
+// ---------- Sepet / ödeme ----------
+function sayfaAc(html, bagla) { $("sayfa").innerHTML = html; $("kaplama").hidden = false; if (bagla) bagla(); }
+function kapat() { $("kaplama").hidden = true; $("sayfa").innerHTML = ""; }
+function sepetSayfasi() {
+  if (!sepet.length) return kapat();
+  const top = sepet.reduce((t, s) => t + s.adet * s.fiyat, 0);
+  sayfaAc(`<h2>Sepet <button class="btn" id="sp-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
+    ${sepet.map(s => `<div class="satir"><div class="bilgi"><b>${kac(s.ad)}</b><small>${para(s.fiyat)} × ${sayi(s.adet)} = ${para(s.fiyat * s.adet)}</small></div>
+      <div class="adet"><button data-e="-" data-id="${s.id}">−</button><b>${sayi(s.adet)}</b><button data-e="+" data-id="${s.id}">+</button></div></div>`).join("")}
+    <div class="toplam-satir"><span>Toplam</span><span>${para(top)}</span></div></div>
+    <div class="alt"><button class="btn" id="sp-temizle">Sepeti boşalt</button><button class="btn yesil" id="od-nakit">Nakit</button><button class="btn ana" id="od-kart">Kart</button><button class="btn" id="od-acik">Açık hesap</button></div>`, () => {
+    $("sp-kapat").onclick = kapat;
+    $("sp-temizle").onclick = () => { sepet = []; kapat(); ekranCiz(); };
+    $("sayfa").querySelectorAll("[data-e]").forEach(b => b.onclick = () => {
+      const s = sepet.find(x => x.id === Number(b.dataset.id)); if (!s) return;
+      s.adet += b.dataset.e === "+" ? 1 : -1; if (s.adet <= 0) sepet = sepet.filter(x => x !== s);
+      ekranCiz(); sepetSayfasi();
+    });
+    $("od-nakit").onclick = () => nakitSor(top);
+    $("od-kart").onclick = () => satisKaydet("kart", null);
+    $("od-acik").onclick = musteriSec;
+  });
+}
+function nakitSor(top) {
+  sayfaAc(`<h2>Nakit ödeme</h2><div class="icerik"><div class="toplam-satir"><span>Toplam</span><span>${para(top)}</span></div>
+    <input id="nk-alinan" type="number" inputmode="decimal" placeholder="Alınan tutar (isteğe bağlı)"><div class="toplam-satir" style="font-size:17px"><span>Para üstü</span><span id="nk-ust">—</span></div></div>
+    <div class="alt"><button class="btn" id="nk-geri">Geri</button><button class="btn yesil" id="nk-tamam">Satışı tamamla</button></div>`, () => {
+    $("nk-geri").onclick = sepetSayfasi;
+    $("nk-alinan").oninput = () => { const a = Number($("nk-alinan").value); $("nk-ust").textContent = a >= top ? para(a - top) : "—"; };
+    $("nk-tamam").onclick = () => satisKaydet("nakit", null);
+    $("nk-alinan").focus();
+  });
+}
+function musteriSec() {
+  sayfaAc(`<h2>Müşteri seç (açık hesap)</h2><div class="icerik"><input id="ms-ara" placeholder="Ad veya telefon" autocomplete="off"><div id="ms-liste"></div></div><div class="alt"><button class="btn" id="ms-geri">Geri</button></div>`, () => {
+    const listele = () => {
+      const q = $("ms-ara").value.trim().toLocaleLowerCase("tr");
+      const l = S.musteriler.filter(m => m.aktif !== 0 && (!q || String(m.ad_soyad).toLocaleLowerCase("tr").includes(q) || String(m.telefon || "").includes(q))).slice(0, 40);
+      $("ms-liste").innerHTML = l.map(m => `<button class="satir" style="width:100%;background:none;border:0;border-bottom:1px solid var(--cizgi);text-align:left" data-m="${m.id}"><div class="bilgi"><b>${kac(m.ad_soyad)}</b><small>${kac(m.telefon || "")}</small></div></button>`).join("") || '<div class="bos">Müşteri bulunamadı</div>';
+      $("ms-liste").querySelectorAll("[data-m]").forEach(b => b.onclick = () => satisKaydet("acik_hesap", Number(b.dataset.m)));
+    };
+    $("ms-ara").oninput = listele; listele();
+    $("ms-geri").onclick = sepetSayfasi;
+  });
+}
+function yeniId(tablo) { S.sayac[tablo] = (S.sayac[tablo] || 0) + 1; return 1000000000 + S.cihaz * 1000000 + S.sayac[tablo]; }
+function satisKaydet(yontem, musteriId) {
+  if (!sepet.length) return;
+  const simdi = Date.now(), tarih = new Date(simdi).toISOString(), top = sepet.reduce((t, s) => t + s.adet * s.fiyat, 0);
+  const gun = tarih.slice(0, 10).replace(/-/g, "");
+  S.sayac.fis = (S.sayac.fis || 0) + 1;
+  const fisNo = `M${gun}-${String(S.cihaz).padStart(3, "0")}-${String(S.sayac.fis).padStart(5, "0")}`;
+  const ekle = (tablo, veri) => { S.kuyruk.push({ tablo, kid: veri.id, veri, g: Date.now() }); return veri; };
+  const satis = ekle("satislar", { id: yeniId("satislar"), fis_no: fisNo, kasa_no: "M" + S.cihaz, kullanici_id: S.kullanici.id, musteri_id: musteriId, ara_toplam: top, indirim: 0, toplam: top, durum: "tamamlandi", tarih });
+  sepet.forEach(s => {
+    ekle("satis_kalemleri", { id: yeniId("satis_kalemleri"), satis_id: satis.id, urun_id: s.id, miktar: s.adet, birim_fiyat: s.fiyat, tutar: s.fiyat * s.adet });
+    ekle("stok_hareketleri", { id: yeniId("stok_hareketleri"), urun_id: s.id, tur: "satis", miktar: -s.adet, aciklama: fisNo, kullanici_id: S.kullanici.id, tarih });
+    const u = S.urunler.find(x => x.id === s.id); if (u) u.stok = Math.round((u.stok - s.adet) * 1000) / 1000;
+  });
+  ekle("odemeler", { id: yeniId("odemeler"), satis_id: satis.id, yontem, tutar: top });
+  if (yontem === "acik_hesap") ekle("cari_hareketler", { id: yeniId("cari_hareketler"), musteri_id: musteriId, tur: "borc", tutar: top, satis_id: satis.id, aciklama: fisNo, islem: "satis", yontem: null, kullanici_id: S.kullanici.id, tarih });
+  const kalemler = sepet.map(s => ({ ad: s.ad, adet: s.adet, fiyat: s.fiyat }));
+  S.satislarim.unshift({ fis_no: fisNo, tarih, toplam: top, yontem, id: satis.id });
+  S.satislarim = S.satislarim.slice(0, 100);
+  sepet = []; kaydet(); ekranCiz(); durumYaz();
+  fisGoster(fisNo, tarih, kalemler, top, yontem);
+  esitle(true);
+}
+const YONTEM = { nakit: "Nakit", kart: "Kart", acik_hesap: "Açık hesap" };
+function fisMetni(fisNo, tarih, kalemler, top, yontem) {
+  const t = new Date(tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" });
+  return `${(S.isletme || "SOFTNEST-satış").toLocaleUpperCase("tr")}\n${t} · ${fisNo}\n------------------------------\n` +
+    kalemler.map(k => `${k.ad}\n  ${sayi(k.adet)} x ${para(k.fiyat)} = ${para(k.adet * k.fiyat)}`).join("\n") +
+    `\n------------------------------\nTOPLAM: ${para(top)}\nÖdeme: ${YONTEM[yontem] || yontem}`;
+}
+function fisGoster(fisNo, tarih, kalemler, top, yontem) {
+  const metin = fisMetni(fisNo, tarih, kalemler, top, yontem);
+  sayfaAc(`<h2>Satış tamamlandı ✓</h2><div class="icerik"><div class="fis" id="fis-yazdir">${kac(metin)}</div></div>
+    <div class="alt"><button class="btn" id="fs-paylas">Paylaş</button><button class="btn" id="fs-yazdir">Yazdır</button><button class="btn yesil" id="fs-tamam">Yeni satış</button></div>`, () => {
+    $("fs-tamam").onclick = () => { kapat(); $("arama").focus(); };
+    $("fs-yazdir").onclick = () => window.print();
+    $("fs-paylas").onclick = async () => { try { if (navigator.share) await navigator.share({ text: metin }); else { await navigator.clipboard.writeText(metin); bildir("Fiş metni kopyalandı"); } } catch (e) { /* vazgeçildi */ } };
+  });
+}
+function satislarSayfasi() {
+  const bugun = new Date().toISOString().slice(0, 10);
+  const l = S.satislarim.filter(s => s.tarih.slice(0, 10) === bugun);
+  const bekleyen = new Set(S.kuyruk.filter(k => k.tablo === "satislar").map(k => k.kid));
+  sayfaAc(`<h2>Bu telefondan bugünkü satışlar <button class="btn" id="st-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
+    ${l.map(s => `<div class="satir"><div class="bilgi"><b>${kac(s.fis_no)}</b><small>${new Date(s.tarih).toLocaleTimeString("tr-TR", { timeStyle: "short" })} · ${YONTEM[s.yontem] || s.yontem} · ${bekleyen.has(s.id) ? "gönderilmedi" : "gönderildi ✓"}</small></div><b>${para(s.toplam)}</b></div>`).join("") || '<div class="bos">Bugün bu telefondan satış yapılmadı</div>'}
+    <div class="toplam-satir"><span>Toplam</span><span>${para(l.reduce((t, s) => t + s.toplam, 0))}</span></div></div>`, () => { $("st-kapat").onclick = kapat; });
+}
+function menuSayfasi() {
+  sayfaAc(`<h2>Menü <button class="btn" id="mn-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
+    <div class="satir"><div class="bilgi"><b>${kac(S.kullanici.ad_soyad)}</b><small>${kac(S.kullanici.kullanici_adi)} · cihaz ${S.cihaz}</small></div></div>
+    <div class="satir"><div class="bilgi"><b>Eşitleme</b><small>${cevrimici ? "Çevrimiçi" : "Çevrimdışı"} · bekleyen kayıt: ${S.kuyruk.length}</small></div></div></div>
+    <div class="alt"><button class="btn" id="mn-esitle">Şimdi eşitle</button><button class="btn" id="mn-cikis" style="color:var(--kirmizi)">Çıkış</button></div>`, () => {
+    $("mn-kapat").onclick = kapat; $("mn-esitle").onclick = async () => { kapat(); await esitle(false); bildir("Eşitleme tamamlandı"); };
+    $("mn-cikis").onclick = () => { if (!S.kuyruk.length || confirm("Gönderilmemiş satışlar var. Yine de çıkılsın mı? (Satışlar telefonda kalır, tekrar girince gönderilir)")) cikis(); };
+  });
+}
+
+// ---------- Kamera ile barkod ----------
+let kameraAkis = null, kameraDongu = null, sonOkunan = "", sonZaman = 0;
+async function kameraAc() {
+  if (!("BarcodeDetector" in window)) return bildir("Bu cihazda kamerayla barkod okuma desteklenmiyor. Barkodu yazın ya da Bluetooth okuyucu kullanın.", 3500);
+  try {
+    kameraAkis = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false });
+  } catch (e) { return bildir("Kamera izni verilmedi", 3000); }
+  const v = $("video"); v.srcObject = kameraAkis; await v.play(); $("kamera").hidden = false;
+  const det = new BarcodeDetector({ formats: ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "itf", "qr_code"] });
+  kameraDongu = setInterval(async () => {
+    try {
+      const r = await det.detect(v); if (!r.length) return;
+      const kod = r[0].rawValue, simdi = Date.now();
+      if (kod === sonOkunan && simdi - sonZaman < 1800) return;
+      sonOkunan = kod; sonZaman = simdi;
+      if (!barkodIsle(kod)) bildir("Barkod kayıtlı değil: " + kod, 2500); else bildir("Eklendi", 900);
+    } catch (e) { /* kare okunamadı */ }
+  }, 220);
+}
+function kameraKapat() { clearInterval(kameraDongu); if (kameraAkis) kameraAkis.getTracks().forEach(t => t.stop()); kameraAkis = null; $("kamera").hidden = true; }
+
+// ---------- Olaylar ----------
+$("g-giris").onclick = girisYap;
+["g-anahtar", "g-kadi", "g-sifre"].forEach(i => $(i).addEventListener("keydown", e => { if (e.key === "Enter") girisYap(); }));
+$("arama").addEventListener("input", e => { aramaMetni = e.target.value; ekranCiz(); });
+$("arama").addEventListener("keydown", e => { if (e.key === "Enter") { const v = e.target.value; if (barkodIsle(v)) { e.target.value = ""; aramaMetni = ""; ekranCiz(); } else { const l = urunSuz(); if (l.length === 1) { sepeteEkle(l[0]); e.target.value = ""; aramaMetni = ""; ekranCiz(); } } } });
+$("cipler").addEventListener("click", e => { const b = e.target.closest("[data-k]"); if (b) { seciliKategori = b.dataset.k; aramaMetni = ""; $("arama").value = ""; ekranCiz(); } });
+$("urunler").addEventListener("click", e => { const b = e.target.closest("[data-u]"); if (b) { const u = S.urunler.find(x => x.id === Number(b.dataset.u)); if (u) sepeteEkle(u); } });
+$("sepet-ac").onclick = sepetSayfasi;
+$("u-satislar").onclick = satislarSayfasi;
+$("u-menu").onclick = menuSayfasi;
+$("kamera-ac").onclick = kameraAc;
+$("kamera-kapat").onclick = kameraKapat;
+$("kaplama").addEventListener("click", e => { if (e.target === $("kaplama")) kapat(); });
+window.addEventListener("online", () => { cevrimici = true; durumYaz(); esitle(true); });
+window.addEventListener("offline", () => { cevrimici = false; durumYaz(); });
+document.addEventListener("visibilitychange", () => { if (!document.hidden) esitle(true); });
+setInterval(() => esitle(true), 15000);
+
+if (S.kullanici && S.anahtar) uygulamayiAc(); else { $("giris").hidden = false; $("g-anahtar").value = S.anahtar || ""; }
+</script>
+</body>
+</html>
