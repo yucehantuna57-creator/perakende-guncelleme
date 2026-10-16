@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.40",
+  "surum": "1.0.41",
   "tarih": "2026-10-16",
   "notlar": [
-    "Menüde 'Alış Faturası' yerine 'Faturalar' var; altında Alış faturası ve Satış faturası sekmeleri açılıyor"
+    "Ayarlar'a 'SOFTNEST cari bağlantısı' eklendi: bağlantı kodu üretilir ve kopyalanır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.41",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Ayarlar'a 'SOFTNEST cari bağlantısı' eklendi: bağlantı kodu üretilir ve kopyalanır"
+      ]
+    },
     {
       "surum": "1.0.40",
       "tarih": "2026-10-16",
@@ -308,5 +315,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "663bc2ee859a7176accd56a9b328131bfcc642a987c0ac4a92cc5d30302beab8"
+  "sha256": "1e3e961aa82dc14378f299b89962f9fae819d49eabff7025da49448c2957f566"
 }
