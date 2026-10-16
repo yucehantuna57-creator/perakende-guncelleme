@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.39",
+  "surum": "1.0.40",
   "tarih": "2026-10-16",
   "notlar": [
-    "Alış Faturası menüsü görünmüyordu, düzeltildi"
+    "Menüde 'Alış Faturası' yerine 'Faturalar' var; altında Alış faturası ve Satış faturası sekmeleri açılıyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.40",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Menüde 'Alış Faturası' yerine 'Faturalar' var; altında Alış faturası ve Satış faturası sekmeleri açılıyor"
+      ]
+    },
     {
       "surum": "1.0.39",
       "tarih": "2026-10-16",
@@ -301,5 +308,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "79df44b2ab4bec76b0ab9a2e0fa5fc2f83094d4392f3ed7b18f5da9147234cae"
+  "sha256": "663bc2ee859a7176accd56a9b328131bfcc642a987c0ac4a92cc5d30302beab8"
 }
