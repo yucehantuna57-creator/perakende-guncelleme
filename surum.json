@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.42",
+  "surum": "1.0.43",
   "tarih": "2026-10-16",
   "notlar": [
-    "Faturalar menüsü: imleç üstüne gelince Alış faturası / Satış faturası alt menüsü açılır, imleç çekilince kapanır"
+    "Ayarlar: SOFTNEST cari bağlantısı en alta alındı; bağlı işletmenin adı ve bağlantı durumu gösteriliyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.43",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Ayarlar: SOFTNEST cari bağlantısı en alta alındı; bağlı işletmenin adı ve bağlantı durumu gösteriliyor"
+      ]
+    },
     {
       "surum": "1.0.42",
       "tarih": "2026-10-16",
@@ -322,5 +329,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "76d726e071a1cc4ce9628c10214dc74681c0683b4761c8b85692abe7f8ae457f"
+  "sha256": "cdeec6e67f71b89a83ca252fcd38136b65e21c33b07d796ef340f53b304a1e5c"
 }
