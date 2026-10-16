@@ -1,12 +1,23 @@
 {
-  "surum": "1.0.37",
+  "surum": "1.0.38",
   "tarih": "2026-10-16",
   "notlar": [
-    "Ürünlerde toplu silme eklendi",
-    "Stok sekmesinde stok ve kritik stok doğrudan düzenlenebiliyor",
-    "Kasa aramasında ürün adı yazınca ürünün kaybolması düzeltildi"
+    "Alış faturası ekranı eklendi (elle giriş, XML / Excel / PDF dosyasından yükleme)",
+    "Faturadaki farklı yazılmış ürün adları stoktaki ürünle eşleştirilir, 'aynı ürün mü?' diye sorulur, stoktaki ad geçerli olur",
+    "SOFTNEST cari faturaları buluttan otomatik gelir; stok, alış fiyatı ve tedarikçi carisine işlenir",
+    "Ürünlerde toplu silme ve stok sekmesinde stok düzenleme"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.38",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Alış faturası ekranı eklendi (elle giriş, XML / Excel / PDF dosyasından yükleme)",
+        "Faturadaki farklı yazılmış ürün adları stoktaki ürünle eşleştirilir, 'aynı ürün mü?' diye sorulur, stoktaki ad geçerli olur",
+        "SOFTNEST cari faturaları buluttan otomatik gelir; stok, alış fiyatı ve tedarikçi carisine işlenir",
+        "Ürünlerde toplu silme ve stok sekmesinde stok düzenleme"
+      ]
+    },
     {
       "surum": "1.0.37",
       "tarih": "2026-10-16",
@@ -286,5 +297,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "a129874da6e11c613f7d49d1d2148a764476f096f05bd449939ee383d9c889df"
+  "sha256": "1787192230cfe53c4a932979299fb293517ba77405ad20c7aa62aadecd7327a1"
 }
