@@ -1,10 +1,21 @@
 {
-  "surum": "1.0.36",
+  "surum": "1.0.37",
   "tarih": "2026-10-16",
   "notlar": [
-    "Telefon uygulaması (SOFTNEST-satış mobil) bulut eşitlemesi: Ayarlar > Telefon uygulaması bağlantısı"
+    "Ürünlerde toplu silme eklendi",
+    "Stok sekmesinde stok ve kritik stok doğrudan düzenlenebiliyor",
+    "Kasa aramasında ürün adı yazınca ürünün kaybolması düzeltildi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.37",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Ürünlerde toplu silme eklendi",
+        "Stok sekmesinde stok ve kritik stok doğrudan düzenlenebiliyor",
+        "Kasa aramasında ürün adı yazınca ürünün kaybolması düzeltildi"
+      ]
+    },
     {
       "surum": "1.0.36",
       "tarih": "2026-10-16",
@@ -275,5 +286,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "483828dc4b50e8b23f92e8503dd9d2533402522ae7ba58e1a4c4f12e96b1d42d"
+  "sha256": "a129874da6e11c613f7d49d1d2148a764476f096f05bd449939ee383d9c889df"
 }
