@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.35",
+  "surum": "1.0.36",
   "tarih": "2026-10-16",
   "notlar": [
-    "Ürün adı SOFTNEST-satış olarak güncellendi (pencere başlığı, açılış ekranı, giriş ekranı, kısayol, kurulum)"
+    "Telefon uygulaması (SOFTNEST-satış mobil) bulut eşitlemesi: Ayarlar > Telefon uygulaması bağlantısı"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.36",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "Telefon uygulaması (SOFTNEST-satış mobil) bulut eşitlemesi: Ayarlar > Telefon uygulaması bağlantısı"
+      ]
+    },
     {
       "surum": "1.0.35",
       "tarih": "2026-10-16",
@@ -268,5 +275,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "73417fd023c81ff6359de0cc527b3cf224e801a737c269106b0da710dcad8c42"
+  "sha256": "483828dc4b50e8b23f92e8503dd9d2533402522ae7ba58e1a4c4f12e96b1d42d"
 }
