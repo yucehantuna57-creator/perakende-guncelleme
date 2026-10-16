@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.44",
+  "surum": "1.0.45",
   "tarih": "2026-10-16",
   "notlar": [
-    "SOFTNEST cari faturaları: buluttan alınıp kaybolan faturalar yeniden işleniyor"
+    "SOFTNEST cari alış faturası kaydedilemiyordu (cari tablosu kısıtı), düzeltildi; cariden gelen fatura düşmüyorsa hata artık görünüyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.45",
+      "tarih": "2026-10-16",
+      "notlar": [
+        "SOFTNEST cari alış faturası kaydedilemiyordu (cari tablosu kısıtı), düzeltildi; cariden gelen fatura düşmüyorsa hata artık görünüyor"
+      ]
+    },
     {
       "surum": "1.0.44",
       "tarih": "2026-10-16",
@@ -336,5 +343,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f2a35e6b8ee5463ea49c05fa8582bf1adeae44b80aebf2b0ced9d618e408ec3f"
+  "sha256": "d93a1ad4fc61d8249501eee31ed0a5ebabda188b968a07b575ce955fb421ba4b"
 }
