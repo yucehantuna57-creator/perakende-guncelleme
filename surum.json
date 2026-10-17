@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.55",
+  "surum": "1.0.56",
   "tarih": "2026-10-17",
   "notlar": [
-    "Ürün formunda 'Yeni' kategori düğmesi küçük pencerede açılıyor; EAN-13/EAN-8 düğmeleri doğru forma bağlandı; stok güncelle panelindeki hata giderildi"
+    "F2 ürün/barkod ara ve F3 ödemeyi tamamla kısayolları tıklamadan çalışıyor (klavye odağı açılışta sayfaya veriliyor)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.56",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "F2 ürün/barkod ara ve F3 ödemeyi tamamla kısayolları tıklamadan çalışıyor (klavye odağı açılışta sayfaya veriliyor)"
+      ]
+    },
     {
       "surum": "1.0.55",
       "tarih": "2026-10-17",
@@ -415,5 +422,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "2e89f4cb042c7050758de522656e086a6ef6f90a0ff8b688ba61c97d502d92fa"
+  "sha256": "bc447361ebf3ad577126b895c21edb97366ae94749df745d61db121cefc6b527"
 }
