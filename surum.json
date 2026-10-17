@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.50",
+  "surum": "1.0.51",
   "tarih": "2026-10-17",
   "notlar": [
-    "Web sitesine gönder: ayrı ekranda ürünleri seçip yalnızca seçilenleri gönderme"
+    "Alış faturası ekranı büyütüldü ve modernleştirildi; ürün formunda 'Yeni kategori' düğmesi eklendi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.51",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Alış faturası ekranı büyütüldü ve modernleştirildi; ürün formunda 'Yeni kategori' düğmesi eklendi"
+      ]
+    },
     {
       "surum": "1.0.50",
       "tarih": "2026-10-17",
@@ -380,5 +387,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "ba3c62bb25ec9905892747ef804089e8ba43d693064b5efbe1a405328114df83"
+  "sha256": "a22f9ef955a2b8449fe1c1eda23e9b2366fd92e93fda7e05adac2f9611afea01"
 }
