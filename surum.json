@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.51",
+  "surum": "1.0.52",
   "tarih": "2026-10-17",
   "notlar": [
-    "Alış faturası ekranı büyütüldü ve modernleştirildi; ürün formunda 'Yeni kategori' düğmesi eklendi"
+    "Ürünler: satıra basınca düzenleme açılıyor; barkod alanında EAN-13 ve EAN-8 oluşturucu düğmeleri"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.52",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Ürünler: satıra basınca düzenleme açılıyor; barkod alanında EAN-13 ve EAN-8 oluşturucu düğmeleri"
+      ]
+    },
     {
       "surum": "1.0.51",
       "tarih": "2026-10-17",
@@ -387,5 +394,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "a22f9ef955a2b8449fe1c1eda23e9b2366fd92e93fda7e05adac2f9611afea01"
+  "sha256": "fefc036c1446587dd53ccc7d3badc95b2fe2709cbdd950f5ce8fd5b739d29288"
 }
