@@ -147,6 +147,7 @@
 </div>
 
 <div id="kaplama" class="kaplama" hidden><div class="sayfa" id="sayfa"></div></div>
+<div id="guncelleme" hidden style="position:fixed;left:12px;right:12px;top:max(10px, env(safe-area-inset-top));z-index:60;background:#1f3a5f;color:#fff;border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 20px rgba(0,0,0,.35)"><div style="flex:1;font-size:14px;font-weight:600">Yeni sürüm hazır. Güncellensin mi?</div><button class="btn" id="gn-sonra" style="height:36px;background:transparent;color:#fff;border-color:rgba(255,255,255,.4)">Sonra</button><button class="btn" id="gn-evet" style="height:36px;background:#fff;color:#1f3a5f;border:0">Güncelle</button></div>
 <div id="bildirim" class="bildirim" hidden></div>
 
 <script>
@@ -337,10 +338,7 @@ function anaCiz() {
       ${donut([{ v: nakit, c: "#1e8e4e" }, { v: kart, c: "#3b6ab3" }, { v: acik, c: "#e0953a" }], l.length, "satış")}
       <div class="lejant"><div><i style="background:#1e8e4e"></i>Nakit<b>${para(nakit)}</b></div><div><i style="background:#3b6ab3"></i>Kart<b>${para(kart)}</b></div><div><i style="background:#e0953a"></i>Açık hesap<b>${para(acik)}</b></div></div>
     </div></div>
-    <div class="iki">
-      <div class="mini"><small>Ürün sayısı</small><b>${urunler.length}</b></div>
-      <div class="mini"><small>Müşteri alacağı</small><b>${para(alacak)}</b></div>
-    </div>
+    <div class="mini"><small>Müşterilerden alacağım</small><b>${para(alacak)}</b></div>
     <div class="kutu"><h3>Son satışlar</h3>
       ${S.satislarim.slice(0, 5).map(s => `<div class="liste-satir"><div class="bilgi"><b>${kac(s.fis_no)}</b><small>${new Date(s.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} · ${YONTEM[s.yontem] || s.yontem}</small></div><b>${para(s.toplam)}</b></div>`).join("") || '<div class="bos" style="padding:14px 0">Bu telefondan henüz satış yapılmadı</div>'}
     </div>`;
@@ -660,6 +658,20 @@ window.addEventListener("online", () => { cevrimici = true; durumYaz(); esitle(t
 window.addEventListener("offline", () => { cevrimici = false; durumYaz(); });
 document.addEventListener("visibilitychange", () => { if (!document.hidden) esitle(true); });
 setInterval(() => esitle(true), 15000);
+
+// ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
+const SURUM = "20261017061337";
+let guncellemeSoruldu = false;
+async function surumDenetle() {
+  if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || guncellemeSoruldu) return;
+  try {
+    const y = await fetch("surum.json?t=" + Date.now(), { cache: "no-store" }); if (!y.ok) return;
+    const s = await y.json();
+    if (s && s.surum && s.surum !== SURUM) { guncellemeSoruldu = true; $("guncelleme").hidden = false; $("gn-evet").onclick = () => { location.replace(location.pathname + "?s=" + encodeURIComponent(s.surum)); }; $("gn-sonra").onclick = () => { $("guncelleme").hidden = true; setTimeout(() => { guncellemeSoruldu = false; }, 30 * 60 * 1000); }; }
+  } catch (e) { /* çevrimdışı: sonra denenir */ }
+}
+document.addEventListener("visibilitychange", () => { if (!document.hidden) surumDenetle(); });
+setInterval(surumDenetle, 10 * 60 * 1000); setTimeout(surumDenetle, 3000);
 
 if (S.kullanici && S.anahtar) uygulamayiAc(); else { $("giris").hidden = false; }
 </script>
