@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.60",
+  "surum": "1.0.61",
   "tarih": "2026-10-17",
   "notlar": [
-    "Kayıt güvenliği: kategori/ürün değişiklikleri sunucuya yazılamazsa artık kaybolmuyor ve uyarı gösteriliyor; kasada kategori butonları büyütüldü; ürün satırı üzerine gelince renk değişiyor"
+    "Kategori ayarlarında kategoriler ▲▼ oklarıyla sıralanıyor ve A–Z sırala düğmesi eklendi; kasadaki kategori butonları bu sırayı izliyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.61",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Kategori ayarlarında kategoriler ▲▼ oklarıyla sıralanıyor ve A–Z sırala düğmesi eklendi; kasadaki kategori butonları bu sırayı izliyor"
+      ]
+    },
     {
       "surum": "1.0.60",
       "tarih": "2026-10-17",
@@ -450,5 +457,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "9d442985858b5e38e94a105011344aa2c9901e7c2d6e9f91934a7dc8dec5045f"
+  "sha256": "f600ff1ea3823ca1b7579a7ba52b6b2de2d5e19c9f81d5cf5e54aeb04d1fad8b"
 }
