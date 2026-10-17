@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.48",
+  "surum": "1.0.49",
   "tarih": "2026-10-17",
   "notlar": [
-    "Müşteriler sayfasının üstü küçültüldü ve detaylandırıldı; yuvarlak (halka) istatistikler eklendi"
+    "Müşteriler: düzenle, sil, arama; telefon, e-posta, vergi dairesi, adres, borç limiti ve not bilgileri; müşteri detayında bilgiler gözüküyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.49",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Müşteriler: düzenle, sil, arama; telefon, e-posta, vergi dairesi, adres, borç limiti ve not bilgileri; müşteri detayında bilgiler gözüküyor"
+      ]
+    },
     {
       "surum": "1.0.48",
       "tarih": "2026-10-17",
@@ -366,5 +373,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "18487c507020ef2681d819ba957cca73a853cbb3d85a47f540c5380c55ba5bcf"
+  "sha256": "8974f9f3111a22bd3b86dfdd980c1ff0495cf4cc1d6510156844f6c39069a3f1"
 }
