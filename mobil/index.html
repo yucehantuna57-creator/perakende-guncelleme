@@ -99,6 +99,10 @@
   .segment { display:flex; background:var(--vurgu); border-radius:12px; padding:3px; gap:3px; } .segment button { flex:1; border:0; background:none; border-radius:9px; height:36px; font-weight:600; color:var(--soluk); } .segment button.aktif { background:var(--kart); color:var(--ana); box-shadow:0 1px 3px rgba(0,0,0,.12); }
   .sayfa input, .sayfa select { margin-bottom:10px; } select { width:100%; height:46px; border:1px solid var(--cizgi); border-radius:12px; padding:0 12px; background:var(--kart); color:var(--yazi); font:inherit; }
   .yaz-baslik { font-size:20px; font-weight:800; margin:2px 2px 0; }
+  :root[data-theme="light"] { --bg:#f4f6fb; --kart:#fff; --yazi:#1c2433; --soluk:#6b7587; --cizgi:#dde3ee; --ana:#1f3a5f; --vurgu:#e8eef8; --vurgu2:#e8f6ec; }
+  :root[data-theme="dark"] { --bg:#10141c; --kart:#1a202c; --yazi:#e8ecf4; --soluk:#8f99ad; --cizgi:#2a3244; --ana:#4a7bc8; --vurgu:#202a3d; --vurgu2:#16301f; }
+  .ayar-satir { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:9px 0; border-bottom:1px solid var(--cizgi); } .ayar-satir:last-child { border-bottom:0; } .ayar-satir span { color:var(--soluk); } .ayar-satir b { text-align:right; }
+  .ayar-satir input[type=checkbox] { width:24px; height:24px; accent-color:var(--ana); flex:none; }
 </style>
 </head>
 <body>
@@ -115,7 +119,7 @@
 <section id="uygulama" hidden>
   <header>
     <div class="ad"><b id="u-isletme">SOFTNEST-satış</b><small><span class="durum" id="u-durum"></span><span id="u-durum-yazi">Eşitleniyor</span> · <span id="u-kim"></span></small></div>
-    <button id="u-menu">⋮</button>
+    <button id="u-menu" aria-label="Ayarlar">⚙ Ayarlar</button>
   </header>
   <main id="sekmeler">
     <div class="sekme" id="t-ana"></div>
@@ -130,6 +134,7 @@
     <div class="sekme" id="t-fiyat" hidden></div>
     <div class="sekme" id="t-musteri" hidden></div>
     <div class="sekme" id="t-stok" hidden></div>
+    <div class="sekme" id="t-ayar" hidden></div>
   </main>
   <div id="sepet-cubuk" hidden><button id="sepet-ac" disabled><span id="sepet-adet">Sepet boş</span><span id="sepet-toplam"></span></button></div>
   <nav id="altmenu">
@@ -161,7 +166,7 @@ const para = n => Number(n || 0).toLocaleString("tr-TR", { minimumFractionDigits
 const sayi = n => Number(n || 0).toLocaleString("tr-TR", { maximumFractionDigits: 3 });
 
 // ---------- Durum ----------
-let S = { anahtar: "", kullanici: null, cihaz: 0, sira: 0, urunler: [], kategoriler: [], musteriler: [], cari: [], isletme: "", tabanStok: {}, kuyruk: [], satislarim: [], sayac: {} };
+let S = { anahtar: "", kullanici: null, cihaz: 0, sira: 0, urunler: [], kategoriler: [], musteriler: [], cari: [], ayar: {}, isletme: "", tabanStok: {}, kuyruk: [], satislarim: [], sayac: {} };
 try { const k = JSON.parse(localStorage.getItem(DEPO) || "null"); if (k) S = { ...S, ...k }; } catch (e) { /* ilk açılış */ }
 if (!S.cihaz) S.cihaz = 1 + Math.floor(Math.random() * 998);
 let sepet = [], seciliKategori = "", aramaMetni = "", cevrimici = navigator.onLine;
@@ -271,7 +276,7 @@ function uygulamayiAc() {
 }
 
 // ---------- Sekmeler (Ana ekran, Satış, Fiyat gör, Müşteri, Stok) ----------
-const SEKMELER = ["ana", "kasa", "fiyat", "musteri", "stok"];
+const SEKMELER = ["ana", "kasa", "fiyat", "musteri", "stok", "ayar"];
 let sekme = "ana", stokSuzgec = "hepsi", fiyatSecili = null;
 const trKucuk = s => String(s == null ? "" : s).toLocaleLowerCase("tr");
 const yerelGun = iso => { const d = new Date(iso); return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0"); };
@@ -290,7 +295,7 @@ function ekranCiz() {
   const sp = sepet.reduce((t, s) => t + s.adet, 0), kr = aktifUrunler().filter(kritikMi).length;
   $("rz-sepet").hidden = !sp; $("rz-sepet").textContent = sp;
   $("rz-stok").hidden = !kr; $("rz-stok").textContent = kr;
-  if (sekme === "ana") anaCiz(); else if (sekme === "kasa") kasaCiz(); else if (sekme === "fiyat") fiyatCiz(); else if (sekme === "musteri") musteriCiz(); else if (sekme === "stok") stokCiz();
+  if (sekme === "ana") anaCiz(); else if (sekme === "kasa") kasaCiz(); else if (sekme === "fiyat") fiyatCiz(); else if (sekme === "musteri") musteriCiz(); else if (sekme === "stok") stokCiz(); else if (sekme === "ayar") ayarCiz();
 }
 function donut(parcalar, merkez, alt) {
   const r = 42, c = 2 * Math.PI * r, top = parcalar.reduce((t, p) => t + p.v, 0);
@@ -306,6 +311,115 @@ const IK = {
   stok: '<svg viewBox="0 0 24 24"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg>',
   liste: '<svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>'
 };
+
+// ---------- Ayarlar ----------
+const AYAR_VARSAYILAN = { tema: "sistem", ses: true, titresim: true, fisIsletme: "", fisAdres: "", fisTel: "", fisNot: "Teşekkür ederiz" };
+const AY = () => ({ ...AYAR_VARSAYILAN, ...(S.ayar || {}) });
+function ayarYaz(k, v) { S.ayar = { ...(S.ayar || {}), [k]: v }; kaydet(); }
+function temaUygula() { const t = AY().tema; if (t === "sistem") document.documentElement.removeAttribute("data-theme"); else document.documentElement.setAttribute("data-theme", t); }
+function ayarCiz() {
+  const a = AY();
+  $("t-ayar").innerHTML = `
+    <div class="yaz-baslik">Ayarlar</div>
+    <div class="kutu"><h3>Hesap</h3>
+      <div class="ayar-satir"><span>İşletme</span><b>${kac(S.isletme || "SOFTNEST-satış")}</b></div>
+      <div class="ayar-satir"><span>Kullanıcı</span><b>${kac(S.kullanici.ad_soyad)} (${kac(S.kullanici.rol === "yonetici" ? "Yönetici" : "Satış")})</b></div>
+      <div class="ayar-satir"><span>Cihaz / kasa no</span><b>M${S.cihaz}</b></div>
+      <div class="ayar-satir"><span>Eşitleme</span><b>${cevrimici ? "Çevrimiçi" : "Çevrimdışı"} · bekleyen ${S.kuyruk.length}</b></div>
+    </div>
+    <div class="kutu"><h3>Görünüm ve ses</h3>
+      <div style="margin-bottom:10px"><div class="segment" id="ay-tema"><button data-t="sistem">Sistem</button><button data-t="light">Açık</button><button data-t="dark">Koyu</button></div></div>
+      <label class="ayar-satir"><span>Barkod okununca bip sesi</span><input type="checkbox" id="ay-ses" ${a.ses ? "checked" : ""}></label>
+      <label class="ayar-satir"><span>Ürün eklenince titreşim</span><input type="checkbox" id="ay-tit" ${a.titresim ? "checked" : ""}></label>
+    </div>
+    <div class="kutu"><h3>Fiş ayarları</h3>
+      <input id="ay-fis-isletme" placeholder="Fişte işletme adı (boşsa: ${kac(S.isletme || "SOFTNEST-satış")})" value="${kac(a.fisIsletme)}">
+      <input id="ay-fis-adres" placeholder="Adres" value="${kac(a.fisAdres)}" style="margin-top:8px">
+      <input id="ay-fis-tel" type="tel" placeholder="Telefon" value="${kac(a.fisTel)}" style="margin-top:8px">
+      <input id="ay-fis-not" placeholder="Fiş altı notu" value="${kac(a.fisNot)}" style="margin-top:8px">
+      <button class="btn" id="ay-fis-kaydet" style="margin-top:8px;width:100%">Fiş ayarlarını kaydet</button>
+    </div>
+    <div class="kutu"><h3>Ürün ve kategori yönetimi</h3>
+      <div class="iki"><button class="btn" id="ay-urun-ekle">+ Ürün ekle</button><button class="btn" id="ay-urun-duzenle">Ürün düzenle</button></div>
+      <div class="iki" style="margin-top:8px"><button class="btn" id="ay-kat">Kategoriler (${S.kategoriler.length})</button><button class="btn" id="ay-musteri-ekle">+ Müşteri ekle</button></div>
+    </div>
+    <div class="kutu"><h3>Veri ve eşitleme</h3>
+      <div class="iki"><button class="btn" id="ay-esitle">Şimdi eşitle</button><button class="btn" id="ay-yenile">Verileri yeniden indir</button></div>
+      <div class="iki" style="margin-top:8px"><button class="btn" id="ay-satislar">Satışlarım</button><button class="btn" id="ay-yedek">Telefon yedeği (JSON)</button></div>
+    </div>
+    <div class="kutu"><h3>Uygulama</h3>
+      <div class="ayar-satir"><span>Sürüm</span><b>${SURUM === "__SURUM__" ? "geliştirme" : SURUM}</b></div>
+      <button class="btn" id="ay-guncelle" style="width:100%;margin-top:6px">Güncellemeleri denetle</button>
+    </div>
+    <button class="btn" id="ay-cikis" style="color:var(--kirmizi);width:100%">Çıkış yap</button>`;
+  document.querySelectorAll("#ay-tema button").forEach(b => { b.classList.toggle("aktif", b.dataset.t === a.tema); b.onclick = () => { ayarYaz("tema", b.dataset.t); temaUygula(); ayarCiz(); }; });
+  $("ay-ses").onchange = e => ayarYaz("ses", e.target.checked);
+  $("ay-tit").onchange = e => ayarYaz("titresim", e.target.checked);
+  $("ay-fis-kaydet").onclick = () => { ayarYaz("fisIsletme", $("ay-fis-isletme").value.trim()); ayarYaz("fisAdres", $("ay-fis-adres").value.trim()); ayarYaz("fisTel", $("ay-fis-tel").value.trim()); ayarYaz("fisNot", $("ay-fis-not").value.trim()); bildir("Fiş ayarları kaydedildi"); };
+  $("ay-urun-ekle").onclick = () => urunFormu(null);
+  $("ay-urun-duzenle").onclick = urunSec;
+  $("ay-kat").onclick = kategoriYonet;
+  $("ay-musteri-ekle").onclick = musteriEkleSayfasi;
+  $("ay-esitle").onclick = async () => { await esitle(false); bildir("Eşitleme tamamlandı"); ayarCiz(); };
+  $("ay-yenile").onclick = async () => { if (S.kuyruk.length && !confirm("Gönderilmemiş kayıtlar var; önce gönderilecek. Devam edilsin mi?")) return; S.sira = 0; S.urunler = []; S.kategoriler = []; S.musteriler = []; S.cari = []; kaydet(); ekranCiz(); await esitle(false); bildir("Veriler yeniden indirildi"); ayarCiz(); };
+  $("ay-satislar").onclick = satislarSayfasi;
+  $("ay-yedek").onclick = () => { try { const b = new Blob([JSON.stringify(S)], { type: "application/json" }), x = document.createElement("a"); x.href = URL.createObjectURL(b); x.download = "softnest-mobil-yedek.json"; x.click(); } catch (e) { bildir("Yedek alınamadı"); } };
+  $("ay-guncelle").onclick = async () => { guncellemeSoruldu = false; $("guncelleme").hidden = true; await surumDenetle(true); if ($("guncelleme").hidden) bildir("Uygulama güncel", 1800); };
+  $("ay-cikis").onclick = () => { if (!S.kuyruk.length || confirm("Gönderilmemiş kayıtlar var. Yine de çıkılsın mı? (Telefonda kalır, tekrar girince gönderilir)")) cikis(); };
+}
+function urunSec() {
+  sayfaAc(`<h2>Ürün düzenle <button class="btn" id="us-kapat" style="height:36px">Kapat</button></h2><div class="icerik"><input id="us-ara" placeholder="Ürün adı veya barkod" autocomplete="off"><div id="us-liste"></div></div>`, () => {
+    $("us-kapat").onclick = kapat;
+    const ciz = () => { const q = trKucuk($("us-ara").value.trim()); const l = aktifUrunler().filter(u => !q || trKucuk(u.ad).includes(q) || String(u.barkod || "").includes(q)).sort((a, b) => String(a.ad).localeCompare(String(b.ad), "tr")).slice(0, 40);
+      $("us-liste").innerHTML = l.map(u => `<div class="liste-satir" data-u="${u.id}"><div class="bilgi"><b>${kac(u.ad)}</b><small>${kac(u.barkod || "")}</small></div><b>${para(u.satis_fiyati)}</b></div>`).join("") || '<div class="bos" style="padding:24px 0">Ürün yok</div>';
+      $("us-liste").querySelectorAll("[data-u]").forEach(b => b.onclick = () => urunFormu(Number(b.dataset.u))); };
+    $("us-ara").oninput = ciz; ciz(); $("us-ara").focus();
+  });
+}
+function urunFormu(id) {
+  const u = id ? S.urunler.find(x => x.id === id) : null;
+  sayfaAc(`<h2>${u ? "Ürünü düzenle" : "Yeni ürün"}</h2><div class="icerik">
+    <input id="uf-barkod" placeholder="Barkod (boşsa otomatik)" value="${kac(u ? u.barkod : "")}" inputmode="numeric">
+    <input id="uf-ad" placeholder="Ürün adı" value="${kac(u ? u.ad : "")}">
+    <select id="uf-kat"><option value="">Kategori yok</option>${S.kategoriler.map(k => `<option value="${k.id}" ${u && u.kategori_id === k.id ? "selected" : ""}>${kac(k.ad)}</option>`).join("")}</select>
+    <div class="iki"><input id="uf-satis" type="number" inputmode="decimal" placeholder="Satış fiyatı" value="${u ? u.satis_fiyati : ""}"><input id="uf-alis" type="number" inputmode="decimal" placeholder="Alış fiyatı" value="${u ? u.alis_fiyati || "" : ""}"></div>
+    <div class="iki" style="margin-top:10px"><input id="uf-kdv" type="number" inputmode="numeric" placeholder="KDV %" value="${u ? u.kdv_orani : 20}"><input id="uf-kritik" type="number" inputmode="decimal" placeholder="Kritik stok" value="${u ? u.kritik_stok || "" : ""}"></div>
+    ${u ? "" : '<input id="uf-stok" type="number" inputmode="decimal" placeholder="Açılış stoğu" style="margin-top:10px">'}
+    <div class="hata" id="uf-hata"></div></div>
+    <div class="alt"><button class="btn" id="uf-iptal">Vazgeç</button><button class="btn ana" id="uf-kaydet">Kaydet</button></div>`, () => {
+    $("uf-iptal").onclick = kapat;
+    $("uf-kaydet").onclick = () => {
+      const ad = $("uf-ad").value.trim(), satis = Number($("uf-satis").value);
+      if (!ad) return ($("uf-hata").textContent = "Ürün adı girin");
+      if ($("uf-satis").value === "" || !(satis >= 0)) return ($("uf-hata").textContent = "Satış fiyatını girin");
+      let barkod = $("uf-barkod").value.trim();
+      if (barkod && S.urunler.some(x => x.barkod === barkod && x.id !== (u && u.id) && !x.silindi)) return ($("uf-hata").textContent = "Bu barkod başka üründe kayıtlı");
+      if (!barkod) { const son = Math.max(0, ...S.urunler.map(x => /^U\d+$/.test(x.barkod || "") ? Number(x.barkod.slice(1)) : 0)); barkod = "U" + String(son + 1).padStart(6, "0"); }
+      const alanlar = { barkod, ad, kategori_id: $("uf-kat").value ? Number($("uf-kat").value) : null, satis_fiyati: satis, alis_fiyati: Number($("uf-alis").value) || 0, kdv_orani: $("uf-kdv").value === "" ? 20 : Number($("uf-kdv").value), kritik_stok: Number($("uf-kritik").value) || 0 };
+      if (u) { Object.assign(u, alanlar); kuyrugaEkle("urunler", { ...u }); bildir("Ürün güncellendi"); }
+      else {
+        const yeni = { id: yeniId("urunler"), ...alanlar, birim: "adet", stok: 0, aktif: 1 };
+        S.urunler.push(yeni); kuyrugaEkle("urunler", { ...yeni });
+        const acilis = Number($("uf-stok").value);
+        if (acilis > 0) { kuyrugaEkle("stok_hareketleri", { id: yeniId("stok_hareketleri"), urun_id: yeni.id, tur: "giris", miktar: acilis, aciklama: "Telefondan açılış stoğu", kullanici_id: S.kullanici.id, tarih: new Date().toISOString() }); yeni.stok = acilis; }
+        bildir("Ürün eklendi");
+      }
+      kaydet(); kapat(); ekranCiz(); durumYaz(); esitle(true);
+    };
+  });
+}
+function kategoriYonet() {
+  const ciz = () => {
+    sayfaAc(`<h2>Kategoriler <button class="btn" id="kt-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
+      ${S.kategoriler.map(k => `<div class="liste-satir" data-k="${k.id}"><div class="bilgi"><b>${kac(k.ad)}</b><small>${S.urunler.filter(u => u.kategori_id === k.id && u.aktif && !u.silindi).length} ürün · adı değiştirmek için dokunun</small></div></div>`).join("") || '<div class="bos" style="padding:24px 0">Kategori yok</div>'}
+      <input id="kt-yeni" placeholder="Yeni kategori adı" style="margin-top:12px"><button class="btn ana" id="kt-ekle" style="width:100%;margin-top:8px">Kategori ekle</button></div>`, () => {
+      $("kt-kapat").onclick = kapat;
+      $("kt-ekle").onclick = () => { const ad = $("kt-yeni").value.trim().slice(0, 30); if (!ad) return; if (S.kategoriler.some(k => trKucuk(k.ad) === trKucuk(ad))) return bildir("Bu kategori var"); const k = kuyrugaEkle("kategoriler", { id: yeniId("kategoriler"), ad }); S.kategoriler.push({ ...k }); kaydet(); ekranCiz(); esitle(true); ciz(); };
+      $("sayfa").querySelectorAll("[data-k]").forEach(b => b.onclick = () => { const k = S.kategoriler.find(x => x.id === Number(b.dataset.k)); const ad = (prompt("Kategori adı", k.ad) || "").trim().slice(0, 30); if (!ad || ad === k.ad) return; k.ad = ad; kuyrugaEkle("kategoriler", { ...k }); kaydet(); ekranCiz(); esitle(true); ciz(); });
+    });
+  };
+  ciz();
+}
 
 // ---------- Ana ekran ----------
 function cariBakiye(id) { return S.cari.reduce((t, h) => h.musteri_id !== id ? t : t + (h.tur === "borc" ? h.tutar : -h.tutar), 0); }
@@ -501,11 +615,11 @@ function kasaCiz() {
 function sepeteEkle(u, adet) {
   const s = sepet.find(x => x.id === u.id);
   if (s) s.adet += adet || 1; else sepet.push({ id: u.id, ad: u.ad, fiyat: u.satis_fiyati, adet: adet || 1 });
-  bip(true); if (navigator.vibrate) navigator.vibrate(30);
+  bip(true); if (navigator.vibrate && AY().titresim !== false) navigator.vibrate(30);
   ekranCiz();
 }
 let sesB = null;
-function bip(ok) { try { sesB = sesB || new (window.AudioContext || window.webkitAudioContext)(); const o = sesB.createOscillator(), g = sesB.createGain(); o.frequency.value = ok ? 1000 : 240; g.gain.value = 0.05; o.connect(g); g.connect(sesB.destination); o.start(); o.stop(sesB.currentTime + (ok ? 0.07 : 0.22)); } catch (e) { /* sessiz */ } }
+function bip(ok) { if (AY().ses === false) return; try { sesB = sesB || new (window.AudioContext || window.webkitAudioContext)(); const o = sesB.createOscillator(), g = sesB.createGain(); o.frequency.value = ok ? 1000 : 240; g.gain.value = 0.05; o.connect(g); g.connect(sesB.destination); o.start(); o.stop(sesB.currentTime + (ok ? 0.07 : 0.22)); } catch (e) { /* sessiz */ } }
 function barkodIsle(metin) {
   let adet = 1; metin = String(metin || "").trim(); if (!metin) return false;
   const m = /^(\d{1,3})\s*[*xX]\s*(.+)$/.exec(metin);
@@ -586,9 +700,10 @@ function satisKaydet(yontem, musteriId) {
 const YONTEM = { nakit: "Nakit", kart: "Kart", acik_hesap: "Açık hesap" };
 function fisMetni(fisNo, tarih, kalemler, top, yontem) {
   const t = new Date(tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" });
-  return `${(S.isletme || "SOFTNEST-satış").toLocaleUpperCase("tr")}\n${t} · ${fisNo}\n------------------------------\n` +
+  const ay = AY();
+  return `${(ay.fisIsletme || S.isletme || "SOFTNEST-satış").toLocaleUpperCase("tr")}\n${ay.fisAdres ? ay.fisAdres + "\n" : ""}${ay.fisTel ? "Tel: " + ay.fisTel + "\n" : ""}${t} · ${fisNo}\n------------------------------\n` +
     kalemler.map(k => `${k.ad}\n  ${sayi(k.adet)} x ${para(k.fiyat)} = ${para(k.adet * k.fiyat)}`).join("\n") +
-    `\n------------------------------\nTOPLAM: ${para(top)}\nÖdeme: ${YONTEM[yontem] || yontem}`;
+    `\n------------------------------\nTOPLAM: ${para(top)}\nÖdeme: ${YONTEM[yontem] || yontem}${ay.fisNot ? "\n\n" + ay.fisNot : ""}`;
 }
 function fisGoster(fisNo, tarih, kalemler, top, yontem) {
   const metin = fisMetni(fisNo, tarih, kalemler, top, yontem);
@@ -649,7 +764,7 @@ $("arama").addEventListener("keydown", e => { if (e.key === "Enter") { const v =
 $("cipler").addEventListener("click", e => { const b = e.target.closest("[data-k]"); if (b) { seciliKategori = b.dataset.k; aramaMetni = ""; $("arama").value = ""; ekranCiz(); } });
 $("urunler").addEventListener("click", e => { const b = e.target.closest("[data-u]"); if (b) { const u = S.urunler.find(x => x.id === Number(b.dataset.u)); if (u) sepeteEkle(u); } });
 $("sepet-ac").onclick = sepetSayfasi;
-$("u-menu").onclick = menuSayfasi;
+$("u-menu").onclick = () => sekmeyeGec("ayar");
 $("kamera-ac").onclick = () => kameraAc("kasa");
 document.querySelectorAll("#altmenu button").forEach(b => b.addEventListener("click", () => sekmeyeGec(b.dataset.s)));
 $("kamera-kapat").onclick = kameraKapat;
@@ -660,10 +775,10 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261017061337";
+const SURUM = "20261017061913";
 let guncellemeSoruldu = false;
-async function surumDenetle() {
-  if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || guncellemeSoruldu) return;
+async function surumDenetle(zorla) {
+  if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
   try {
     const y = await fetch("surum.json?t=" + Date.now(), { cache: "no-store" }); if (!y.ok) return;
     const s = await y.json();
@@ -673,6 +788,7 @@ async function surumDenetle() {
 document.addEventListener("visibilitychange", () => { if (!document.hidden) surumDenetle(); });
 setInterval(surumDenetle, 10 * 60 * 1000); setTimeout(surumDenetle, 3000);
 
+temaUygula();
 if (S.kullanici && S.anahtar) uygulamayiAc(); else { $("giris").hidden = false; }
 </script>
 </body>
