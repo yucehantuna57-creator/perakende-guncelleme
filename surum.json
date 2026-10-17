@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.61",
+  "surum": "1.0.62",
   "tarih": "2026-10-17",
   "notlar": [
-    "Kategori ayarlarında kategoriler ▲▼ oklarıyla sıralanıyor ve A–Z sırala düğmesi eklendi; kasadaki kategori butonları bu sırayı izliyor"
+    "Beklemeye al ve Bekleyenler listesi; tartılı ürün (terazi) desteği: kg/metre/litre, etiketli terazi barkodu; fişten iade alma (stok, kasa ve cari hesaba işler)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.62",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Beklemeye al ve Bekleyenler listesi; tartılı ürün (terazi) desteği: kg/metre/litre, etiketli terazi barkodu; fişten iade alma (stok, kasa ve cari hesaba işler)"
+      ]
+    },
     {
       "surum": "1.0.61",
       "tarih": "2026-10-17",
@@ -457,5 +464,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f600ff1ea3823ca1b7579a7ba52b6b2de2d5e19c9f81d5cf5e54aeb04d1fad8b"
+  "sha256": "fc867cbefcde4c4e01a477db4a9ef49ff20bc00862fc067c95abb303e3b40723"
 }
