@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.57",
+  "surum": "1.0.58",
   "tarih": "2026-10-17",
   "notlar": [
-    "Alış faturası: satırda 'Stoktan ara' ile ürün eşleştirme; KDV dahil alış fiyatı (düzenlenebilir) ve KDV dahil satır toplamı"
+    "Sanal klavye yeniden tasarlandı: daha geniş, yumuşak köşeli ve dokunmaya uygun"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.58",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Sanal klavye yeniden tasarlandı: daha geniş, yumuşak köşeli ve dokunmaya uygun"
+      ]
+    },
     {
       "surum": "1.0.57",
       "tarih": "2026-10-17",
@@ -429,5 +436,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "93d8150f1a4b4a0e96acb6f9af5d1b837fa575d778d9a5ca56777a58ffa5063d"
+  "sha256": "837aded2ac0a4bee57176d284d10be89d068aa54eade696839be69b7205ca175"
 }
