@@ -66,10 +66,8 @@
 
 <section id="giris" hidden>
   <div class="logo"><b>SOFTNEST-satış</b><span>Mobil kasa</span></div>
-  <input id="g-anahtar" placeholder="Lisans anahtarı (örn. 1234-5678-9012)" autocomplete="off" inputmode="numeric">
   <input id="g-kadi" placeholder="Kullanıcı adı" autocomplete="username" autocapitalize="none">
   <input id="g-sifre" type="password" placeholder="Şifre" autocomplete="current-password">
-  <a href="#" id="g-lisans-degis" hidden style="font-size:13px;text-align:center;color:var(--soluk)">Lisans anahtarını değiştir</a>
   <div class="hata" id="g-hata"></div>
   <button class="btn ana" id="g-giris">Giriş yap</button>
   <small style="color:var(--soluk);text-align:center">Lisans anahtarını ve kullanıcı bilgilerini bilgisayardaki programın Ayarlar → Telefon uygulaması bölümünden öğrenebilirsiniz.</small>
@@ -195,12 +193,14 @@ function durumYaz(hata) {
 
 // ---------- Giriş ----------
 async function girisYap() {
-  const anahtar = $("g-anahtar").value.trim(), kadi = $("g-kadi").value.trim(), sifre = $("g-sifre").value;
+  const kadi = $("g-kadi").value.trim(), sifre = $("g-sifre").value;
   $("g-hata").textContent = "";
-  if (!anahtar || !kadi || !sifre) return ($("g-hata").textContent = "Tüm alanları doldurun");
+  if (!kadi || !sifre) return ($("g-hata").textContent = "Tüm alanları doldurun");
   $("g-giris").disabled = true; $("g-giris").textContent = "Giriş yapılıyor...";
   try {
-    const r = await rpc("bulut_giris", { p_anahtar: anahtar, p_kadi: kadi, p_sifre_hash: sha256(sifre) });
+    // Kullanıcı adı + şifre ile giriş: işletme (lisans) bulutta kullanıcıdan bulunur
+    const r = await rpc("bulut_giris_kullanici", { p_kadi: kadi, p_sifre_hash: sha256(sifre) });
+    const anahtar = r.anahtar;
     if (!r.ok) throw new Error(r.hata || "Giriş yapılamadı");
     if (S.anahtar && S.anahtar.replace(/\D/g, "") !== anahtar.replace(/\D/g, "")) S = { ...S, urunler: [], kategoriler: [], musteriler: [], tabanStok: {}, kuyruk: [], satislarim: [], sira: 0 };
     S.anahtar = anahtar; S.kullanici = r.kullanici; kaydet();
@@ -374,7 +374,7 @@ function kameraKapat() { clearInterval(kameraDongu); if (kameraAkis) kameraAkis.
 
 // ---------- Olaylar ----------
 $("g-giris").onclick = girisYap;
-["g-anahtar", "g-kadi", "g-sifre"].forEach(i => $(i).addEventListener("keydown", e => { if (e.key === "Enter") girisYap(); }));
+["g-kadi", "g-sifre"].forEach(i => $(i).addEventListener("keydown", e => { if (e.key === "Enter") girisYap(); }));
 $("arama").addEventListener("input", e => { aramaMetni = e.target.value; ekranCiz(); });
 $("arama").addEventListener("keydown", e => { if (e.key === "Enter") { const v = e.target.value; if (barkodIsle(v)) { e.target.value = ""; aramaMetni = ""; ekranCiz(); } else { const l = urunSuz(); if (l.length === 1) { sepeteEkle(l[0]); e.target.value = ""; aramaMetni = ""; ekranCiz(); } } } });
 $("cipler").addEventListener("click", e => { const b = e.target.closest("[data-k]"); if (b) { seciliKategori = b.dataset.k; aramaMetni = ""; $("arama").value = ""; ekranCiz(); } });
@@ -390,14 +390,7 @@ window.addEventListener("offline", () => { cevrimici = false; durumYaz(); });
 document.addEventListener("visibilitychange", () => { if (!document.hidden) esitle(true); });
 setInterval(() => esitle(true), 15000);
 
-// Bağlantı linki (…/mobil/#k=1234-5678-9012) açılırsa lisans anahtarı kendiliğinden alınır; anahtar bir kez bilindikten sonra giriş ekranında sorulmaz
-(function () {
-  const k = /[#&?]k=([0-9A-Za-z-]{4,40})/.exec(location.hash || "");
-  if (k) { S.anahtar = k[1]; kaydet(); try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { /* önemsiz */ } }
-})();
-function lisansGizle(gizle) { $("g-anahtar").hidden = gizle; $("g-lisans-degis").hidden = !gizle; }
-$("g-lisans-degis").addEventListener("click", e => { e.preventDefault(); lisansGizle(false); $("g-anahtar").focus(); });
-if (S.kullanici && S.anahtar) uygulamayiAc(); else { $("giris").hidden = false; $("g-anahtar").value = S.anahtar || ""; lisansGizle(!!S.anahtar); }
+if (S.kullanici && S.anahtar) uygulamayiAc(); else { $("giris").hidden = false; }
 </script>
 </body>
 </html>
