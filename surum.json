@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.52",
+  "surum": "1.0.53",
   "tarih": "2026-10-17",
   "notlar": [
-    "Ürünler: satıra basınca düzenleme açılıyor; barkod alanında EAN-13 ve EAN-8 oluşturucu düğmeleri"
+    "Ürün paneli genişletildi; ürün adı, barkod ve liste kutuları büyütüldü"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.53",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Ürün paneli genişletildi; ürün adı, barkod ve liste kutuları büyütüldü"
+      ]
+    },
     {
       "surum": "1.0.52",
       "tarih": "2026-10-17",
@@ -394,5 +401,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "fefc036c1446587dd53ccc7d3badc95b2fe2709cbdd950f5ce8fd5b739d29288"
+  "sha256": "b51a7584bd233da058af74225db19e8545d91c6c12a5b198a04762a6874f5094"
 }
