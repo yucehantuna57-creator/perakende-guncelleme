@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.62",
+  "surum": "1.0.63",
   "tarih": "2026-10-17",
   "notlar": [
-    "Beklemeye al ve Bekleyenler listesi; tartılı ürün (terazi) desteği: kg/metre/litre, etiketli terazi barkodu; fişten iade alma (stok, kasa ve cari hesaba işler)"
+    "SOFTNEST cari bağlantı kodu üretilince bulut eşitlemesi otomatik açılıyor (cariden fatura alınabilsin)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.63",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "SOFTNEST cari bağlantı kodu üretilince bulut eşitlemesi otomatik açılıyor (cariden fatura alınabilsin)"
+      ]
+    },
     {
       "surum": "1.0.62",
       "tarih": "2026-10-17",
@@ -464,5 +471,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "fc867cbefcde4c4e01a477db4a9ef49ff20bc00862fc067c95abb303e3b40723"
+  "sha256": "b727733e12a20d14e4f3a5e5e1b4842facfd17f20e598ad23f6ac1f837827341"
 }
