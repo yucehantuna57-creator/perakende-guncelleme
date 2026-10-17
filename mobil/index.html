@@ -69,6 +69,7 @@
   <input id="g-anahtar" placeholder="Lisans anahtarı (örn. 1234-5678-9012)" autocomplete="off" inputmode="numeric">
   <input id="g-kadi" placeholder="Kullanıcı adı" autocomplete="username" autocapitalize="none">
   <input id="g-sifre" type="password" placeholder="Şifre" autocomplete="current-password">
+  <a href="#" id="g-lisans-degis" hidden style="font-size:13px;text-align:center;color:var(--soluk)">Lisans anahtarını değiştir</a>
   <div class="hata" id="g-hata"></div>
   <button class="btn ana" id="g-giris">Giriş yap</button>
   <small style="color:var(--soluk);text-align:center">Lisans anahtarını ve kullanıcı bilgilerini bilgisayardaki programın Ayarlar → Telefon uygulaması bölümünden öğrenebilirsiniz.</small>
@@ -389,7 +390,14 @@ window.addEventListener("offline", () => { cevrimici = false; durumYaz(); });
 document.addEventListener("visibilitychange", () => { if (!document.hidden) esitle(true); });
 setInterval(() => esitle(true), 15000);
 
-if (S.kullanici && S.anahtar) uygulamayiAc(); else { $("giris").hidden = false; $("g-anahtar").value = S.anahtar || ""; }
+// Bağlantı linki (…/mobil/#k=1234-5678-9012) açılırsa lisans anahtarı kendiliğinden alınır; anahtar bir kez bilindikten sonra giriş ekranında sorulmaz
+(function () {
+  const k = /[#&?]k=([0-9A-Za-z-]{4,40})/.exec(location.hash || "");
+  if (k) { S.anahtar = k[1]; kaydet(); try { history.replaceState(null, "", location.pathname + location.search); } catch (e) { /* önemsiz */ } }
+})();
+function lisansGizle(gizle) { $("g-anahtar").hidden = gizle; $("g-lisans-degis").hidden = !gizle; }
+$("g-lisans-degis").addEventListener("click", e => { e.preventDefault(); lisansGizle(false); $("g-anahtar").focus(); });
+if (S.kullanici && S.anahtar) uygulamayiAc(); else { $("giris").hidden = false; $("g-anahtar").value = S.anahtar || ""; lisansGizle(!!S.anahtar); }
 </script>
 </body>
 </html>
