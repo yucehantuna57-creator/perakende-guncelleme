@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.58",
+  "surum": "1.0.59",
   "tarih": "2026-10-17",
   "notlar": [
-    "Sanal klavye yeniden tasarlandı: daha geniş, yumuşak köşeli ve dokunmaya uygun"
+    "Ürün panelinde imleç üstüne gelen ürün satırı renk değiştiriyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.59",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Ürün panelinde imleç üstüne gelen ürün satırı renk değiştiriyor"
+      ]
+    },
     {
       "surum": "1.0.58",
       "tarih": "2026-10-17",
@@ -436,5 +443,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "837aded2ac0a4bee57176d284d10be89d068aa54eade696839be69b7205ca175"
+  "sha256": "150e92e8dae3384ce243f40c58a47c91dd17895750efe22081d7e7365b50866a"
 }
