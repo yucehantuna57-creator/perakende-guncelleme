@@ -1,12 +1,17 @@
 {
-  "surum": "1.0.46",
-  "tarih": "2026-10-16",
+  "surum": "1.0.47",
+  "tarih": "2026-10-17",
   "notlar": [
-    "Cariden gelen fatura artık onayınızı bekliyor: incelenip 'ürünlere ve cariye işlensin mi' sorusuna evet denince işleniyor",
-    "Alış faturasında Düzenle, satış fiyatı ve barkod ekleme eklendi",
-    "Tedarikçi cari ekstresinde fatura içeriği görünüyor, alacak sütunu düzeltildi"
+    "Ürünler sayfasının ortasına ürün / barkod arama kutusu eklendi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.47",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Ürünler sayfasının ortasına ürün / barkod arama kutusu eklendi"
+      ]
+    },
     {
       "surum": "1.0.46",
       "tarih": "2026-10-16",
@@ -354,5 +359,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "c7df6f189f614ade88dcda55e35c0edc5126d758207d15e4d70a8d1babc682f9"
+  "sha256": "23d2c5844f631a746643f4517fabd1eb63f9521b769cfe60446b524d1c6c94de"
 }
