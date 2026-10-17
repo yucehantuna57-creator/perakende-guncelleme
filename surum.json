@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.56",
+  "surum": "1.0.57",
   "tarih": "2026-10-17",
   "notlar": [
-    "F2 ürün/barkod ara ve F3 ödemeyi tamamla kısayolları tıklamadan çalışıyor (klavye odağı açılışta sayfaya veriliyor)"
+    "Alış faturası: satırda 'Stoktan ara' ile ürün eşleştirme; KDV dahil alış fiyatı (düzenlenebilir) ve KDV dahil satır toplamı"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.57",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Alış faturası: satırda 'Stoktan ara' ile ürün eşleştirme; KDV dahil alış fiyatı (düzenlenebilir) ve KDV dahil satır toplamı"
+      ]
+    },
     {
       "surum": "1.0.56",
       "tarih": "2026-10-17",
@@ -422,5 +429,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "bc447361ebf3ad577126b895c21edb97366ae94749df745d61db121cefc6b527"
+  "sha256": "93d8150f1a4b4a0e96acb6f9af5d1b837fa575d778d9a5ca56777a58ffa5063d"
 }
