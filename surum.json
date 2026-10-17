@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.59",
+  "surum": "1.0.60",
   "tarih": "2026-10-17",
   "notlar": [
-    "Ürün panelinde imleç üstüne gelen ürün satırı renk değiştiriyor"
+    "Kayıt güvenliği: kategori/ürün değişiklikleri sunucuya yazılamazsa artık kaybolmuyor ve uyarı gösteriliyor; kasada kategori butonları büyütüldü; ürün satırı üzerine gelince renk değişiyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.60",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Kayıt güvenliği: kategori/ürün değişiklikleri sunucuya yazılamazsa artık kaybolmuyor ve uyarı gösteriliyor; kasada kategori butonları büyütüldü; ürün satırı üzerine gelince renk değişiyor"
+      ]
+    },
     {
       "surum": "1.0.59",
       "tarih": "2026-10-17",
@@ -443,5 +450,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "150e92e8dae3384ce243f40c58a47c91dd17895750efe22081d7e7365b50866a"
+  "sha256": "9d442985858b5e38e94a105011344aa2c9901e7c2d6e9f91934a7dc8dec5045f"
 }
