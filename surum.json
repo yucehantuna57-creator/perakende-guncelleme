@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.47",
+  "surum": "1.0.48",
   "tarih": "2026-10-17",
   "notlar": [
-    "Ürünler sayfasının ortasına ürün / barkod arama kutusu eklendi"
+    "Müşteriler sayfasının üstü küçültüldü ve detaylandırıldı; yuvarlak (halka) istatistikler eklendi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.48",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Müşteriler sayfasının üstü küçültüldü ve detaylandırıldı; yuvarlak (halka) istatistikler eklendi"
+      ]
+    },
     {
       "surum": "1.0.47",
       "tarih": "2026-10-17",
@@ -359,5 +366,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "23d2c5844f631a746643f4517fabd1eb63f9521b769cfe60446b524d1c6c94de"
+  "sha256": "18487c507020ef2681d819ba957cca73a853cbb3d85a47f540c5380c55ba5bcf"
 }
