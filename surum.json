@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.53",
+  "surum": "1.0.54",
   "tarih": "2026-10-17",
   "notlar": [
-    "Ürün paneli genişletildi; ürün adı, barkod ve liste kutuları büyütüldü"
+    "Giriş, kurulum ve lisans ekranlarına sanal klavye eklendi (şifre için büyük sayı tuşları, kullanıcı adı için harf klavyesi)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.54",
+      "tarih": "2026-10-17",
+      "notlar": [
+        "Giriş, kurulum ve lisans ekranlarına sanal klavye eklendi (şifre için büyük sayı tuşları, kullanıcı adı için harf klavyesi)"
+      ]
+    },
     {
       "surum": "1.0.53",
       "tarih": "2026-10-17",
@@ -401,5 +408,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "b51a7584bd233da058af74225db19e8545d91c6c12a5b198a04762a6874f5094"
+  "sha256": "5caa3ce47faa3d5b4be2d6a50508412185c4494c6475c3dcd415179065caeea7"
 }
