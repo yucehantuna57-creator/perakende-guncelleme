@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.72",
+  "surum": "1.0.73",
   "tarih": "2026-10-18",
   "notlar": [
-    "Sepet/satış iptali ve silme onayları ekranın ortasında uygulama içi pencerede açılır (üstteki tarayıcı kutusu kaldırıldı)"
+    "Sağ altta Yazıcılar düğmesi: fiş, etiket ve belge/ekstre için ayrı yazıcı seçilir (her bilgisayarda ayrı)",
+    "Fiş, barkod etiketi, ekstre ve gün sonu çıktıları seçilen yazıcıya gönderilir, yazıcılar çakışmaz"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.73",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Sağ altta Yazıcılar düğmesi: fiş, etiket ve belge/ekstre için ayrı yazıcı seçilir (her bilgisayarda ayrı)",
+        "Fiş, barkod etiketi, ekstre ve gün sonu çıktıları seçilen yazıcıya gönderilir, yazıcılar çakışmaz"
+      ]
+    },
     {
       "surum": "1.0.72",
       "tarih": "2026-10-18",
@@ -535,5 +544,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "574565aa0db305a87076f77888e7fc429b1fc7e0467cd633b8e59299926690ba"
+  "sha256": "f068254f33a5dfeae3b7f17e71ddaad434a9c84d6d2ee391c51028a9e1bc2b55"
 }
