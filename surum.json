@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.76",
+  "surum": "1.0.77",
   "tarih": "2026-10-18",
   "notlar": [
-    "Müşteri seç ekranında yeni müşteri ekleme düzeltmesi (aranan yazı ad/telefon alanına otomatik gelir)"
+    "Ürün ekle ve Ürünü düzenle artık ekranı kaplamayan küçük pencerede açılır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.77",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Ürün ekle ve Ürünü düzenle artık ekranı kaplamayan küçük pencerede açılır"
+      ]
+    },
     {
       "surum": "1.0.76",
       "tarih": "2026-10-18",
@@ -565,5 +572,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f41f5a9ef82ecf35dfa18a0d07734fd75ded4fc5a33f553a93dc5a0ba731484c"
+  "sha256": "ce497e8ab852f09ace353888f311fcad2248f391c3305660d0ad62adb81a1e88"
 }
