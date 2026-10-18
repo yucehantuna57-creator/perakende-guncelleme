@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.75",
+  "surum": "1.0.76",
   "tarih": "2026-10-18",
   "notlar": [
-    "Kasada Müşteri seç ekranına '+ Yeni müşteri ekle' düğmesi: yeni müşteri kaydedilince satışa otomatik seçilir"
+    "Müşteri seç ekranında yeni müşteri ekleme düzeltmesi (aranan yazı ad/telefon alanına otomatik gelir)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.76",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Müşteri seç ekranında yeni müşteri ekleme düzeltmesi (aranan yazı ad/telefon alanına otomatik gelir)"
+      ]
+    },
     {
       "surum": "1.0.75",
       "tarih": "2026-10-18",
@@ -558,5 +565,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "2bfb72c67de6e5836cc4172de000f955216e38427a62c181c1690fa705ad5f99"
+  "sha256": "f41f5a9ef82ecf35dfa18a0d07734fd75ded4fc5a33f553a93dc5a0ba731484c"
 }
