@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.80",
+  "surum": "1.0.81",
   "tarih": "2026-10-18",
   "notlar": [
-    "Barkod etiketi ve raf etiketi yenilendi: etiket boyutu (40x30 ... 100x50 mm), tür seçimi, adet, canlı önizleme, EAN-13/EAN-8 barkod, büyük fiyatlı raf etiketi"
+    "Ürünler sayfasına 'Toplu etiket' düğmesi: kategoriye/aramaya göre ürün işaretle, tek seferde barkod veya raf etiketi yazdır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.81",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Ürünler sayfasına 'Toplu etiket' düğmesi: kategoriye/aramaya göre ürün işaretle, tek seferde barkod veya raf etiketi yazdır"
+      ]
+    },
     {
       "surum": "1.0.80",
       "tarih": "2026-10-18",
@@ -593,5 +600,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "fe2f903c784c6ab4175cf381fa99704080c96916c4cfd24322190d512c179df1"
+  "sha256": "a72a078c6f192e7cc37ef679d84181e02932ebecc07fa03fb709f92ac424ac6a"
 }
