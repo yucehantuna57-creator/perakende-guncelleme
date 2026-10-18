@@ -1,11 +1,19 @@
 {
-  "surum": "1.0.73",
+  "surum": "1.0.74",
   "tarih": "2026-10-18",
   "notlar": [
-    "Sağ altta Yazıcılar düğmesi: fiş, etiket ve belge/ekstre için ayrı yazıcı seçilir (her bilgisayarda ayrı)",
-    "Fiş, barkod etiketi, ekstre ve gün sonu çıktıları seçilen yazıcıya gönderilir, yazıcılar çakışmaz"
+    "Yeni fiş tasarımı: kutulu firma başlığı, sütunlu ürün listesi, kutulu toplam, fiş no barkodu",
+    "Fiş düzenleme ekranı: firma adı, slogan, vergi dairesi, üst ve alt serbest yazı kutuları, canlı önizleme"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.74",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Yeni fiş tasarımı: kutulu firma başlığı, sütunlu ürün listesi, kutulu toplam, fiş no barkodu",
+        "Fiş düzenleme ekranı: firma adı, slogan, vergi dairesi, üst ve alt serbest yazı kutuları, canlı önizleme"
+      ]
+    },
     {
       "surum": "1.0.73",
       "tarih": "2026-10-18",
@@ -544,5 +552,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f068254f33a5dfeae3b7f17e71ddaad434a9c84d6d2ee391c51028a9e1bc2b55"
+  "sha256": "da5c771558cd7c09b03d98032f271590aced4387246f81560b413c00f19dc29b"
 }
