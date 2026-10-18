@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.79",
+  "surum": "1.0.80",
   "tarih": "2026-10-18",
   "notlar": [
-    "Kasada sepetteki ürün satırının üzerine gelince renk değişir"
+    "Barkod etiketi ve raf etiketi yenilendi: etiket boyutu (40x30 ... 100x50 mm), tür seçimi, adet, canlı önizleme, EAN-13/EAN-8 barkod, büyük fiyatlı raf etiketi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.80",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Barkod etiketi ve raf etiketi yenilendi: etiket boyutu (40x30 ... 100x50 mm), tür seçimi, adet, canlı önizleme, EAN-13/EAN-8 barkod, büyük fiyatlı raf etiketi"
+      ]
+    },
     {
       "surum": "1.0.79",
       "tarih": "2026-10-18",
@@ -586,5 +593,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "02b4a0965bd3e3765bb41481cc2d10d69ebc0c48c6d070f6131cdc9b1fef3d91"
+  "sha256": "fe2f903c784c6ab4175cf381fa99704080c96916c4cfd24322190d512c179df1"
 }
