@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.68",
+  "surum": "1.0.69",
   "tarih": "2026-10-18",
   "notlar": [
-    "Kategori ayarlarında 'Ürünleri gör' (kategorideki ürünleri listele, düzenle, kategoriden çıkar); kasada kategoriye basınca arama kutusu temizleniyor"
+    "Kayıtsız barkod okutulunca 'Hızlı kayıt' penceresi açılıyor (ad, fiyat, stok, kategori; kaydedip sepete ekler); barkod okutulunca arama kutusu kendiliğinden temizleniyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.69",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Kayıtsız barkod okutulunca 'Hızlı kayıt' penceresi açılıyor (ad, fiyat, stok, kategori; kaydedip sepete ekler); barkod okutulunca arama kutusu kendiliğinden temizleniyor"
+      ]
+    },
     {
       "surum": "1.0.68",
       "tarih": "2026-10-18",
@@ -506,5 +513,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "0c45380e2ea4fd36155549aa6c8d03e2d6d1cbe2da697aa892a8e17cda9087f4"
+  "sha256": "64dd39579becd4e69027316697e991f8e9539fd7984e11c6758d9ae56354a4e7"
 }
