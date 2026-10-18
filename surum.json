@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.65",
+  "surum": "1.0.66",
   "tarih": "2026-10-18",
   "notlar": [
-    "Giriş ekranı: 'Buluttan getir' ve 'Lisanslı giriş yap (lisans anahtarını değiştir)'; başka lisansa bağlı bilgisayarda lisans değişimi onayla yapılıyor"
+    "Giriş ekranından 'Buluttan getir' kaldırıldı (hesap başka bilgisayara bu yolla getirilemez); 'Lisanslı giriş yap' kalıyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.66",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Giriş ekranından 'Buluttan getir' kaldırıldı (hesap başka bilgisayara bu yolla getirilemez); 'Lisanslı giriş yap' kalıyor"
+      ]
+    },
     {
       "surum": "1.0.65",
       "tarih": "2026-10-18",
@@ -485,5 +492,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "c6364d9ad5987ff45c958efad3d17a76b31d00a49b818dd9f722945813f49187"
+  "sha256": "775937f78aa281efc8260e3069f62f6123998d5b7444ebf8abadd0f32c0f754c"
 }
