@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.66",
+  "surum": "1.0.67",
   "tarih": "2026-10-18",
   "notlar": [
-    "Giriş ekranından 'Buluttan getir' kaldırıldı (hesap başka bilgisayara bu yolla getirilemez); 'Lisanslı giriş yap' kalıyor"
+    "Lisanslı giriş yap: sadece lisans anahtarı girilince hesaplar ve ürünler buluttan alınır, sonra kullanıcı adı ve şifreyle giriş yapılır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.67",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Lisanslı giriş yap: sadece lisans anahtarı girilince hesaplar ve ürünler buluttan alınır, sonra kullanıcı adı ve şifreyle giriş yapılır"
+      ]
+    },
     {
       "surum": "1.0.66",
       "tarih": "2026-10-18",
@@ -492,5 +499,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "775937f78aa281efc8260e3069f62f6123998d5b7444ebf8abadd0f32c0f754c"
+  "sha256": "dbaac7097f4d2646731309cebd9f3acfc1e9e4a729edff321b123390b5a97f50"
 }
