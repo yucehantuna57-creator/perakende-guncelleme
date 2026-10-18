@@ -1,11 +1,17 @@
 {
-  "surum": "1.0.74",
+  "surum": "1.0.75",
   "tarih": "2026-10-18",
   "notlar": [
-    "Yeni fiş tasarımı: kutulu firma başlığı, sütunlu ürün listesi, kutulu toplam, fiş no barkodu",
-    "Fiş düzenleme ekranı: firma adı, slogan, vergi dairesi, üst ve alt serbest yazı kutuları, canlı önizleme"
+    "Kasada Müşteri seç ekranına '+ Yeni müşteri ekle' düğmesi: yeni müşteri kaydedilince satışa otomatik seçilir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.75",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Kasada Müşteri seç ekranına '+ Yeni müşteri ekle' düğmesi: yeni müşteri kaydedilince satışa otomatik seçilir"
+      ]
+    },
     {
       "surum": "1.0.74",
       "tarih": "2026-10-18",
@@ -552,5 +558,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "da5c771558cd7c09b03d98032f271590aced4387246f81560b413c00f19dc29b"
+  "sha256": "2bfb72c67de6e5836cc4172de000f955216e38427a62c181c1690fa705ad5f99"
 }
