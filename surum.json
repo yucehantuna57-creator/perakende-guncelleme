@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.78",
+  "surum": "1.0.79",
   "tarih": "2026-10-18",
   "notlar": [
-    "Yazıcılar panelinde 'Yazdırma sırası' sekmesi: bekleyen/yazdırılan işler, durum, iptal; düğmede bekleyen iş sayacı"
+    "Kasada sepetteki ürün satırının üzerine gelince renk değişir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.79",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Kasada sepetteki ürün satırının üzerine gelince renk değişir"
+      ]
+    },
     {
       "surum": "1.0.78",
       "tarih": "2026-10-18",
@@ -579,5 +586,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "a496d65c52010a5a15fe3f9617f6c28882361094a44bd3e0c0bc2106f944890e"
+  "sha256": "02b4a0965bd3e3765bb41481cc2d10d69ebc0c48c6d070f6131cdc9b1fef3d91"
 }
