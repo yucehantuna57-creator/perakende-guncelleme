@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.71",
+  "surum": "1.0.72",
   "tarih": "2026-10-18",
   "notlar": [
-    "Ürünler düğmesi sola alındı, kasadaki arama düğmeleri büyütüldü"
+    "Sepet/satış iptali ve silme onayları ekranın ortasında uygulama içi pencerede açılır (üstteki tarayıcı kutusu kaldırıldı)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.72",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Sepet/satış iptali ve silme onayları ekranın ortasında uygulama içi pencerede açılır (üstteki tarayıcı kutusu kaldırıldı)"
+      ]
+    },
     {
       "surum": "1.0.71",
       "tarih": "2026-10-18",
@@ -528,5 +535,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "3ae784d35de428998031f3cdc549806f1be266718920309af8fc8670de716934"
+  "sha256": "574565aa0db305a87076f77888e7fc429b1fc7e0467cd633b8e59299926690ba"
 }
