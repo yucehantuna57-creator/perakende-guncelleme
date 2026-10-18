@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.67",
+  "surum": "1.0.68",
   "tarih": "2026-10-18",
   "notlar": [
-    "Lisanslı giriş yap: sadece lisans anahtarı girilince hesaplar ve ürünler buluttan alınır, sonra kullanıcı adı ve şifreyle giriş yapılır"
+    "Kategori ayarlarında 'Ürünleri gör' (kategorideki ürünleri listele, düzenle, kategoriden çıkar); kasada kategoriye basınca arama kutusu temizleniyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.68",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Kategori ayarlarında 'Ürünleri gör' (kategorideki ürünleri listele, düzenle, kategoriden çıkar); kasada kategoriye basınca arama kutusu temizleniyor"
+      ]
+    },
     {
       "surum": "1.0.67",
       "tarih": "2026-10-18",
@@ -499,5 +506,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "dbaac7097f4d2646731309cebd9f3acfc1e9e4a729edff321b123390b5a97f50"
+  "sha256": "0c45380e2ea4fd36155549aa6c8d03e2d6d1cbe2da697aa892a8e17cda9087f4"
 }
