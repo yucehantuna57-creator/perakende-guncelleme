@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.69",
+  "surum": "1.0.70",
   "tarih": "2026-10-18",
   "notlar": [
-    "Kayıtsız barkod okutulunca 'Hızlı kayıt' penceresi açılıyor (ad, fiyat, stok, kategori; kaydedip sepete ekler); barkod okutulunca arama kutusu kendiliğinden temizleniyor"
+    "Kasada barkod okutunca ürünler paneli kendiliğinden açılmaz, ürün doğrudan sepete eklenir",
+    "Fiyat gör ve müşteri ara düğmelerinin yanına Ürünler paneli düğmesi eklendi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.70",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Kasada barkod okutunca ürünler paneli kendiliğinden açılmaz, ürün doğrudan sepete eklenir",
+        "Fiyat gör ve müşteri ara düğmelerinin yanına Ürünler paneli düğmesi eklendi"
+      ]
+    },
     {
       "surum": "1.0.69",
       "tarih": "2026-10-18",
@@ -513,5 +522,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "64dd39579becd4e69027316697e991f8e9539fd7984e11c6758d9ae56354a4e7"
+  "sha256": "582665a73c44cc6de951453c593c3e3944033cb2e56e728b9a0b7edc8a7b512d"
 }
