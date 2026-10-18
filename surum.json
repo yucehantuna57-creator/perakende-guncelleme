@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.63",
-  "tarih": "2026-10-17",
+  "surum": "1.0.64",
+  "tarih": "2026-10-18",
   "notlar": [
-    "SOFTNEST cari bağlantı kodu üretilince bulut eşitlemesi otomatik açılıyor (cariden fatura alınabilsin)"
+    "Giriş ekranına 'Hesabım başka bilgisayarda kayıtlı: buluttan getir' eklendi: kullanıcı adı ve şifre ile hesap, lisans ve ürünler bu bilgisayara otomatik gelir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.64",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Giriş ekranına 'Hesabım başka bilgisayarda kayıtlı: buluttan getir' eklendi: kullanıcı adı ve şifre ile hesap, lisans ve ürünler bu bilgisayara otomatik gelir"
+      ]
+    },
     {
       "surum": "1.0.63",
       "tarih": "2026-10-17",
@@ -471,5 +478,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "b727733e12a20d14e4f3a5e5e1b4842facfd17f20e598ad23f6ac1f837827341"
+  "sha256": "9e246b43a73a4369f272ccb7090655587d0638a7b2e6ca392aaf6e4e53644ce2"
 }
