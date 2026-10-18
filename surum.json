@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.64",
+  "surum": "1.0.65",
   "tarih": "2026-10-18",
   "notlar": [
-    "Giriş ekranına 'Hesabım başka bilgisayarda kayıtlı: buluttan getir' eklendi: kullanıcı adı ve şifre ile hesap, lisans ve ürünler bu bilgisayara otomatik gelir"
+    "Giriş ekranı: 'Buluttan getir' ve 'Lisanslı giriş yap (lisans anahtarını değiştir)'; başka lisansa bağlı bilgisayarda lisans değişimi onayla yapılıyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.65",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Giriş ekranı: 'Buluttan getir' ve 'Lisanslı giriş yap (lisans anahtarını değiştir)'; başka lisansa bağlı bilgisayarda lisans değişimi onayla yapılıyor"
+      ]
+    },
     {
       "surum": "1.0.64",
       "tarih": "2026-10-18",
@@ -478,5 +485,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "9e246b43a73a4369f272ccb7090655587d0638a7b2e6ca392aaf6e4e53644ce2"
+  "sha256": "c6364d9ad5987ff45c958efad3d17a76b31d00a49b818dd9f722945813f49187"
 }
