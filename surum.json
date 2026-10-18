@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.77",
+  "surum": "1.0.78",
   "tarih": "2026-10-18",
   "notlar": [
-    "Ürün ekle ve Ürünü düzenle artık ekranı kaplamayan küçük pencerede açılır"
+    "Yazıcılar panelinde 'Yazdırma sırası' sekmesi: bekleyen/yazdırılan işler, durum, iptal; düğmede bekleyen iş sayacı"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.78",
+      "tarih": "2026-10-18",
+      "notlar": [
+        "Yazıcılar panelinde 'Yazdırma sırası' sekmesi: bekleyen/yazdırılan işler, durum, iptal; düğmede bekleyen iş sayacı"
+      ]
+    },
     {
       "surum": "1.0.77",
       "tarih": "2026-10-18",
@@ -572,5 +579,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "ce497e8ab852f09ace353888f311fcad2248f391c3305660d0ad62adb81a1e88"
+  "sha256": "a496d65c52010a5a15fe3f9617f6c28882361094a44bd3e0c0bc2106f944890e"
 }
