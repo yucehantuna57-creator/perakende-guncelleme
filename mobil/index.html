@@ -166,7 +166,7 @@ const para = n => Number(n || 0).toLocaleString("tr-TR", { minimumFractionDigits
 const sayi = n => Number(n || 0).toLocaleString("tr-TR", { maximumFractionDigits: 3 });
 
 // ---------- Durum ----------
-let S = { anahtar: "", kullanici: null, cihaz: 0, sira: 0, urunler: [], kategoriler: [], musteriler: [], cari: [], ayar: {}, isletme: "", tabanStok: {}, kuyruk: [], satislarim: [], sayac: {} };
+let S = { anahtar: "", kullanici: null, cihaz: 0, sira: 0, urunler: [], kategoriler: [], musteriler: [], cari: [], ayar: {}, isletme: "", tabanStok: {}, kuyruk: [], satislarim: [], sayac: {}, dukSira: 0, dukSatis: {}, dukOdeme: {}, dukZaman: 0 };
 try { const k = JSON.parse(localStorage.getItem(DEPO) || "null"); if (k) S = { ...S, ...k }; } catch (e) { /* ilk açılış */ }
 if (!S.cihaz) S.cihaz = 1 + Math.floor(Math.random() * 998);
 let sepet = [], seciliKategori = "", aramaMetni = "", cevrimici = navigator.onLine;
@@ -226,6 +226,29 @@ async function cek() {
   // Henüz buluta gitmemiş satışların stok düşümü yeniden uygulanır
   S.kuyruk.filter(k => k.tablo === "stok_hareketleri").forEach(k => { const u = S.urunler.find(x => x.id === k.veri.urun_id); if (u && guncellenen.has(u.id)) u.stok = Math.round((u.stok + k.veri.miktar) * 1000) / 1000; });
 }
+// Dükkânın tüm kasalarındaki satışlar (canlı takip): satislar + odemeler ayrı bir imleçle çekilir, son 14 gün saklanır
+async function cekDukkan() {
+  const sinir = Date.now() - 14 * 86400000;
+  for (let tur = 0; tur < 40; tur++) {
+    const r = await rpc("bulut_al", { p_anahtar: S.anahtar, p_sonra: S.dukSira, p_cihaz: "tel-" + S.cihaz, p_tablolar: ["satislar", "odemeler"] });
+    if (!r.ok) throw new Error(r.hata || "Alınamadı");
+    for (const k of r.kayitlar) {
+      const id = Number(k.kid), v = k.veri || {};
+      if (k.tablo === "satislar") {
+        if (k.silindi) { delete S.dukSatis[id]; continue; }
+        if (new Date(v.tarih).getTime() < sinir) continue;
+        S.dukSatis[id] = { id, fis_no: v.fis_no, tarih: v.tarih, toplam: Number(v.toplam || 0), kasa: v.kasa_no || "", durum: v.durum || "tamamlandi", iade: !!(v.iade_fis_id || v.iade) };
+      } else if (k.tablo === "odemeler") {
+        if (k.silindi) { delete S.dukOdeme[v.satis_id]; continue; }
+        S.dukOdeme[v.satis_id] = v.yontem;
+      }
+    }
+    S.dukSira = r.sira;
+    if (r.kayitlar.length < 1500) break;
+  }
+  for (const id of Object.keys(S.dukOdeme)) if (!S.dukSatis[id]) delete S.dukOdeme[id];
+  S.dukZaman = Date.now();
+}
 async function it() {
   while (S.kuyruk.length) {
     const parca = S.kuyruk.slice(0, 300);
@@ -240,7 +263,7 @@ async function esitle(sessiz) {
   if (esitleniyor || !S.anahtar || !S.kullanici) return;
   esitleniyor = true;
   try {
-    await it(); await cek(); kaydet(); cevrimici = true; durumYaz();
+    await it(); await cek(); try { await cekDukkan(); } catch (e) { /* canlı takip alınamazsa ana eşitleme bozulmaz */ } kaydet(); cevrimici = true; durumYaz();
     ekranCiz();
   } catch (e) { cevrimici = false; durumYaz(e.message); if (!sessiz) bildir("Eşitlenemedi: " + e.message); }
   esitleniyor = false;
@@ -423,6 +446,28 @@ function kategoriYonet() {
 
 // ---------- Ana ekran ----------
 function cariBakiye(id) { return S.cari.reduce((t, h) => h.musteri_id !== id ? t : t + (h.tur === "borc" ? h.tutar : -h.tutar), 0); }
+// Tüm kasalar: bugünkü ciro, ödeme dağılımı, dünle karşılaştırma ve son satışlar (bu telefon dahil)
+function dukkanKutusu() {
+  const hepsi = new Map();
+  Object.values(S.dukSatis).forEach(x => hepsi.set(x.fis_no || ("i" + x.id), { ...x, yontem: S.dukOdeme[x.id] || "" }));
+  S.satislarim.forEach(x => { if (!hepsi.has(x.fis_no)) hepsi.set(x.fis_no, { fis_no: x.fis_no, tarih: x.tarih, toplam: x.toplam, kasa: "M" + S.cihaz, durum: "tamamlandi", yontem: x.yontem }); });
+  const tum = [...hepsi.values()].filter(x => x.durum === "tamamlandi").sort((a, b) => new Date(b.tarih) - new Date(a.tarih));
+  if (!tum.length && !S.dukZaman) return `<div class="kutu"><h3>Dükkân · tüm kasalar</h3><small>Veriler yükleniyor...</small></div>`;
+  const bugun = yerelGun(new Date().toISOString()), dun = yerelGun(new Date(Date.now() - 86400000).toISOString());
+  const topla = (l, y) => l.filter(x => !y || x.yontem === y).reduce((t, x) => t + x.toplam, 0);
+  const b = tum.filter(x => yerelGun(x.tarih) === bugun), d = tum.filter(x => yerelGun(x.tarih) === dun);
+  const ciro = topla(b), dunCiro = topla(d), fark = dunCiro > 0 ? Math.round((ciro - dunCiro) / dunCiro * 100) : null;
+  const kasalar = [...new Set(b.map(x => x.kasa).filter(Boolean))];
+  const saat = S.dukZaman ? new Date(S.dukZaman).toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }) : "—";
+  return `<div class="kutu dukkan"><h3>Dükkân · tüm kasalar <small style="float:right;font-weight:400">Güncelleme ${saat}</small></h3>
+    <div class="buyuk">${para(ciro)}</div>
+    <div class="satir2" style="margin-top:6px"><div><b>${b.length}</b>satış</div><div><b>${b.length ? para(ciro / b.length) : "—"}</b>ortalama sepet</div><div><b>${fark === null ? "—" : (fark >= 0 ? "+" : "") + fark + "%"}</b>düne göre</div></div>
+    <div class="halkalar" style="margin-top:10px">${donut([{ v: topla(b, "nakit"), c: "#1e8e4e" }, { v: topla(b, "kart"), c: "#3b6ab3" }, { v: topla(b, "acik_hesap"), c: "#e0953a" }], b.length, "satış")}
+      <div class="lejant"><div><i style="background:#1e8e4e"></i>Nakit<b>${para(topla(b, "nakit"))}</b></div><div><i style="background:#3b6ab3"></i>Kart<b>${para(topla(b, "kart"))}</b></div><div><i style="background:#e0953a"></i>Açık hesap<b>${para(topla(b, "acik_hesap"))}</b></div></div></div>
+    <div style="margin-top:10px;font-size:13px;opacity:.75">${kasalar.length ? "Bugün satış yapan kasa: " + kasalar.map(kac).join(", ") : "Bugün henüz satış yok"}</div>
+    ${tum.slice(0, 6).map(x => `<div class="liste-satir"><div class="bilgi"><b>${kac(x.fis_no)}</b><small>${new Date(x.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} · ${kac(x.kasa)} · ${YONTEM[x.yontem] || x.yontem || ""}</small></div><b>${para(x.toplam)}</b></div>`).join("")}
+  </div>`;
+}
 function anaCiz() {
   const bugun = yerelGun(new Date().toISOString()), l = S.satislarim.filter(s => yerelGun(s.tarih) === bugun);
   const ciro = l.reduce((t, s) => t + s.toplam, 0), yon = y => l.filter(s => s.yontem === y).reduce((t, s) => t + s.toplam, 0);
@@ -439,6 +484,7 @@ function anaCiz() {
       <div><small>Bu telefondan bugünkü satış</small><div class="buyuk">${para(ciro)}</div></div>
       <div class="satir2"><div><b>${l.length}</b>satış</div><div><b>${l.length ? para(ciro / l.length) : "—"}</b>ortalama sepet</div><div><b>${bekleyen}</b>gönderilmeyi bekleyen</div></div>
     </div>
+    ${dukkanKutusu()}
     <div class="karolar">
       <button class="hizli" data-h="kasa"><span class="ik">${IK.satis}</span>Satış yap</button>
       <button class="hizli" data-h="fiyat"><span class="ik">${IK.fiyat}</span>Fiyat gör</button>
@@ -775,7 +821,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261017061913";
+const SURUM = "20261019093809";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
