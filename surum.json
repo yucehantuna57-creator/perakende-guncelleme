@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.83",
+  "surum": "1.0.84",
   "tarih": "2026-10-20",
   "notlar": [
-    "Barkod birleştir: stokta olmayan ürünler yeni ürün olarak eklenir, aynı adlı ürün varsa birleştirilir; isteğe bağlı fiyat güncelleme"
+    "Ürün ekle/düzenle ekranında barkod okutunca ekran kapanmaz, imleç satış fiyatına geçer"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.84",
+      "tarih": "2026-10-20",
+      "notlar": [
+        "Ürün ekle/düzenle ekranında barkod okutunca ekran kapanmaz, imleç satış fiyatına geçer"
+      ]
+    },
     {
       "surum": "1.0.83",
       "tarih": "2026-10-20",
@@ -614,5 +621,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "0b4d52c14f8817e6f4a0ba8dc67d25f046e4fb24a6eb15137cd19db5894ad0db"
+  "sha256": "66273c2fe67f6cad830a5e7866e397bffe9f6b024588356542a14e9b558d5203"
 }
