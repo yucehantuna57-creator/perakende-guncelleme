@@ -365,9 +365,8 @@ function ayarCiz() {
       <input id="ay-fis-not" placeholder="Fiş altı notu" value="${kac(a.fisNot)}" style="margin-top:8px">
       <button class="btn" id="ay-fis-kaydet" style="margin-top:8px;width:100%">Fiş ayarlarını kaydet</button>
     </div>
-    <div class="kutu"><h3>Ürün ve kategori yönetimi</h3>
-      <div class="iki"><button class="btn" id="ay-urun-ekle">+ Ürün ekle</button><button class="btn" id="ay-urun-duzenle">Ürün düzenle</button></div>
-      <div class="iki" style="margin-top:8px"><button class="btn" id="ay-kat">Kategoriler (${S.kategoriler.length})</button><button class="btn" id="ay-musteri-ekle">+ Müşteri ekle</button></div>
+    <div class="kutu"><h3>Kategori ve müşteri</h3>
+      <div class="iki"><button class="btn" id="ay-kat">Kategoriler (${S.kategoriler.length})</button><button class="btn" id="ay-musteri-ekle">+ Müşteri ekle</button></div>
     </div>
     <div class="kutu"><h3>Veri ve eşitleme</h3>
       <div class="iki"><button class="btn" id="ay-esitle">Şimdi eşitle</button><button class="btn" id="ay-yenile">Verileri yeniden indir</button></div>
@@ -382,8 +381,6 @@ function ayarCiz() {
   $("ay-ses").onchange = e => ayarYaz("ses", e.target.checked);
   $("ay-tit").onchange = e => ayarYaz("titresim", e.target.checked);
   $("ay-fis-kaydet").onclick = () => { ayarYaz("fisIsletme", $("ay-fis-isletme").value.trim()); ayarYaz("fisAdres", $("ay-fis-adres").value.trim()); ayarYaz("fisTel", $("ay-fis-tel").value.trim()); ayarYaz("fisNot", $("ay-fis-not").value.trim()); bildir("Fiş ayarları kaydedildi"); };
-  $("ay-urun-ekle").onclick = () => urunFormu(null);
-  $("ay-urun-duzenle").onclick = urunSec;
   $("ay-kat").onclick = kategoriYonet;
   $("ay-musteri-ekle").onclick = musteriEkleSayfasi;
   $("ay-esitle").onclick = async () => { await esitle(false); bildir("Eşitleme tamamlandı"); ayarCiz(); };
@@ -392,15 +389,6 @@ function ayarCiz() {
   $("ay-yedek").onclick = () => { try { const b = new Blob([JSON.stringify(S)], { type: "application/json" }), x = document.createElement("a"); x.href = URL.createObjectURL(b); x.download = "softnest-mobil-yedek.json"; x.click(); } catch (e) { bildir("Yedek alınamadı"); } };
   $("ay-guncelle").onclick = async () => { guncellemeSoruldu = false; $("guncelleme").hidden = true; await surumDenetle(true); if ($("guncelleme").hidden) bildir("Uygulama güncel", 1800); };
   $("ay-cikis").onclick = () => { if (!S.kuyruk.length || confirm("Gönderilmemiş kayıtlar var. Yine de çıkılsın mı? (Telefonda kalır, tekrar girince gönderilir)")) cikis(); };
-}
-function urunSec() {
-  sayfaAc(`<h2>Ürün düzenle <button class="btn" id="us-kapat" style="height:36px">Kapat</button></h2><div class="icerik"><input id="us-ara" placeholder="Ürün adı veya barkod" autocomplete="off"><div id="us-liste"></div></div>`, () => {
-    $("us-kapat").onclick = kapat;
-    const ciz = () => { const q = trKucuk($("us-ara").value.trim()); const l = aktifUrunler().filter(u => !q || trKucuk(u.ad).includes(q) || String(u.barkod || "").includes(q)).sort((a, b) => String(a.ad).localeCompare(String(b.ad), "tr")).slice(0, 40);
-      $("us-liste").innerHTML = l.map(u => `<div class="liste-satir" data-u="${u.id}"><div class="bilgi"><b>${kac(u.ad)}</b><small>${kac(u.barkod || "")}</small></div><b>${para(u.satis_fiyati)}</b></div>`).join("") || '<div class="bos" style="padding:24px 0">Ürün yok</div>';
-      $("us-liste").querySelectorAll("[data-u]").forEach(b => b.onclick = () => urunFormu(Number(b.dataset.u))); };
-    $("us-ara").oninput = ciz; ciz(); $("us-ara").focus();
-  });
 }
 // ---------- Ürünler sekmesi: ara, kamerayla bul, ekle, düzenle ----------
 function urunCiz() {
@@ -906,7 +894,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261020190000";
+const SURUM = "20261020200000";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
