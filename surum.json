@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.85",
+  "surum": "1.0.86",
   "tarih": "2026-10-20",
   "notlar": [
-    "Kasada barkod okutunca Enter'a basmadan ürün sepete eklenir (okuyucu hızında gelen ya da stoktaki barkod otomatik işlenir)"
+    "Kasada Ürünler paneli açılınca \"Ürünü düzenle\" sekmesi seçili gelmez; listeden ürüne basınca sepete eklenir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.86",
+      "tarih": "2026-10-20",
+      "notlar": [
+        "Kasada Ürünler paneli açılınca \"Ürünü düzenle\" sekmesi seçili gelmez; listeden ürüne basınca sepete eklenir"
+      ]
+    },
     {
       "surum": "1.0.85",
       "tarih": "2026-10-20",
@@ -628,5 +635,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "cf48d06d9efe7bf7fa51ffd57008a07f8afe3d30aa15cc8daeca86e46388a939"
+  "sha256": "2cb5951a77e10bd4c77fdbd849de28925bf721d0a7fb7f4683f2ad91f38b358b"
 }
