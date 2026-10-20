@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.82",
+  "surum": "1.0.83",
   "tarih": "2026-10-20",
   "notlar": [
-    "Ürünler sayfasına 'Barkod birleştir': Excel'deki barkodlar stoktaki ürünlerle ad/stok koduna göre eşleştirilip barkodlar güncellenir (ürün silinmez)"
+    "Barkod birleştir: stokta olmayan ürünler yeni ürün olarak eklenir, aynı adlı ürün varsa birleştirilir; isteğe bağlı fiyat güncelleme"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.83",
+      "tarih": "2026-10-20",
+      "notlar": [
+        "Barkod birleştir: stokta olmayan ürünler yeni ürün olarak eklenir, aynı adlı ürün varsa birleştirilir; isteğe bağlı fiyat güncelleme"
+      ]
+    },
     {
       "surum": "1.0.82",
       "tarih": "2026-10-20",
@@ -607,5 +614,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f181a5bc09f913e16800dbeedfb8478686eec6d938cafd9252f0a397fdffcc91"
+  "sha256": "0b4d52c14f8817e6f4a0ba8dc67d25f046e4fb24a6eb15137cd19db5894ad0db"
 }
