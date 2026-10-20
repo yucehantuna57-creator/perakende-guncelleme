@@ -56,6 +56,7 @@
   .toplam-satir { display:flex; justify-content:space-between; font-size:20px; font-weight:700; padding:14px 0 6px; }
   #kamera { position:fixed; inset:0; background:#000; z-index:30; display:flex; flex-direction:column; } #kamera video { flex:1; width:100%; object-fit:cover; min-height:0; }
   #kamera .ipucu { position:absolute; top:18%; left:10%; right:10%; height:26%; border:3px solid rgba(255,255,255,.85); border-radius:16px; box-shadow:0 0 0 999px rgba(0,0,0,.35); pointer-events:none; }
+  #kamera-durum { position:absolute; top:46%; left:10%; right:10%; color:#fff; text-align:center; font-size:15px; text-shadow:0 1px 3px #000; pointer-events:none; }
   #kamera .alt { padding:14px; background:#000; display:flex; gap:8px; } #kamera .alt .btn { flex:1; }
   .bildirim { position:fixed; left:50%; transform:translateX(-50%); bottom:90px; background:#222; color:#fff; padding:10px 16px; border-radius:12px; z-index:40; font-size:14px; max-width:90%; text-align:center; }
   .fis { font-family:'Courier New', monospace; font-size:13px; white-space:pre-wrap; background:var(--kart); border:1px dashed var(--cizgi); border-radius:10px; padding:12px; }
@@ -147,7 +148,7 @@
 </section>
 
 <div id="kamera" hidden>
-  <video id="video" playsinline muted></video><div class="ipucu"></div>
+  <video id="video" playsinline muted autoplay></video><div class="ipucu"></div><div id="kamera-durum"></div>
   <div class="alt"><button class="btn" id="kamera-kapat">Kapat</button></div>
 </div>
 
@@ -782,43 +783,81 @@ function menuSayfasi() {
 let kameraAkis = null, kameraDongu = null, sonOkunan = "", sonZaman = 0;
 let kameraMod = "kasa";
 const BARKOD_BICIMLERI = ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "itf", "qr_code"];
-// Safari'de yerleşik BarcodeDetector yok; o zaman aynı arayüzü sunan kütüphane (zxing) bir kez indirilip kullanılır
-let barkodOkuyucuSinifi = null;
-async function barkodOkuyucu() {
-  if (!barkodOkuyucuSinifi) {
-    let yerlesik = false;
-    try { yerlesik = "BarcodeDetector" in window && (await BarcodeDetector.getSupportedFormats()).includes("ean_13"); } catch (e) { /* yok */ }
-    barkodOkuyucuSinifi = yerlesik ? BarcodeDetector : (await import("https://cdn.jsdelivr.net/npm/barcode-detector@2.3.1/+esm")).BarcodeDetector;
-  }
-  return new barkodOkuyucuSinifi({ formats: BARKOD_BICIMLERI });
+// Safari'de yerleşik BarcodeDetector yok; o zaman uygulamayla gelen zxing okuyucusu (zxing/ klasörü) kullanılır
+let barkodCoz = null;
+function betikYukle(adres) {
+  return new Promise((coz, red) => { const b = document.createElement("script"); b.src = adres; b.onload = coz; b.onerror = () => red(new Error("dosya yüklenemedi: " + adres)); document.head.appendChild(b); });
 }
+async function barkodOkuyucu() {
+  if (barkodCoz) return barkodCoz;
+  let yerlesik = false;
+  try { yerlesik = "BarcodeDetector" in window && (await BarcodeDetector.getSupportedFormats()).includes("ean_13"); } catch (e) { /* yok */ }
+  if (yerlesik) {
+    const det = new BarcodeDetector({ formats: BARKOD_BICIMLERI });
+    barkodCoz = async kaynak => { const r = await det.detect(kaynak); return r.length ? r[0].rawValue : null; };
+    return barkodCoz;
+  }
+  if (!window.ZXingWASM) await betikYukle("zxing/zxing-reader.js");
+  ZXingWASM.setZXingModuleOverrides({ locateFile: (ad, onek) => ad.endsWith(".wasm") ? new URL("zxing/" + ad, location.href).href : onek + ad });
+  await ZXingWASM.getZXingModule();
+  const secenek = { formats: ["EAN13", "EAN8", "UPCA", "UPCE", "Code128", "Code39", "ITF", "QRCode"], tryHarder: true, maxNumberOfSymbols: 1 };
+  barkodCoz = async kaynak => { const r = await ZXingWASM.readBarcodesFromImageData(kaynak, secenek); return r.length ? r[0].text : null; };
+  barkodCoz.goruntuIster = true;
+  return barkodCoz;
+}
+// Kameradan o anki karenin yalnızca çerçeve (ipucu kutusu) bölgesini tam çözünürlükte alır;
+// küçültmek çizgileri inceltip okumayı bozuyor, kırpmak hem hızlı hem net
+const kareTuval = document.createElement("canvas");
+function kareAl(v) {
+  const g = v.videoWidth, y = v.videoHeight; if (!g || !y) return null;
+  // video ekranı "cover" ile dolduruyor: ekran koordinatı -> video pikseli
+  const vr = v.getBoundingClientRect(), cr = document.querySelector("#kamera .ipucu").getBoundingClientRect();
+  const o = Math.max(vr.width / g, vr.height / y);
+  const ox = (vr.width - g * o) / 2, oy = (vr.height - y * o) / 2;
+  const pay = 40; // çerçevenin biraz dışını da al
+  let x0 = (cr.left - vr.left - ox - pay) / o, y0 = (cr.top - vr.top - oy - pay) / o;
+  let x1 = (cr.right - vr.left - ox + pay) / o, y1 = (cr.bottom - vr.top - oy + pay) / o;
+  x0 = Math.max(0, Math.floor(x0)); y0 = Math.max(0, Math.floor(y0)); x1 = Math.min(g, Math.ceil(x1)); y1 = Math.min(y, Math.ceil(y1));
+  if (!(x1 - x0 > 50 && y1 - y0 > 50)) { x0 = 0; y0 = 0; x1 = g; y1 = y; }
+  kareTuval.width = x1 - x0; kareTuval.height = y1 - y0;
+  const c = kareTuval.getContext("2d", { willReadFrequently: true });
+  c.drawImage(v, x0, y0, x1 - x0, y1 - y0, 0, 0, x1 - x0, y1 - y0);
+  return c.getImageData(0, 0, x1 - x0, y1 - y0);
+}
+function kameraDurum(yazi) { $("kamera-durum").textContent = yazi || ""; }
 async function kameraAc(mod) {
   kameraMod = mod === "fiyat" ? "fiyat" : "kasa";
   if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) return bildir("Kamera bu tarayıcıda kullanılamıyor. Uygulamayı https adresinden açın.", 3500);
   // Önce kamera izni istenir (Safari izin kutusunu burada gösterir)
   try {
-    kameraAkis = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" } }, audio: false });
+    kameraAkis = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: "environment" }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
   } catch (e) { return bildir("Kamera izni verilmedi. iPhone'da Ayarlar > Safari > Kamera bölümünden 'İzin Ver' seçin.", 4500); }
   const v = $("video"); v.srcObject = kameraAkis; await v.play(); $("kamera").hidden = false;
-  let det;
-  try { det = await barkodOkuyucu(); }
-  catch (e) { kameraKapat(); return bildir("Barkod okuyucu yüklenemedi, internet bağlantısını kontrol edin.", 3500); }
-  let mesgul = false; // önceki kare çözülmeden yenisi başlamaz (kütüphane yavaş olabilir)
+  kameraDurum("Okuyucu hazırlanıyor…");
+  let coz;
+  try { coz = await barkodOkuyucu(); }
+  catch (e) { kameraKapat(); return bildir("Barkod okuyucu yüklenemedi: " + (e && e.message || e), 5000); }
+  kameraDurum("Barkodu çerçeveye tutun");
+  let mesgul = false, hataSay = 0; // önceki kare çözülmeden yenisi başlamaz
   kameraDongu = setInterval(async () => {
     if (mesgul || !kameraAkis) return;
     mesgul = true;
     try {
-      const r = await det.detect(v); if (!r.length) return;
-      const kod = r[0].rawValue, simdi = Date.now();
+      const kaynak = coz.goruntuIster ? kareAl(v) : v; if (!kaynak) return;
+      const kod = await coz(kaynak); hataSay = 0; if (!kod) return;
+      const simdi = Date.now();
       if (kod === sonOkunan && simdi - sonZaman < 1800) return;
       sonOkunan = kod; sonZaman = simdi;
+      if (navigator.vibrate) navigator.vibrate(60);
       if (kameraMod === "fiyat") { kameraKapat(); $("fy-ara").value = kod; fiyatSecili = null; fiyatAra(); return; }
       if (!barkodIsle(kod)) bildir("Barkod kayıtlı değil: " + kod, 2500); else bildir("Eklendi", 900);
-    } catch (e) { /* kare okunamadı */ }
-    finally { mesgul = false; }
-  }, 220);
+    } catch (e) {
+      // Tek kare okunamayabilir; üst üste hata gelirse sebebi ekranda yazılır
+      if (++hataSay >= 5) kameraDurum("Okuma hatası: " + (e && e.message || e));
+    } finally { mesgul = false; }
+  }, 200);
 }
-function kameraKapat() { clearInterval(kameraDongu); if (kameraAkis) kameraAkis.getTracks().forEach(t => t.stop()); kameraAkis = null; $("kamera").hidden = true; }
+function kameraKapat() { clearInterval(kameraDongu); if (kameraAkis) kameraAkis.getTracks().forEach(t => t.stop()); kameraAkis = null; $("kamera").hidden = true; kameraDurum(""); }
 
 // ---------- Olaylar ----------
 $("g-giris").onclick = girisYap;
@@ -839,7 +878,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261020150000";
+const SURUM = "20261020170000";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
