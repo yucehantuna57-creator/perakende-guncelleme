@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.84",
+  "surum": "1.0.85",
   "tarih": "2026-10-20",
   "notlar": [
-    "Ürün ekle/düzenle ekranında barkod okutunca ekran kapanmaz, imleç satış fiyatına geçer"
+    "Kasada barkod okutunca Enter'a basmadan ürün sepete eklenir (okuyucu hızında gelen ya da stoktaki barkod otomatik işlenir)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.85",
+      "tarih": "2026-10-20",
+      "notlar": [
+        "Kasada barkod okutunca Enter'a basmadan ürün sepete eklenir (okuyucu hızında gelen ya da stoktaki barkod otomatik işlenir)"
+      ]
+    },
     {
       "surum": "1.0.84",
       "tarih": "2026-10-20",
@@ -621,5 +628,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "66273c2fe67f6cad830a5e7866e397bffe9f6b024588356542a14e9b558d5203"
+  "sha256": "cf48d06d9efe7bf7fa51ffd57008a07f8afe3d30aa15cc8daeca86e46388a939"
 }
