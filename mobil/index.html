@@ -782,7 +782,7 @@ function menuSayfasi() {
 // ---------- Kamera ile barkod ----------
 let kameraAkis = null, kameraDongu = null, sonOkunan = "", sonZaman = 0;
 let kameraMod = "kasa";
-const BARKOD_BICIMLERI = ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "itf", "qr_code"];
+const BARKOD_BICIMLERI = ["ean_13", "ean_8", "upc_a", "upc_e", "code_128", "code_39", "itf"];
 // Safari'de yerleşik BarcodeDetector yok; o zaman uygulamayla gelen zxing okuyucusu (zxing/ klasörü) kullanılır
 let barkodCoz = null;
 function betikYukle(adres) {
@@ -800,7 +800,7 @@ async function barkodOkuyucu() {
   if (!window.ZXingWASM) await betikYukle("zxing/zxing-reader.js");
   ZXingWASM.setZXingModuleOverrides({ locateFile: (ad, onek) => ad.endsWith(".wasm") ? new URL("zxing/" + ad, location.href).href : onek + ad });
   await ZXingWASM.getZXingModule();
-  const secenek = { formats: ["EAN13", "EAN8", "UPCA", "UPCE", "Code128", "Code39", "ITF", "QRCode"], tryHarder: true, maxNumberOfSymbols: 1 };
+  const secenek = { formats: ["EAN13", "EAN8", "UPCA", "UPCE", "Code128", "Code39", "ITF"], tryHarder: true, maxNumberOfSymbols: 1 };
   barkodCoz = async kaynak => { const r = await ZXingWASM.readBarcodesFromImageData(kaynak, secenek); return r.length ? r[0].text : null; };
   barkodCoz.goruntuIster = true;
   return barkodCoz;
@@ -878,7 +878,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261020170000";
+const SURUM = "20261020180000";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
