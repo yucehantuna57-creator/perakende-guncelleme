@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.81",
-  "tarih": "2026-10-18",
+  "surum": "1.0.82",
+  "tarih": "2026-10-20",
   "notlar": [
-    "Ürünler sayfasına 'Toplu etiket' düğmesi: kategoriye/aramaya göre ürün işaretle, tek seferde barkod veya raf etiketi yazdır"
+    "Ürünler sayfasına 'Barkod birleştir': Excel'deki barkodlar stoktaki ürünlerle ad/stok koduna göre eşleştirilip barkodlar güncellenir (ürün silinmez)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.82",
+      "tarih": "2026-10-20",
+      "notlar": [
+        "Ürünler sayfasına 'Barkod birleştir': Excel'deki barkodlar stoktaki ürünlerle ad/stok koduna göre eşleştirilip barkodlar güncellenir (ürün silinmez)"
+      ]
+    },
     {
       "surum": "1.0.81",
       "tarih": "2026-10-18",
@@ -600,5 +607,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "a72a078c6f192e7cc37ef679d84181e02932ebecc07fa03fb709f92ac424ac6a"
+  "sha256": "f181a5bc09f913e16800dbeedfb8478686eec6d938cafd9252f0a397fdffcc91"
 }
