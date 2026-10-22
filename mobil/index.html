@@ -76,7 +76,7 @@
   .sekme { padding:12px 12px 20px; display:flex; flex-direction:column; gap:12px; }
   #t-kasa { padding:0; gap:0; } #t-kasa #urunler { overflow:visible; padding-bottom:150px; }
   #altmenu { position:fixed; left:0; right:0; bottom:0; height:calc(var(--alt) + env(safe-area-inset-bottom)); padding-bottom:env(safe-area-inset-bottom); background:var(--kart); border-top:1px solid var(--cizgi); display:flex; z-index:10; }
-  #altmenu button { flex:1; background:none; border:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:var(--soluk); font-size:11px; font-weight:600; position:relative; }
+  #altmenu button { flex:1; min-width:0; background:none; border:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:var(--soluk); font-size:11px; font-weight:600; position:relative; }
   #altmenu button svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
   #altmenu button.aktif { color:var(--ana); }
   #altmenu button .rozet { position:absolute; top:6px; left:calc(50% + 8px); background:var(--kirmizi); color:#fff; border-radius:999px; font-size:10px; padding:1px 5px; min-width:16px; text-align:center; }
@@ -153,6 +153,7 @@
     <button data-s="urun"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/><path d="M19 15v6M16 18h6"/></svg>Ürünler</button>
     <button data-s="musteri"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 3-6 6.5-6s6.5 2.4 6.5 6"/><path d="M16 4.6a3.5 3.5 0 010 6.8M18.5 14.4c2 .8 3 2.6 3 5.6"/></svg>Müşteri</button>
     <button data-s="stok"><svg viewBox="0 0 24 24"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5l9 4.5 9-4.5M12 12v9"/></svg>Stok<span class="rozet" id="rz-stok" hidden></span></button>
+    <button data-s="fis"><svg viewBox="0 0 24 24"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg>Fişler</button>
   </nav>
 </section>
 
@@ -384,7 +385,7 @@ function ayarCiz() {
     </div>
     <div class="kutu"><h3>Veri ve eşitleme</h3>
       <div class="iki"><button class="btn" id="ay-esitle">Şimdi eşitle</button><button class="btn" id="ay-yenile">Verileri yeniden indir</button></div>
-      <div class="iki" style="margin-top:8px"><button class="btn" id="ay-satislar">Fişler</button><button class="btn" id="ay-yedek">Telefon yedeği (JSON)</button></div>
+      <div style="margin-top:8px"><button class="btn" id="ay-yedek" style="width:100%">Telefon yedeği (JSON)</button></div>
     </div>
     <div class="kutu"><h3>Uygulama</h3>
       <div class="ayar-satir"><span>Sürüm</span><b>${SURUM === "__SURUM__" ? "geliştirme" : SURUM}</b></div>
@@ -399,7 +400,6 @@ function ayarCiz() {
   $("ay-musteri-ekle").onclick = musteriEkleSayfasi;
   $("ay-esitle").onclick = async () => { await esitle(false); bildir("Eşitleme tamamlandı"); ayarCiz(); };
   $("ay-yenile").onclick = async () => { if (S.kuyruk.length && !confirm("Gönderilmemiş kayıtlar var; önce gönderilecek. Devam edilsin mi?")) return; S.sira = 0; S.urunler = []; S.kategoriler = []; S.musteriler = []; S.cari = []; kaydet(); ekranCiz(); await esitle(false); bildir("Veriler yeniden indirildi"); ayarCiz(); };
-  $("ay-satislar").onclick = fislerSayfasi;
   $("ay-yedek").onclick = () => { try { const b = new Blob([JSON.stringify(S)], { type: "application/json" }), x = document.createElement("a"); x.href = URL.createObjectURL(b); x.download = "softnest-mobil-yedek.json"; x.click(); } catch (e) { bildir("Yedek alınamadı"); } };
   $("ay-guncelle").onclick = async () => { guncellemeSoruldu = false; $("guncelleme").hidden = true; await surumDenetle(true); if ($("guncelleme").hidden) bildir("Uygulama güncel", 1800); };
   $("ay-cikis").onclick = () => { if (!S.kuyruk.length || confirm("Gönderilmemiş kayıtlar var. Yine de çıkılsın mı? (Telefonda kalır, tekrar girince gönderilir)")) cikis(); };
@@ -965,7 +965,8 @@ $("urunler").addEventListener("click", e => { const b = e.target.closest("[data-
 $("sepet-ac").onclick = sepetSayfasi;
 $("u-menu").onclick = () => sekmeyeGec("ayar");
 $("kamera-ac").onclick = () => kameraAc("kasa");
-document.querySelectorAll("#altmenu button").forEach(b => b.addEventListener("click", () => sekmeyeGec(b.dataset.s)));
+// Fişler ayrı sekme değil, üstte açılan sayfa
+document.querySelectorAll("#altmenu button").forEach(b => b.addEventListener("click", () => b.dataset.s === "fis" ? fislerSayfasi() : sekmeyeGec(b.dataset.s)));
 $("kamera-kapat").onclick = kameraKapat;
 $("kaplama").addEventListener("click", e => { if (e.target === $("kaplama")) kapat(); });
 window.addEventListener("online", () => { cevrimici = true; durumYaz(); esitle(true); });
@@ -974,7 +975,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022074212";
+const SURUM = "20261022074813";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
