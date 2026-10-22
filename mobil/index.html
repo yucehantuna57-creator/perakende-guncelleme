@@ -55,6 +55,13 @@
   .adet { display:flex; align-items:center; gap:6px; } .adet button { width:36px; height:36px; border-radius:10px; border:1px solid var(--cizgi); background:var(--kart); font-size:20px; line-height:1; }
   .sp-gir { min-width:52px; height:36px; border:1px solid var(--cizgi); border-radius:10px; background:var(--kart); color:inherit; font:inherit; font-size:16px; font-weight:700; padding:0 8px; } .bilgi .sp-gir { height:30px; font-size:14px; color:var(--ana, inherit); border-style:dashed; }
   .adet .sp-sil { margin-left:4px; color:var(--kirmizi); font-size:17px; }
+  /* Cari seçimi: Müşteriler / Firmalar */
+  .cari-kutular { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:6px 0 10px; }
+  .cari-kutu { background:var(--kart); border:0; border-radius:18px; padding:22px 12px; display:flex; flex-direction:column; align-items:center; gap:8px; box-shadow:0 1px 3px rgba(15,30,60,.08), 0 0 0 1px var(--cizgi); cursor:pointer; }
+  .cari-kutu:active { transform:scale(.97); }
+  .cari-kutu .ik { width:56px; height:56px; border-radius:16px; display:grid; place-items:center; background:var(--vurgu); color:var(--ana); font-size:28px; }
+  .cari-kutu .ik svg { width:30px; height:30px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+  .cari-kutu b { font-size:17px; } .cari-kutu small { color:var(--soluk); }
   /* Sepet ekranı */
   .sayfa:has(.sepet-ekran) { height:92%; }
   .sepet-ekran { display:flex; flex-direction:column; height:100%; min-height:0; }
@@ -576,6 +583,7 @@ function anaCiz() {
     if (h === "satislar") return fislerSayfasi();
     if (h === "tara") { sekmeyeGec("kasa"); return kameraAc("kasa"); }
     if (h === "kritik") { stokSuzgec = "kritik"; return sekmeyeGec("stok"); }
+    if (h === "musteri") return cariSecimi();
     sekmeyeGec(h);
   });
 }
@@ -622,6 +630,16 @@ function fiyatAra() {
 // ---------- Müşteriler ----------
 // Cariler iki sekmede: müşteriler ve firmalar (tedarikçiler), bilgisayardaki gibi
 let musteriSekme = "musteri";
+// Müşteri'ye dokununca önce iki büyük kutu açılır: Müşteriler / Firmalar
+function cariSecimi() {
+  const aktif = S.musteriler.filter(m => m.aktif !== 0);
+  const kutu = (tur, ad, alt) => `<button class="cari-kutu" data-cs="${tur}"><span class="ik">${tur === "firma" ? '<svg viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 9h8v12M4 21h17"/><path d="M7 8h2M7 12h2M7 16h2M15 13h2M15 17h2"/></svg>' : IK.musteri}</span><b>${ad}</b><small>${alt}</small></button>`;
+  sayfaAc(`<h2>Cariler <button class="btn" id="cs-kapat" style="height:36px">Kapat</button></h2><div class="icerik"><div class="cari-kutular">
+    ${kutu("musteri", "Müşteriler", aktif.filter(m => !m.tedarikci).length + " müşteri")}${kutu("firma", "Firmalar", aktif.filter(m => m.tedarikci).length + " firma")}</div></div>`, () => {
+    $("cs-kapat").onclick = kapat;
+    $("sayfa").querySelectorAll("[data-cs]").forEach(b => b.onclick = () => { musteriSekme = b.dataset.cs; kapat(); sekmeyeGec("musteri"); });
+  });
+}
 function musteriCiz() {
   if (!$("ms-sorgu")) {
     $("t-musteri").innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div class="yaz-baslik" id="ms-baslik">Müşteriler</div><button class="btn ana" id="ms-yeni" style="height:40px">+ Yeni cari</button></div>
@@ -1039,7 +1057,7 @@ $("sepet-ac").onclick = sepetSayfasi;
 $("u-menu").onclick = () => sekmeyeGec("ayar");
 $("kamera-ac").onclick = () => kameraAc("kasa");
 // Fişler ayrı sekme değil, üstte açılan sayfa
-document.querySelectorAll("#altmenu button").forEach(b => b.addEventListener("click", () => b.dataset.s === "fis" ? fislerSayfasi() : sekmeyeGec(b.dataset.s)));
+document.querySelectorAll("#altmenu button").forEach(b => b.addEventListener("click", () => b.dataset.s === "fis" ? fislerSayfasi() : b.dataset.s === "musteri" ? cariSecimi() : sekmeyeGec(b.dataset.s)));
 $("kamera-kapat").onclick = kameraKapat;
 $("kaplama").addEventListener("click", e => { if (e.target === $("kaplama")) kapat(); });
 window.addEventListener("online", () => { cevrimici = true; durumYaz(); esitle(true); });
@@ -1048,7 +1066,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022135524";
+const SURUM = "20261022135757";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
