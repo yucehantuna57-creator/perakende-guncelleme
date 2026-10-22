@@ -99,7 +99,7 @@
   .liste-satir { display:flex; align-items:center; gap:10px; padding:11px 0; border-bottom:1px solid var(--cizgi); cursor:pointer; } .liste-satir:last-child { border-bottom:0; }
   .liste-satir .bilgi { flex:1; min-width:0; } .liste-satir .bilgi b { display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; } .liste-satir .bilgi small { color:var(--soluk); }
   .avatar { width:40px; height:40px; border-radius:50%; background:var(--vurgu); color:var(--ana); font-weight:800; display:flex; align-items:center; justify-content:center; flex:none; }
-  .rozet2 { font-size:12px; font-weight:700; padding:3px 9px; border-radius:999px; background:var(--vurgu); color:var(--ana); white-space:nowrap; } .rozet2.kirmizi { background:#fbe3e0; color:var(--kirmizi); } .rozet2.yesil { background:var(--vurgu2); color:var(--yesil); } .rozet2.sari { background:#fdf0dc; color:#9a5d08; }
+  .rozet2 { font-size:12px; font-weight:700; padding:3px 9px; border-radius:999px; background:var(--vurgu); color:var(--ana); white-space:nowrap; } .rozet2.kirmizi { background:#fbe3e0; color:var(--kirmizi); } .rozet2.yesil { background:var(--vurgu2); color:var(--yesil); } .rozet2.sari { background:#fdf0dc; color:#9a5d08; } .rozet2.mavi { background:#e1ecfb; color:#2d5ea8; }
   .fiyat-kart { background:var(--kart); border:1px solid var(--cizgi); border-radius:20px; padding:22px 18px; text-align:center; display:flex; flex-direction:column; gap:8px; }
   .fiyat-kart .ad { font-size:19px; font-weight:700; line-height:1.25; } .fiyat-kart .dev { font-size:46px; font-weight:800; color:var(--ana); letter-spacing:-1px; line-height:1.1; }
   .fiyat-kart .alt-bilgi { display:flex; justify-content:center; gap:8px; flex-wrap:wrap; color:var(--soluk); font-size:13px; }
@@ -590,18 +590,20 @@ function musteriCiz() {
   const q = trKucuk($("ms-sorgu").value.trim());
   const hepsi = S.musteriler.filter(m => m.aktif !== 0 && !m.tedarikci).map(m => ({ m, b: cariBakiye(m.id) }));
   const borclu = hepsi.filter(x => x.b > 0.005), alacak = borclu.reduce((t, x) => t + x.b, 0);
-  $("ms-ozet").innerHTML = `<div class="mini"><small>Toplam alacak</small><b>${para(alacak)}</b></div><div class="mini"><small>Borçlu müşteri</small><b>${borclu.length} / ${hepsi.length}</b></div>`;
+  // Eksi bakiye: müşterinin bize alacağı (ör. Excel'den gelen alacaklı cariler)
+  const alacakli = hepsi.filter(x => x.b < -0.005), borcumuz = alacakli.reduce((t, x) => t - x.b, 0);
+  $("ms-ozet").innerHTML = `<div class="mini"><small>Toplam alacak</small><b>${para(alacak)}</b></div><div class="mini"><small>Borçlu müşteri</small><b>${borclu.length} / ${hepsi.length}</b></div>${alacakli.length ? `<div class="mini" style="grid-column:1/-1"><small>Alacaklı müşteri (borcumuz)</small><b>${alacakli.length} · ${para(borcumuz)}</b></div>` : ""}`;
   const l = hepsi.filter(x => !q || trKucuk(x.m.ad_soyad).includes(q) || String(x.m.telefon || "").includes(q)).sort((a, b) => b.b - a.b || String(a.m.ad_soyad).localeCompare(String(b.m.ad_soyad), "tr")).slice(0, 80);
-  $("ms-liste").innerHTML = l.map(({ m, b }) => `<div class="liste-satir" data-m="${m.id}"><div class="avatar">${kac(String(m.ad_soyad || "?").charAt(0).toLocaleUpperCase("tr"))}</div><div class="bilgi"><b>${kac(m.ad_soyad)}</b><small>${kac(m.telefon || "Telefon yok")}</small></div><span class="rozet2 ${b > 0.005 ? "kirmizi" : "yesil"}">${b > 0.005 ? para(b) : "Borcu yok"}</span></div>`).join("") || '<div class="bos" style="padding:30px 0">Müşteri bulunamadı</div>';
+  $("ms-liste").innerHTML = l.map(({ m, b }) => `<div class="liste-satir" data-m="${m.id}"><div class="avatar">${kac(String(m.ad_soyad || "?").charAt(0).toLocaleUpperCase("tr"))}</div><div class="bilgi"><b>${kac(m.ad_soyad)}</b><small>${kac(m.telefon || "Telefon yok")}</small></div><span class="rozet2 ${b > 0.005 ? "kirmizi" : b < -0.005 ? "mavi" : "yesil"}">${b > 0.005 ? para(b) : b < -0.005 ? "Alacaklı " + para(-b) : "Borcu yok"}</span></div>`).join("") || '<div class="bos" style="padding:30px 0">Müşteri bulunamadı</div>';
   $("ms-liste").querySelectorAll("[data-m]").forEach(b => b.onclick = () => musteriDetay(Number(b.dataset.m)));
 }
 function musteriDetay(id) {
   const m = S.musteriler.find(x => x.id === id); if (!m) return;
   const b = cariBakiye(id), son = S.cari.filter(h => h.musteri_id === id).sort((x, y) => String(y.tarih).localeCompare(String(x.tarih))).slice(0, 8);
   sayfaAc(`<h2>${kac(m.ad_soyad)} <button class="btn" id="md-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
-    <div class="kutu" style="text-align:center;margin-bottom:10px"><small style="color:var(--soluk)">Güncel bakiye (borç)</small><div style="font-size:30px;font-weight:800;color:${b > 0.005 ? "var(--kirmizi)" : "var(--yesil)"}">${para(Math.max(0, b))}</div><small style="color:var(--soluk)">${kac(m.telefon || "Telefon yok")}</small></div>
+    <div class="kutu" style="text-align:center;margin-bottom:10px"><small style="color:var(--soluk)">${b < -0.005 ? "Müşterinin alacağı (borcumuz)" : "Güncel bakiye (borç)"}</small><div style="font-size:30px;font-weight:800;color:${b > 0.005 ? "var(--kirmizi)" : b < -0.005 ? "#2d5ea8" : "var(--yesil)"}">${para(Math.abs(b))}</div><small style="color:var(--soluk)">${kac(m.telefon || "Telefon yok")}</small></div>
     <div style="font-weight:700;margin:6px 0">Son hareketler</div>
-    ${son.map(h => `<div class="satir"><div class="bilgi"><b>${h.tur === "borc" ? "Açık hesap satışı" : "Tahsilat"}</b><small>${new Date(h.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} ${kac(h.aciklama || "")}</small></div><b style="color:${h.tur === "borc" ? "var(--kirmizi)" : "var(--yesil)"}">${h.tur === "borc" ? "+" : "−"}${para(h.tutar)}</b></div>`).join("") || '<div class="bos" style="padding:16px 0">Hareket yok</div>'}</div>
+    ${son.map(h => `<div class="satir"><div class="bilgi"><b>${h.tur === "borc" ? (h.islem === "borc_duzeltme" ? "Borç" : "Açık hesap satışı") : h.tur === "alacak" ? "Alacak" : "Tahsilat"}</b><small>${new Date(h.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} ${kac(h.aciklama || "")}</small></div><b style="color:${h.tur === "borc" ? "var(--kirmizi)" : "var(--yesil)"}">${h.tur === "borc" ? "+" : "−"}${para(h.tutar)}</b></div>`).join("") || '<div class="bos" style="padding:16px 0">Hareket yok</div>'}</div>
     <div class="alt"><button class="btn" id="md-satis">Satış yap</button><button class="btn yesil" id="md-tahsilat">Tahsilat al</button></div>`, () => {
     $("md-kapat").onclick = kapat;
     $("md-satis").onclick = () => { kapat(); sekmeyeGec("kasa"); bildir("Ürünleri ekleyin, ödemede 'Açık hesap' ile " + m.ad_soyad + " seçin", 3200); };
@@ -981,7 +983,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022075416";
+const SURUM = "20261022131150";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
