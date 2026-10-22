@@ -169,8 +169,10 @@ const para = n => Number(n || 0).toLocaleString("tr-TR", { minimumFractionDigits
 const sayi = n => Number(n || 0).toLocaleString("tr-TR", { maximumFractionDigits: 3 });
 
 // ---------- Durum ----------
-let S = { anahtar: "", kullanici: null, cihaz: 0, sira: 0, urunler: [], kategoriler: [], musteriler: [], cari: [], ayar: {}, isletme: "", tabanStok: {}, kuyruk: [], satislarim: [], sayac: {}, dukSira: 0, dukSatis: {}, dukOdeme: {}, dukZaman: 0 };
+let S = { anahtar: "", kullanici: null, cihaz: 0, sira: 0, urunler: [], kategoriler: [], musteriler: [], cari: [], ayar: {}, isletme: "", tabanStok: {}, kuyruk: [], satislarim: [], sayac: {}, dukSira: 0, dukSatis: {}, dukOdeme: {}, dukKalem: null, dukZaman: 0 };
 try { const k = JSON.parse(localStorage.getItem(DEPO) || "null"); if (k) S = { ...S, ...k }; } catch (e) { /* ilk açılış */ }
+// Satış kalemleri sonradan eklendi: eski imleçle kalemler hiç gelmez, bir kez baştan çekilir
+if (!S.dukKalem) { S.dukKalem = {}; S.dukSira = 0; }
 if (!S.cihaz) S.cihaz = 1 + Math.floor(Math.random() * 998);
 let sepet = [], seciliKategori = "", aramaMetni = "", cevrimici = navigator.onLine;
 function kaydet() { try { localStorage.setItem(DEPO, JSON.stringify(S)); } catch (e) { bildir("Kayıt alanı dolu"); } }
@@ -233,7 +235,7 @@ async function cek() {
 async function cekDukkan() {
   const sinir = Date.now() - 14 * 86400000;
   for (let tur = 0; tur < 40; tur++) {
-    const r = await rpc("bulut_al", { p_anahtar: S.anahtar, p_sonra: S.dukSira, p_cihaz: "tel-" + S.cihaz, p_tablolar: ["satislar", "odemeler"] });
+    const r = await rpc("bulut_al", { p_anahtar: S.anahtar, p_sonra: S.dukSira, p_cihaz: "tel-" + S.cihaz, p_tablolar: ["satislar", "odemeler", "satis_kalemleri"] });
     if (!r.ok) throw new Error(r.hata || "Alınamadı");
     for (const k of r.kayitlar) {
       const id = Number(k.kid), v = k.veri || {};
@@ -244,12 +246,17 @@ async function cekDukkan() {
       } else if (k.tablo === "odemeler") {
         if (k.silindi) { delete S.dukOdeme[v.satis_id]; continue; }
         S.dukOdeme[v.satis_id] = v.yontem;
+      } else if (k.tablo === "satis_kalemleri") {
+        const l = (S.dukKalem[v.satis_id] || []).filter(x => x.id !== id);
+        if (!k.silindi) l.push({ id, urun_id: v.urun_id, ad: v.urun_adi || "", miktar: Number(v.miktar || 0), fiyat: Number(v.birim_fiyat || 0), tutar: Number(v.tutar || 0) });
+        S.dukKalem[v.satis_id] = l;
       }
     }
     S.dukSira = r.sira;
     if (r.kayitlar.length < 1500) break;
   }
   for (const id of Object.keys(S.dukOdeme)) if (!S.dukSatis[id]) delete S.dukOdeme[id];
+  for (const id of Object.keys(S.dukKalem)) if (!S.dukSatis[id]) delete S.dukKalem[id];
   S.dukZaman = Date.now();
 }
 async function it() {
@@ -480,7 +487,7 @@ function dukkanKutusu() {
     <div class="halkalar" style="margin-top:10px">${donut([{ v: topla(b, "nakit"), c: "#1e8e4e" }, { v: topla(b, "kart"), c: "#3b6ab3" }, { v: topla(b, "acik_hesap"), c: "#e0953a" }], b.length, "satış")}
       <div class="lejant"><div><i style="background:#1e8e4e"></i>Nakit<b>${para(topla(b, "nakit"))}</b></div><div><i style="background:#3b6ab3"></i>Kart<b>${para(topla(b, "kart"))}</b></div><div><i style="background:#e0953a"></i>Açık hesap<b>${para(topla(b, "acik_hesap"))}</b></div></div></div>
     <div style="margin-top:10px;font-size:13px;opacity:.75">${kasalar.length ? "Bugün satış yapan kasa: " + kasalar.map(kac).join(", ") : "Bugün henüz satış yok"}</div>
-    ${tum.slice(0, 6).map(x => `<div class="liste-satir"><div class="bilgi"><b>${kac(x.fis_no)}</b><small>${new Date(x.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} · ${kac(x.kasa)} · ${YONTEM[x.yontem] || x.yontem || ""}</small></div><b>${para(x.toplam)}</b></div>`).join("")}
+    ${tum.slice(0, 6).map(x => `<div class="liste-satir" data-fis="${kac(x.fis_no)}"><div class="bilgi"><b>${kac(x.fis_no)}</b><small>${new Date(x.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} · ${kac(x.kasa)} · ${YONTEM[x.yontem] || x.yontem || ""}</small></div><b>${para(x.toplam)}</b></div>`).join("")}
   </div>`;
 }
 function anaCiz() {
@@ -515,7 +522,7 @@ function anaCiz() {
     </div></div>
     <div class="mini"><small>Müşterilerden alacağım</small><b>${para(alacak)}</b></div>
     <div class="kutu"><h3>Son satışlar</h3>
-      ${S.satislarim.slice(0, 5).map(s => `<div class="liste-satir"><div class="bilgi"><b>${kac(s.fis_no)}</b><small>${new Date(s.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} · ${YONTEM[s.yontem] || s.yontem}</small></div><b>${para(s.toplam)}</b></div>`).join("") || '<div class="bos" style="padding:14px 0">Bu telefondan henüz satış yapılmadı</div>'}
+      ${S.satislarim.slice(0, 5).map(s => `<div class="liste-satir" data-fis="${kac(s.fis_no)}"><div class="bilgi"><b>${kac(s.fis_no)}</b><small>${new Date(s.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} · ${YONTEM[s.yontem] || s.yontem}</small></div><b>${para(s.toplam)}</b></div>`).join("") || '<div class="bos" style="padding:14px 0">Bu telefondan henüz satış yapılmadı</div>'}
     </div>`;
   $("t-ana").querySelectorAll("[data-h]").forEach(b => b.onclick = () => {
     const h = b.dataset.h;
@@ -752,7 +759,7 @@ function satisKaydet(yontem, musteriId) {
   ekle("odemeler", { id: yeniId("odemeler"), satis_id: satis.id, yontem, tutar: top });
   if (yontem === "acik_hesap") ekle("cari_hareketler", { id: yeniId("cari_hareketler"), musteri_id: musteriId, tur: "borc", tutar: top, satis_id: satis.id, aciklama: fisNo, islem: "satis", yontem: null, kullanici_id: S.kullanici.id, tarih });
   const kalemler = sepet.map(s => ({ ad: s.ad, adet: s.adet, fiyat: s.fiyat }));
-  S.satislarim.unshift({ fis_no: fisNo, tarih, toplam: top, yontem, id: satis.id });
+  S.satislarim.unshift({ fis_no: fisNo, tarih, toplam: top, yontem, id: satis.id, kalemler });
   S.satislarim = S.satislarim.slice(0, 100);
   sepet = []; kaydet(); ekranCiz(); durumYaz();
   fisGoster(fisNo, tarih, kalemler, top, yontem);
@@ -775,12 +782,31 @@ function fisGoster(fisNo, tarih, kalemler, top, yontem) {
     $("fs-paylas").onclick = async () => { try { if (navigator.share) await navigator.share({ text: metin }); else { await navigator.clipboard.writeText(metin); bildir("Fiş metni kopyalandı"); } } catch (e) { /* vazgeçildi */ } };
   });
 }
+// Geçmiş satışın içeriği: bu telefonun satışları kendi kalemleriyle, diğer kasalarınki buluttan gelen kalemlerle
+function satisDetay(fisNo) {
+  const ben = S.satislarim.find(x => x.fis_no === fisNo), duk = Object.values(S.dukSatis).find(x => x.fis_no === fisNo);
+  const kayit = ben || duk; if (!kayit) return;
+  const sid = (duk || ben).id;
+  let kalemler = ben && ben.kalemler;
+  if (!kalemler) {
+    const l = S.dukKalem[sid];
+    if (!l || !l.length) return bildir(cevrimici ? "Bu satışın içeriği henüz gelmedi, biraz sonra tekrar deneyin" : "Satış içeriği için internet bağlantısı gerekli", 3000);
+    kalemler = l.map(k => ({ ad: k.ad || (S.urunler.find(u => u.id === k.urun_id) || {}).ad || "Ürün #" + k.urun_id, adet: k.miktar, fiyat: k.fiyat }));
+  }
+  const yontem = (ben && ben.yontem) || S.dukOdeme[sid] || "", metin = fisMetni(fisNo, kayit.tarih, kalemler, kayit.toplam, yontem);
+  sayfaAc(`<h2>Satış içeriği <button class="btn" id="sd-kapat" style="height:36px">Kapat</button></h2><div class="icerik"><div class="fis" id="fis-yazdir">${kac(metin)}</div></div>
+    <div class="alt"><button class="btn" id="sd-paylas">Paylaş</button><button class="btn" id="sd-yazdir">Yazdır</button></div>`, () => {
+    $("sd-kapat").onclick = kapat; $("sd-yazdir").onclick = () => window.print();
+    $("sd-paylas").onclick = async () => { try { if (navigator.share) await navigator.share({ text: metin }); else { await navigator.clipboard.writeText(metin); bildir("Fiş metni kopyalandı"); } } catch (e) { /* vazgeçildi */ } };
+  });
+}
+document.addEventListener("click", e => { const r = e.target.closest("[data-fis]"); if (r) satisDetay(r.dataset.fis); });
 function satislarSayfasi() {
   const bugun = new Date().toISOString().slice(0, 10);
   const l = S.satislarim.filter(s => s.tarih.slice(0, 10) === bugun);
   const bekleyen = new Set(S.kuyruk.filter(k => k.tablo === "satislar").map(k => k.kid));
   sayfaAc(`<h2>Bu telefondan bugünkü satışlar <button class="btn" id="st-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
-    ${l.map(s => `<div class="satir"><div class="bilgi"><b>${kac(s.fis_no)}</b><small>${new Date(s.tarih).toLocaleTimeString("tr-TR", { timeStyle: "short" })} · ${YONTEM[s.yontem] || s.yontem} · ${bekleyen.has(s.id) ? "gönderilmedi" : "gönderildi ✓"}</small></div><b>${para(s.toplam)}</b></div>`).join("") || '<div class="bos">Bugün bu telefondan satış yapılmadı</div>'}
+    ${l.map(s => `<div class="satir" data-fis="${kac(s.fis_no)}" style="cursor:pointer"><div class="bilgi"><b>${kac(s.fis_no)}</b><small>${new Date(s.tarih).toLocaleTimeString("tr-TR", { timeStyle: "short" })} · ${YONTEM[s.yontem] || s.yontem} · ${bekleyen.has(s.id) ? "gönderilmedi" : "gönderildi ✓"}</small></div><b>${para(s.toplam)}</b></div>`).join("") || '<div class="bos">Bugün bu telefondan satış yapılmadı</div>'}
     <div class="toplam-satir"><span>Toplam</span><span>${para(l.reduce((t, s) => t + s.toplam, 0))}</span></div></div>`, () => { $("st-kapat").onclick = kapat; });
 }
 function menuSayfasi() {
@@ -894,7 +920,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261020200000";
+const SURUM = "20261022073430";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
