@@ -1,12 +1,17 @@
 {
-  "surum": "1.0.90",
+  "surum": "1.0.91",
   "tarih": "2026-10-22",
   "notlar": [
-    "Kasada sepet satırını silme düğmesi küçük ✕ olarak satırın sağına alındı",
-    "Kategori ürünleri listesinde Düzenle ürünü pencerede açar, kaydedince kategori listesine döner",
-    "Kategoriye ürün eklerken tıklanma sırası kasadaki hızlı satış sırası olur"
+    "Ayarlar: Excel ile cari yükle (müşteri listesi bakiyeleriyle; eksi bakiye müşterinin alacağı olarak yazılır)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.91",
+      "tarih": "2026-10-22",
+      "notlar": [
+        "Ayarlar: Excel ile cari yükle (müşteri listesi bakiyeleriyle; eksi bakiye müşterinin alacağı olarak yazılır)"
+      ]
+    },
     {
       "surum": "1.0.90",
       "tarih": "2026-10-22",
@@ -669,5 +674,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "7213dcd93dbbe02789379540491c7a239ebbee99478020a47eaabb321c3cec29"
+  "sha256": "9f7a54cbeaa5fb31bea0ff8b8bfc43594352abe2e518d0d1b1289d0ce2600a77"
 }
