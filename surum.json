@@ -1,11 +1,19 @@
 {
-  "surum": "1.0.88",
+  "surum": "1.0.89",
   "tarih": "2026-10-22",
   "notlar": [
-    "Kasada sepetteki fiyata tıklayınca bu satışa özel fiyat yazılabilir (ürünün kayıtlı fiyatı değişmez)",
-    "Sepetteki adede tıklayınca adet yazılabilir"
+    "Masaüstü: sunucu açılamazsa nedeni günlüğe yazılır ve ekranda gösterilir",
+    "Masaüstü: sunucuya açılışta 60 saniyeye kadar süre tanınır (önce 25 saniyeydi)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.89",
+      "tarih": "2026-10-22",
+      "notlar": [
+        "Masaüstü: sunucu açılamazsa nedeni günlüğe yazılır ve ekranda gösterilir",
+        "Masaüstü: sunucuya açılışta 60 saniyeye kadar süre tanınır (önce 25 saniyeydi)"
+      ]
+    },
     {
       "surum": "1.0.88",
       "tarih": "2026-10-22",
@@ -651,5 +659,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "82217aba3fc20c9dff172dfcf94997efedf077f40e3a07976f45c8bc7c5dc75a"
+  "sha256": "ed7013fcf63c916b25b21b855ed3b60fa9be795948280ff5945f5c816c1a961f"
 }
