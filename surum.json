@@ -1,11 +1,17 @@
 {
-  "surum": "1.0.92",
+  "surum": "1.0.93",
   "tarih": "2026-10-22",
   "notlar": [
-    "Müşteriler menüsünde Müşteriler / Firmalar alt satırı ve sayfada iki sekme",
-    "Yeni cari açarken müşteri mi firma mı sorulur"
+    "F2 ile ürün paneli açılınca ekranın yana kayıp beyaz kalması düzeltildi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.93",
+      "tarih": "2026-10-22",
+      "notlar": [
+        "F2 ile ürün paneli açılınca ekranın yana kayıp beyaz kalması düzeltildi"
+      ]
+    },
     {
       "surum": "1.0.92",
       "tarih": "2026-10-22",
@@ -683,5 +689,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "696eeef511be77c4b6ea6e73914d102070043ae16bfb6dd0c750e49de187160b"
+  "sha256": "3a344c8bc7595fcc892c0a9c4e2d03bd8b0fed72eb573841949585b044ba6e89"
 }
