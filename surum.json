@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.94",
+  "surum": "1.0.95",
   "tarih": "2026-10-22",
   "notlar": [
-    "Bulut yedeği: veritabanı saatte bir OneDrive\\SOFTNEST-yedek klasörüne kopyalanır (son 60 gün)"
+    "Parçalı ödeme: bir satış nakit, kart ve açık hesaba bölünebilir (ör. 200 nakit + 100 kart + 200 açık hesap)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.95",
+      "tarih": "2026-10-22",
+      "notlar": [
+        "Parçalı ödeme: bir satış nakit, kart ve açık hesaba bölünebilir (ör. 200 nakit + 100 kart + 200 açık hesap)"
+      ]
+    },
     {
       "surum": "1.0.94",
       "tarih": "2026-10-22",
@@ -696,5 +703,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "b70b99e4836e93fb6871d1a4e642ae65de4952b29b7a892bf246da66822ca90f"
+  "sha256": "d4062e23083891792c7ce1099f58426ffca7fab4e26e74ab3f0c59e93318b4a5"
 }
