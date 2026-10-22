@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.93",
+  "surum": "1.0.94",
   "tarih": "2026-10-22",
   "notlar": [
-    "F2 ile ürün paneli açılınca ekranın yana kayıp beyaz kalması düzeltildi"
+    "Bulut yedeği: veritabanı saatte bir OneDrive\\SOFTNEST-yedek klasörüne kopyalanır (son 60 gün)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.94",
+      "tarih": "2026-10-22",
+      "notlar": [
+        "Bulut yedeği: veritabanı saatte bir OneDrive\\SOFTNEST-yedek klasörüne kopyalanır (son 60 gün)"
+      ]
+    },
     {
       "surum": "1.0.93",
       "tarih": "2026-10-22",
@@ -689,5 +696,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "3a344c8bc7595fcc892c0a9c4e2d03bd8b0fed72eb573841949585b044ba6e89"
+  "sha256": "b70b99e4836e93fb6871d1a4e642ae65de4952b29b7a892bf246da66822ca90f"
 }
