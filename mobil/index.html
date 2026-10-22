@@ -55,6 +55,24 @@
   .adet { display:flex; align-items:center; gap:6px; } .adet button { width:36px; height:36px; border-radius:10px; border:1px solid var(--cizgi); background:var(--kart); font-size:20px; line-height:1; }
   .sp-gir { min-width:52px; height:36px; border:1px solid var(--cizgi); border-radius:10px; background:var(--kart); color:inherit; font:inherit; font-size:16px; font-weight:700; padding:0 8px; } .bilgi .sp-gir { height:30px; font-size:14px; color:var(--ana, inherit); border-style:dashed; }
   .adet .sp-sil { margin-left:4px; color:var(--kirmizi); font-size:17px; }
+  /* Sepet ekranı */
+  .sayfa:has(.sepet-ekran) { height:92%; }
+  .sepet-ekran { display:flex; flex-direction:column; height:100%; min-height:0; }
+  .sepet-ekran h2 small { display:block; font-size:12px; font-weight:500; color:var(--soluk); }
+  .sepet-ekran .icerik { display:flex; flex-direction:column; gap:10px; padding-top:4px; }
+  .sp-kart { background:var(--kart); border-radius:16px; padding:12px; box-shadow:0 1px 3px rgba(15,30,60,.08), 0 0 0 1px var(--cizgi); display:grid; grid-template-columns:1fr auto; gap:8px 10px; }
+  .sp-ust { grid-column:1/-1; display:flex; align-items:flex-start; gap:8px; } .sp-ust b { flex:1; font-size:15px; line-height:1.3; }
+  .sp-ust .sp-sil { flex:none; width:30px; height:30px; border-radius:9px; border:0; background:#fbe3e0; color:var(--kirmizi); font-size:14px; font-weight:800; }
+  .sp-alt { grid-column:1/-1; display:flex; align-items:center; justify-content:space-between; gap:8px; }
+  .sp-fiyat { display:flex; align-items:center; gap:6px; flex-wrap:wrap; } .sp-fiyat s { font-size:12px; color:var(--soluk); }
+  .sp-fiyat .sp-gir { height:36px; border-style:dashed; color:var(--ana); font-size:15px; }
+  .sp-kart .adet button { width:38px; height:38px; } .sp-kart .adet .sp-gir { width:auto; min-width:48px; }
+  .sp-tutar { grid-column:1/-1; text-align:right; font-weight:800; font-size:17px; border-top:1px dashed var(--cizgi); padding-top:8px; }
+  .sp-odeme { display:grid !important; grid-template-columns:1fr 1fr; gap:8px; background:var(--kart); box-shadow:0 -6px 16px rgba(15,30,60,.08); }
+  .sp-odeme .btn { min-width:0 !important; }
+  .sp-toplam { grid-column:1/-1; display:flex; justify-content:space-between; align-items:baseline; padding:2px 2px 4px; } .sp-toplam span { color:var(--soluk); font-weight:600; } .sp-toplam b { font-size:26px; }
+  .sp-odeme .buyuk { height:54px; font-size:17px; border-radius:14px; }
+  .sp-bosalt { color:var(--kirmizi); }
   #sayi-sor { position:fixed; inset:0; z-index:60; background:rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; padding:16px; }
   #sayi-sor .kt { width:100%; max-width:300px; background:var(--kart); color:inherit; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
   #sayi-sor h4 { margin:0; font-size:16px; } #sayi-sor small { color:var(--soluk); display:block; margin:2px 0 10px; }
@@ -758,11 +776,18 @@ function sepetSayfasi() {
   if (!sepet.length) return kapat();
   const top = sepet.reduce((t, s) => t + s.adet * s.fiyat, 0);
   const liste = s => Number((S.urunler.find(u => u.id === s.id) || {}).satis_fiyati ?? s.fiyat);
-  sayfaAc(`<h2>Sepet <button class="btn" id="sp-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
-    ${sepet.map(s => `<div class="satir"><div class="bilgi"><b>${kac(s.ad)}</b><small><button class="sp-gir" data-f="fiyat" data-id="${s.id}" aria-label="Fiyatı değiştir">${para(s.fiyat)}</button> ×${sayi(s.adet)} = ${para(s.fiyat * s.adet)}${liste(s) !== s.fiyat ? ` <s>${para(liste(s))}</s>` : ""}</small></div>
-      <div class="adet"><button data-e="-" data-id="${s.id}">−</button><button class="sp-gir" data-f="adet" data-id="${s.id}" aria-label="Adedi değiştir">${sayi(s.adet)}</button><button data-e="+" data-id="${s.id}">+</button><button class="sp-sil" data-sil="${s.id}" aria-label="Ürünü sepetten sil">🗑</button></div></div>`).join("")}
-    <div class="toplam-satir"><span>Toplam</span><span>${para(top)}</span></div></div>
-    <div class="alt"><button class="btn" id="sp-temizle">Sepeti boşalt</button><button class="btn yesil" id="od-nakit">Nakit</button><button class="btn ana" id="od-kart">Kart</button><button class="btn" id="od-acik">Açık hesap</button></div>`, () => {
+  // Sepet: ürünler kart olarak listelenir, toplam ve ödeme düğmeleri altta sabit kalır
+  const adetToplam = sepet.reduce((t, s) => t + s.adet, 0);
+  sayfaAc(`<div class="sepet-ekran"><h2><span>Sepet <small>${sayi(adetToplam)} ürün · ${sepet.length} kalem</small></span><button class="btn" id="sp-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
+    ${sepet.map(s => `<div class="sp-kart">
+      <div class="sp-ust"><b>${kac(s.ad)}</b><button class="sp-sil" data-sil="${s.id}" aria-label="Ürünü sepetten sil">✕</button></div>
+      <div class="sp-alt"><div class="sp-fiyat"><button class="sp-gir" data-f="fiyat" data-id="${s.id}" aria-label="Fiyatı değiştir">${para(s.fiyat)}</button>${liste(s) !== s.fiyat ? `<s>${para(liste(s))}</s>` : ""}</div>
+        <div class="adet"><button data-e="-" data-id="${s.id}">−</button><button class="sp-gir" data-f="adet" data-id="${s.id}" aria-label="Adedi değiştir">${sayi(s.adet)}</button><button data-e="+" data-id="${s.id}">+</button></div></div>
+      <div class="sp-tutar">${para(s.fiyat * s.adet)}</div></div>`).join("")}
+    </div>
+    <div class="alt sp-odeme"><div class="sp-toplam"><span>Toplam</span><b>${para(top)}</b></div>
+      <button class="btn yesil buyuk" id="od-nakit">Nakit</button><button class="btn ana buyuk" id="od-kart">Kart</button>
+      <button class="btn" id="od-acik">Açık hesap</button><button class="btn sp-bosalt" id="sp-temizle">Sepeti boşalt</button></div></div>`, () => {
     $("sp-kapat").onclick = kapat;
     $("sp-temizle").onclick = () => { sepet = []; kapat(); ekranCiz(); };
     $("sayfa").querySelectorAll("[data-e]").forEach(b => b.onclick = () => {
@@ -1010,7 +1035,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022134705";
+const SURUM = "20261022134949";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
