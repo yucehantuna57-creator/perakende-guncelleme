@@ -773,14 +773,14 @@ function nakitSor(top) {
   });
 }
 function musteriSec() {
-  sayfaAc(`<h2>Müşteri seç (açık hesap)</h2><div class="icerik"><input id="ms-ara" placeholder="Ad veya telefon" autocomplete="off"><div id="ms-liste"></div></div><div class="alt"><button class="btn" id="ms-geri">Geri</button></div>`, () => {
+  sayfaAc(`<h2>Müşteri seç (açık hesap)</h2><div class="icerik"><input id="ah-ara" placeholder="Ad veya telefon" autocomplete="off"><div id="ah-liste"></div></div><div class="alt"><button class="btn" id="ms-geri">Geri</button></div>`, () => {
     const listele = () => {
-      const q = $("ms-ara").value.trim().toLocaleLowerCase("tr");
+      const q = $("ah-ara").value.trim().toLocaleLowerCase("tr");
       const l = S.musteriler.filter(m => m.aktif !== 0 && !m.tedarikci && (!q || String(m.ad_soyad).toLocaleLowerCase("tr").includes(q) || String(m.telefon || "").includes(q))).slice(0, 40);
-      $("ms-liste").innerHTML = l.map(m => `<button class="satir" style="width:100%;background:none;border:0;border-bottom:1px solid var(--cizgi);text-align:left" data-m="${m.id}"><div class="bilgi"><b>${kac(m.ad_soyad)}</b><small>${kac(m.telefon || "")}</small></div></button>`).join("") || '<div class="bos">Müşteri bulunamadı</div>';
-      $("ms-liste").querySelectorAll("[data-m]").forEach(b => b.onclick = () => satisKaydet("acik_hesap", Number(b.dataset.m)));
+      $("ah-liste").innerHTML = l.map(m => `<button class="satir" style="width:100%;background:none;border:0;border-bottom:1px solid var(--cizgi);text-align:left" data-m="${m.id}"><div class="bilgi"><b>${kac(m.ad_soyad)}</b><small>${kac(m.telefon || "")}</small></div></button>`).join("") || '<div class="bos">Müşteri bulunamadı</div>';
+      $("ah-liste").querySelectorAll("[data-m]").forEach(b => b.onclick = () => satisKaydet("acik_hesap", Number(b.dataset.m)));
     };
-    $("ms-ara").oninput = listele; listele();
+    $("ah-ara").oninput = listele; listele();
     $("ms-geri").onclick = sepetSayfasi;
   });
 }
@@ -983,7 +983,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022131150";
+const SURUM = "20261022131508";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
