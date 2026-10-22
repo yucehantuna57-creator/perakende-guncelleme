@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.87",
-  "tarih": "2026-10-20",
+  "surum": "1.0.88",
+  "tarih": "2026-10-22",
   "notlar": [
-    "Kasada F2 ürünler panelini açar, Esc kapatır (kapanınca imleç barkod kutusuna döner)"
+    "Kasada sepetteki fiyata tıklayınca bu satışa özel fiyat yazılabilir (ürünün kayıtlı fiyatı değişmez)",
+    "Sepetteki adede tıklayınca adet yazılabilir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.88",
+      "tarih": "2026-10-22",
+      "notlar": [
+        "Kasada sepetteki fiyata tıklayınca bu satışa özel fiyat yazılabilir (ürünün kayıtlı fiyatı değişmez)",
+        "Sepetteki adede tıklayınca adet yazılabilir"
+      ]
+    },
     {
       "surum": "1.0.87",
       "tarih": "2026-10-20",
@@ -642,5 +651,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "71b941366e67b62b34b9a8890aebca7e1afb1dacf3638e0ab0d7f7104b4f30e8"
+  "sha256": "82217aba3fc20c9dff172dfcf94997efedf077f40e3a07976f45c8bc7c5dc75a"
 }
