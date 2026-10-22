@@ -180,7 +180,7 @@ const sayi = n => Number(n || 0).toLocaleString("tr-TR", { maximumFractionDigits
 let S = { anahtar: "", kullanici: null, cihaz: 0, sira: 0, urunler: [], kategoriler: [], musteriler: [], cari: [], ayar: {}, isletme: "", tabanStok: {}, kuyruk: [], satislarim: [], sayac: {}, dukSira: 0, dukSatis: {}, dukOdeme: {}, dukKalem: null, dukZaman: 0 };
 try { const k = JSON.parse(localStorage.getItem(DEPO) || "null"); if (k) S = { ...S, ...k }; } catch (e) { /* ilk açılış */ }
 // Satış kalemleri sonradan eklendi: eski imleçle kalemler hiç gelmez, bir kez baştan çekilir
-if (!S.dukKalem) { S.dukKalem = {}; S.dukSira = 0; }
+if (!S.dukKalem || S.dukKalemSurum !== 2) { S.dukKalem = {}; S.dukSira = 0; S.dukKalemSurum = 2; }
 if (!S.cihaz) S.cihaz = 1 + Math.floor(Math.random() * 998);
 let sepet = [], seciliKategori = "", aramaMetni = "", cevrimici = navigator.onLine;
 function kaydet() { try { localStorage.setItem(DEPO, JSON.stringify(S)); } catch (e) { bildir("Kayıt alanı dolu"); } }
@@ -823,14 +823,20 @@ function fisGoster(fisNo, tarih, kalemler, top, yontem) {
   });
 }
 // Geçmiş satışın içeriği: bu telefonun satışları kendi kalemleriyle, diğer kasalarınki buluttan gelen kalemlerle
-function satisDetay(fisNo) {
+function satisDetay(fisNo, tekrar) {
   const ben = S.satislarim.find(x => x.fis_no === fisNo), duk = Object.values(S.dukSatis).find(x => x.fis_no === fisNo);
   const kayit = ben || duk; if (!kayit) return;
   const sid = (duk || ben).id;
   let kalemler = ben && ben.kalemler;
   if (!kalemler) {
     const l = S.dukKalem[sid];
-    if (!l || !l.length) return bildir(cevrimici ? "Bu satışın içeriği henüz gelmedi, biraz sonra tekrar deneyin" : "Satış içeriği için internet bağlantısı gerekli", 3000);
+    if (!l || !l.length) {
+      // İçerik yoksa imleç kalemler gelmeden ilerlemiş olabilir: bir kez baştan çekilir ve yeniden denenir
+      if (tekrar || !S.anahtar) return bildir(navigator.onLine ? "Bu satışın içeriği bulunamadı" : "Satış içeriği için internet bağlantısı gerekli", 3000);
+      bildir("Fiş içeriği alınıyor...", 4000);
+      S.dukSira = 0;
+      return cekDukkan().then(() => { kaydet(); satisDetay(fisNo, true); }).catch(() => bildir("Satış içeriği için internet bağlantısı gerekli", 3000));
+    }
     kalemler = l.map(k => ({ ad: k.ad || (S.urunler.find(u => u.id === k.urun_id) || {}).ad || "Ürün #" + k.urun_id, adet: k.miktar, fiyat: k.fiyat }));
   }
   const yontem = (ben && ben.yontem) || S.dukOdeme[sid] || "", metin = fisMetni(fisNo, kayit.tarih, kalemler, kayit.toplam, yontem);
@@ -975,7 +981,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022074813";
+const SURUM = "20261022075416";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
