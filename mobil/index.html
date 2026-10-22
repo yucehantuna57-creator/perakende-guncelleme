@@ -53,6 +53,12 @@
   .sayfa .alt .btn { flex:1; min-width:96px; }
   .satir { display:flex; align-items:center; gap:10px; padding:10px 0; border-bottom:1px solid var(--cizgi); } .satir .bilgi { flex:1; min-width:0; } .satir .bilgi b { display:block; } .satir .bilgi small { color:var(--soluk); }
   .adet { display:flex; align-items:center; gap:6px; } .adet button { width:36px; height:36px; border-radius:10px; border:1px solid var(--cizgi); background:var(--kart); font-size:20px; line-height:1; }
+  .sp-gir { min-width:52px; height:36px; border:1px solid var(--cizgi); border-radius:10px; background:var(--kart); color:inherit; font:inherit; font-size:16px; font-weight:700; padding:0 8px; } .bilgi .sp-gir { height:30px; font-size:14px; color:var(--ana, inherit); border-style:dashed; }
+  #sayi-sor { position:fixed; inset:0; z-index:60; background:rgba(0,0,0,.45); display:flex; align-items:center; justify-content:center; padding:16px; }
+  #sayi-sor .kt { width:100%; max-width:300px; background:var(--kart); color:inherit; border-radius:16px; padding:16px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+  #sayi-sor h4 { margin:0; font-size:16px; } #sayi-sor small { color:var(--soluk); display:block; margin:2px 0 10px; }
+  #sayi-sor .gr { display:flex; align-items:center; gap:8px; } #sayi-sor input { flex:1; min-width:0; height:48px; font-size:22px; font-weight:700; text-align:right; border:1px solid var(--cizgi); border-radius:10px; padding:0 10px; background:var(--bg); color:inherit; }
+  #sayi-sor .iki { display:flex; gap:8px; margin-top:12px; } #sayi-sor .iki .btn { flex:1; }
   .toplam-satir { display:flex; justify-content:space-between; font-size:20px; font-weight:700; padding:14px 0 6px; }
   #kamera { position:fixed; inset:0; background:#000; z-index:30; display:flex; flex-direction:column; } #kamera video { flex:1; width:100%; object-fit:cover; min-height:0; }
   #kamera .ipucu { position:absolute; top:18%; left:10%; right:10%; height:26%; border:3px solid rgba(255,255,255,.85); border-radius:16px; box-shadow:0 0 0 999px rgba(0,0,0,.35); pointer-events:none; }
@@ -700,12 +706,31 @@ function barkodIsle(metin) {
 // ---------- Sepet / ödeme ----------
 function sayfaAc(html, bagla) { $("sayfa").innerHTML = html; $("kaplama").hidden = false; if (bagla) bagla(); }
 function kapat() { $("kaplama").hidden = true; $("sayfa").innerHTML = ""; }
+// Ekranın ortasında küçük sayı giriş kutusu (virgüllü yazılabilir: 1,5 · 1.199,90 · 2.5)
+function sayiSor(baslik, alt, deger, birim, tamam) {
+  const k = document.createElement("div"); k.id = "sayi-sor";
+  k.innerHTML = `<div class="kt"><h4>${kac(baslik)}</h4><small>${kac(alt)}</small><div class="gr"><input inputmode="decimal" value="${kac(deger)}">${birim ? `<b>${kac(birim)}</b>` : ""}</div>
+    <div class="iki"><button class="btn" data-k="iptal">Vazgeç</button><button class="btn yesil" data-k="tamam">Tamam</button></div></div>`;
+  document.body.appendChild(k);
+  const g = k.querySelector("input"), kapa = () => k.remove();
+  const onayla = () => {
+    let t = g.value.trim().replace(/[^\d.,]/g, "");
+    t = t.includes(",") || /\.\d{3}$/.test(t) ? t.replace(/\./g, "").replace(",", ".") : t;
+    const v = Number(t);
+    if (!t || !isFinite(v) || v < 0) return bildir("Geçerli bir sayı yazın");
+    kapa(); tamam(v);
+  };
+  k.onclick = e => { if (e.target === k || e.target.dataset.k === "iptal") kapa(); else if (e.target.dataset.k === "tamam") onayla(); };
+  g.onkeydown = e => { if (e.key === "Enter") onayla(); else if (e.key === "Escape") kapa(); };
+  g.focus(); g.select();
+}
 function sepetSayfasi() {
   if (!sepet.length) return kapat();
   const top = sepet.reduce((t, s) => t + s.adet * s.fiyat, 0);
+  const liste = s => Number((S.urunler.find(u => u.id === s.id) || {}).satis_fiyati ?? s.fiyat);
   sayfaAc(`<h2>Sepet <button class="btn" id="sp-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
-    ${sepet.map(s => `<div class="satir"><div class="bilgi"><b>${kac(s.ad)}</b><small>${para(s.fiyat)} × ${sayi(s.adet)} = ${para(s.fiyat * s.adet)}</small></div>
-      <div class="adet"><button data-e="-" data-id="${s.id}">−</button><b>${sayi(s.adet)}</b><button data-e="+" data-id="${s.id}">+</button></div></div>`).join("")}
+    ${sepet.map(s => `<div class="satir"><div class="bilgi"><b>${kac(s.ad)}</b><small><button class="sp-gir" data-f="fiyat" data-id="${s.id}" aria-label="Fiyatı değiştir">${para(s.fiyat)}</button> ×${sayi(s.adet)} = ${para(s.fiyat * s.adet)}${liste(s) !== s.fiyat ? ` <s>${para(liste(s))}</s>` : ""}</small></div>
+      <div class="adet"><button data-e="-" data-id="${s.id}">−</button><button class="sp-gir" data-f="adet" data-id="${s.id}" aria-label="Adedi değiştir">${sayi(s.adet)}</button><button data-e="+" data-id="${s.id}">+</button></div></div>`).join("")}
     <div class="toplam-satir"><span>Toplam</span><span>${para(top)}</span></div></div>
     <div class="alt"><button class="btn" id="sp-temizle">Sepeti boşalt</button><button class="btn yesil" id="od-nakit">Nakit</button><button class="btn ana" id="od-kart">Kart</button><button class="btn" id="od-acik">Açık hesap</button></div>`, () => {
     $("sp-kapat").onclick = kapat;
@@ -714,6 +739,16 @@ function sepetSayfasi() {
       const s = sepet.find(x => x.id === Number(b.dataset.id)); if (!s) return;
       s.adet += b.dataset.e === "+" ? 1 : -1; if (s.adet <= 0) sepet = sepet.filter(x => x !== s);
       ekranCiz(); sepetSayfasi();
+    });
+    // Fiyata ya da adede dokununca küçük giriş kutusu açılır (yalnızca bu sepet için); adet 0 yazılırsa ürün sepetten çıkar
+    $("sayfa").querySelectorAll(".sp-gir").forEach(g => g.onclick = () => {
+      const s = sepet.find(x => x.id === Number(g.dataset.id)); if (!s) return;
+      const fiyat = g.dataset.f === "fiyat";
+      sayiSor(fiyat ? "Bu satış için fiyat" : "Adet", s.ad, fiyat ? para(s.fiyat).replace(" TL", "") : sayi(s.adet), fiyat ? "TL" : "", v => {
+        if (fiyat) s.fiyat = Math.round(v * 100) / 100;
+        else { s.adet = Math.round(v * 1000) / 1000; if (s.adet <= 0) sepet = sepet.filter(x => x !== s); }
+        ekranCiz(); sepetSayfasi();
+      });
     });
     $("od-nakit").onclick = () => nakitSor(top);
     $("od-kart").onclick = () => satisKaydet("kart", null);
@@ -920,7 +955,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022073430";
+const SURUM = "20261022073817";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
