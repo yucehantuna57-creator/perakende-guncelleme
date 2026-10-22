@@ -421,7 +421,7 @@ function ayarCiz() {
       <button class="btn" id="ay-fis-kaydet" style="margin-top:8px;width:100%">Fiş ayarlarını kaydet</button>
     </div>
     <div class="kutu"><h3>Kategori ve müşteri</h3>
-      <div class="iki"><button class="btn" id="ay-kat">Kategoriler (${S.kategoriler.length})</button><button class="btn" id="ay-musteri-ekle">+ Müşteri ekle</button></div>
+      <div class="iki"><button class="btn" id="ay-kat">Kategoriler (${S.kategoriler.length})</button><button class="btn" id="ay-musteri-ekle">+ Cari ekle</button></div>
     </div>
     <div class="kutu"><h3>Veri ve eşitleme</h3>
       <div class="iki"><button class="btn" id="ay-esitle">Şimdi eşitle</button><button class="btn" id="ay-yenile">Verileri yeniden indir</button></div>
@@ -620,19 +620,27 @@ function fiyatAra() {
 }
 
 // ---------- Müşteriler ----------
+// Cariler iki sekmede: müşteriler ve firmalar (tedarikçiler), bilgisayardaki gibi
+let musteriSekme = "musteri";
 function musteriCiz() {
   if (!$("ms-sorgu")) {
-    $("t-musteri").innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div class="yaz-baslik">Müşteriler</div><button class="btn ana" id="ms-yeni" style="height:40px">+ Yeni</button></div>
+    $("t-musteri").innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div class="yaz-baslik" id="ms-baslik">Müşteriler</div><button class="btn ana" id="ms-yeni" style="height:40px">+ Yeni cari</button></div>
+      <div class="cipler" id="ms-sekme" style="padding:0"><button class="cip" data-ms="musteri">Müşteriler</button><button class="cip" data-ms="firma">Firmalar</button></div>
       <div id="ms-ozet" class="iki"></div><input id="ms-sorgu" placeholder="Ad veya telefon ara" autocomplete="off"><div id="ms-liste" class="kutu" style="padding:4px 14px"></div>`;
     $("ms-sorgu").addEventListener("input", musteriCiz);
-    $("ms-yeni").onclick = musteriEkleSayfasi;
+    $("ms-yeni").onclick = () => musteriEkleSayfasi();
+    $("ms-sekme").querySelectorAll("[data-ms]").forEach(b => b.onclick = () => { musteriSekme = b.dataset.ms; musteriCiz(); });
   }
+  const firma = musteriSekme === "firma";
+  $("ms-sekme").querySelectorAll("[data-ms]").forEach(b => b.classList.toggle("aktif", b.dataset.ms === musteriSekme));
+  $("ms-baslik").textContent = firma ? "Firmalar" : "Müşteriler";
   const q = trKucuk($("ms-sorgu").value.trim());
-  const hepsi = S.musteriler.filter(m => m.aktif !== 0 && !m.tedarikci).map(m => ({ m, b: cariBakiye(m.id) }));
+  const hepsi = S.musteriler.filter(m => m.aktif !== 0 && !!m.tedarikci === firma).map(m => ({ m, b: cariBakiye(m.id) }));
   const borclu = hepsi.filter(x => x.b > 0.005), alacak = borclu.reduce((t, x) => t + x.b, 0);
   // Eksi bakiye: müşterinin bize alacağı (ör. Excel'den gelen alacaklı cariler)
   const alacakli = hepsi.filter(x => x.b < -0.005), borcumuz = alacakli.reduce((t, x) => t - x.b, 0);
-  $("ms-ozet").innerHTML = `<div class="mini"><small>Toplam alacak</small><b>${para(alacak)}</b></div><div class="mini"><small>Borçlu müşteri</small><b>${borclu.length} / ${hepsi.length}</b></div>${alacakli.length ? `<div class="mini" style="grid-column:1/-1"><small>Alacaklı müşteri (borcumuz)</small><b>${alacakli.length} · ${para(borcumuz)}</b></div>` : ""}`;
+  if (firma) $("ms-ozet").innerHTML = `<div class="mini"><small>Firmalara borcumuz</small><b>${para(borcumuz)}</b></div><div class="mini"><small>Firma</small><b>${hepsi.length}</b></div>`;
+  else $("ms-ozet").innerHTML = `<div class="mini"><small>Toplam alacak</small><b>${para(alacak)}</b></div><div class="mini"><small>Borçlu müşteri</small><b>${borclu.length} / ${hepsi.length}</b></div>${alacakli.length ? `<div class="mini" style="grid-column:1/-1"><small>Alacaklı müşteri (borcumuz)</small><b>${alacakli.length} · ${para(borcumuz)}</b></div>` : ""}`;
   const l = hepsi.filter(x => !q || trKucuk(x.m.ad_soyad).includes(q) || String(x.m.telefon || "").includes(q)).sort((a, b) => b.b - a.b || String(a.m.ad_soyad).localeCompare(String(b.m.ad_soyad), "tr")).slice(0, 80);
   $("ms-liste").innerHTML = l.map(({ m, b }) => `<div class="liste-satir" data-m="${m.id}"><div class="avatar">${kac(String(m.ad_soyad || "?").charAt(0).toLocaleUpperCase("tr"))}</div><div class="bilgi"><b>${kac(m.ad_soyad)}</b><small>${kac(m.telefon || "Telefon yok")}</small></div><span class="rozet2 ${b > 0.005 ? "kirmizi" : b < -0.005 ? "mavi" : "yesil"}">${b > 0.005 ? para(b) : b < -0.005 ? "Alacaklı " + para(-b) : "Borcu yok"}</span></div>`).join("") || '<div class="bos" style="padding:30px 0">Müşteri bulunamadı</div>';
   $("ms-liste").querySelectorAll("[data-m]").forEach(b => b.onclick = () => musteriDetay(Number(b.dataset.m)));
@@ -667,14 +675,19 @@ function tahsilatSayfasi(id) {
     };
   });
 }
+// Yeni caride önce tür sorulur: müşteri mi firma mı (seçilmeden kaydedilmez)
 function musteriEkleSayfasi() {
-  sayfaAc(`<h2>Yeni müşteri</h2><div class="icerik"><input id="mn-ad" placeholder="Ad soyad" autocomplete="off"><input id="mn-tel" type="tel" placeholder="Telefon (isteğe bağlı)"><div class="hata" id="mn-hata"></div></div>
+  let tur = "";
+  sayfaAc(`<h2>Yeni cari</h2><div class="icerik"><div style="font-weight:700;margin-bottom:6px">Bu cari ne?</div><div class="iki" id="mn-tur" style="margin-bottom:10px"><button class="btn" data-tur="musteri">Müşteri</button><button class="btn" data-tur="firma">Firma (tedarikçi)</button></div><input id="mn-ad" placeholder="Ad soyad / unvan" autocomplete="off"><input id="mn-tel" type="tel" placeholder="Telefon (isteğe bağlı)"><div class="hata" id="mn-hata"></div></div>
     <div class="alt"><button class="btn" id="mn-iptal">Vazgeç</button><button class="btn ana" id="mn-kaydet">Kaydet</button></div>`, () => {
     $("mn-iptal").onclick = kapat;
+    $("mn-tur").querySelectorAll("[data-tur]").forEach(b => b.onclick = () => { tur = b.dataset.tur; $("mn-tur").querySelectorAll("[data-tur]").forEach(x => x.classList.toggle("ana", x === b)); $("mn-hata").textContent = ""; });
     $("mn-kaydet").onclick = () => {
+      if (!tur) return ($("mn-hata").textContent = "Müşteri mi firma mı seçin");
       const ad = $("mn-ad").value.trim(); if (!ad) return ($("mn-hata").textContent = "Ad soyad girin");
-      const m = kuyrugaEkle("musteriler", { id: yeniId("musteriler"), ad_soyad: ad, telefon: $("mn-tel").value.trim(), vergi_no: "", aktif: 1 });
-      S.musteriler.push({ ...m }); kaydet(); kapat(); ekranCiz(); bildir("Müşteri eklendi"); esitle(true);
+      const m = kuyrugaEkle("musteriler", { id: yeniId("musteriler"), ad_soyad: ad, telefon: $("mn-tel").value.trim(), vergi_no: "", tedarikci: tur === "firma" ? 1 : 0, aktif: 1 });
+      musteriSekme = tur;
+      S.musteriler.push({ ...m }); kaydet(); kapat(); ekranCiz(); bildir(tur === "firma" ? "Firma eklendi" : "Müşteri eklendi"); esitle(true);
     };
   });
 }
@@ -1035,7 +1048,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022134949";
+const SURUM = "20261022135524";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
