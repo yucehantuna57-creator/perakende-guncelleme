@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.91",
+  "surum": "1.0.92",
   "tarih": "2026-10-22",
   "notlar": [
-    "Ayarlar: Excel ile cari yükle (müşteri listesi bakiyeleriyle; eksi bakiye müşterinin alacağı olarak yazılır)"
+    "Müşteriler menüsünde Müşteriler / Firmalar alt satırı ve sayfada iki sekme",
+    "Yeni cari açarken müşteri mi firma mı sorulur"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.92",
+      "tarih": "2026-10-22",
+      "notlar": [
+        "Müşteriler menüsünde Müşteriler / Firmalar alt satırı ve sayfada iki sekme",
+        "Yeni cari açarken müşteri mi firma mı sorulur"
+      ]
+    },
     {
       "surum": "1.0.91",
       "tarih": "2026-10-22",
@@ -674,5 +683,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "9f7a54cbeaa5fb31bea0ff8b8bfc43594352abe2e518d0d1b1289d0ce2600a77"
+  "sha256": "696eeef511be77c4b6ea6e73914d102070043ae16bfb6dd0c750e49de187160b"
 }
