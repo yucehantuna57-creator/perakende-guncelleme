@@ -75,6 +75,28 @@
   #sekmeler { flex:1; min-height:0; overflow-y:auto; -webkit-overflow-scrolling:touch; }
   .sekme { padding:12px 12px 20px; display:flex; flex-direction:column; gap:12px; }
   #t-kasa { padding:0; gap:0; } #t-kasa #urunler { overflow:visible; padding-bottom:150px; }
+  /* Satış ekranı: arama ve kategoriler kayarken üstte kalır, ürün kartları */
+  #t-kasa .arama { position:sticky; top:0; z-index:5; background:var(--bg); padding-top:12px; }
+  #t-kasa .cipler { position:sticky; top:64px; z-index:5; background:var(--bg); padding-bottom:10px; box-shadow:0 6px 8px -8px rgba(0,0,0,.25); }
+  #t-kasa .arama input { border-radius:14px; padding-left:40px; background:var(--kart) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='%236b7587' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='M20 20l-3.5-3.5'/%3E%3C/svg%3E") no-repeat 13px center; }
+  #t-kasa .cip { padding:8px 16px; box-shadow:0 1px 2px rgba(0,0,0,.05); }
+  #urunler { padding-top:8px; gap:12px; }
+  .urun { position:relative; border:0; border-radius:16px; padding:12px; gap:6px; min-height:128px; box-shadow:0 1px 3px rgba(15,30,60,.08), 0 0 0 1px var(--cizgi); transition:transform .08s ease, box-shadow .15s ease; }
+  .urun:active { transform:scale(.97); background:var(--kart); }
+  .urun .ust { display:flex; align-items:center; justify-content:space-between; gap:6px; }
+  .urun .harf { width:34px; height:34px; border-radius:10px; display:grid; place-items:center; font-weight:800; font-size:16px; color:hsl(var(--h) 55% 35%); background:hsl(var(--h) 70% 92%); }
+  @media (prefers-color-scheme: dark) { .urun .harf { color:hsl(var(--h) 70% 80%); background:hsl(var(--h) 35% 22%); } }
+  .urun .ad { font-size:14px; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; flex:1; }
+  .urun .fiyat { font-size:18px; font-weight:800; }
+  .urun .stok { font-size:11px; font-weight:600; padding:2px 8px; border-radius:999px; background:var(--vurgu); color:var(--soluk); white-space:nowrap; }
+  .urun .stok.az { background:#fbe3e0; color:var(--kirmizi); }
+  .urun.bitti .harf, .urun.bitti .ad { opacity:.7; }
+  .urun.secili { box-shadow:0 0 0 2px var(--yesil), 0 4px 12px rgba(30,142,78,.18); }
+  .urun .adetrozet { min-width:28px; height:28px; padding:0 8px; border-radius:999px; background:var(--yesil); color:#fff; font-weight:800; font-size:14px; display:grid; place-items:center; }
+  #sepet-cubuk button { border-radius:16px; box-shadow:0 6px 16px rgba(30,142,78,.35); }
+  #sepet-cubuk button:disabled { box-shadow:none; }
+  #sepet-adet::after { content:"  ›"; font-weight:800; }
+  #sepet-ac:disabled #sepet-adet::after { content:""; }
   #altmenu { position:fixed; left:0; right:0; bottom:0; height:calc(var(--alt) + env(safe-area-inset-bottom)); padding-bottom:env(safe-area-inset-bottom); background:var(--kart); border-top:1px solid var(--cizgi); display:flex; z-index:10; }
   #altmenu button { flex:1; min-width:0; background:none; border:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:var(--soluk); font-size:11px; font-weight:600; position:relative; }
   #altmenu button svg { width:24px; height:24px; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
@@ -682,7 +704,12 @@ function urunSuz() {
 function kasaCiz() {
   $("cipler").innerHTML = `<button class="cip ${seciliKategori === "" ? "aktif" : ""}" data-k="">Tümü</button>` + S.kategoriler.map(k => `<button class="cip ${seciliKategori === String(k.id) ? "aktif" : ""}" data-k="${k.id}">${kac(k.ad)}</button>`).join("");
   const l = urunSuz();
-  $("urunler").innerHTML = l.length ? l.map(u => `<button class="urun" data-u="${u.id}"><span class="ad">${kac(u.ad)}</span><span class="fiyat">${para(u.satis_fiyati)}</span><span class="stok ${u.stok <= 0 ? "az" : ""}">Stok: ${sayi(u.stok)}</span></button>`).join("")
+  // Kart: kategoriye göre renkli baş harf, sepetteki adet rozeti, stok etiketi
+  const sepetteki = new Map(sepet.map(s => [s.id, s.adet]));
+  const renk = u => { const k = String(u.kategori_id || u.ad || ""); let h = 0; for (const c of k) h = (h * 31 + c.charCodeAt(0)) % 360; return h; };
+  $("urunler").innerHTML = l.length ? l.map(u => { const n = sepetteki.get(u.id); return `<button class="urun ${n ? "secili" : ""} ${u.stok <= 0 ? "bitti" : ""}" data-u="${u.id}">
+      <span class="ust"><span class="harf" style="--h:${renk(u)}">${kac(String(u.ad || "?").trim().charAt(0).toLocaleUpperCase("tr"))}</span>${n ? `<span class="adetrozet">${sayi(n)}</span>` : `<span class="stok ${u.stok <= 0 ? "az" : ""}">${u.stok <= 0 ? "Stok yok" : "Stok " + sayi(u.stok)}</span>`}</span>
+      <span class="ad">${kac(u.ad)}</span><span class="fiyat">${para(u.satis_fiyati)}</span></button>`; }).join("")
     : `<div class="bos">${S.urunler.length ? "Ürün bulunamadı" : (esitleniyor ? "Ürünler yükleniyor..." : "Henüz ürün yok. Bilgisayardaki programda Ayarlar → Telefon uygulaması bağlantısını açın.")}</div>`;
   const adet = sepet.reduce((t, s) => t + s.adet, 0), top = sepet.reduce((t, s) => t + s.adet * s.fiyat, 0);
   $("sepet-ac").disabled = !adet;
@@ -983,7 +1010,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022131508";
+const SURUM = "20261022134705";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
