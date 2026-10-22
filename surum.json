@@ -1,11 +1,21 @@
 {
-  "surum": "1.0.89",
+  "surum": "1.0.90",
   "tarih": "2026-10-22",
   "notlar": [
-    "Masaüstü: sunucu açılamazsa nedeni günlüğe yazılır ve ekranda gösterilir",
-    "Masaüstü: sunucuya açılışta 60 saniyeye kadar süre tanınır (önce 25 saniyeydi)"
+    "Kasada sepet satırını silme düğmesi küçük ✕ olarak satırın sağına alındı",
+    "Kategori ürünleri listesinde Düzenle ürünü pencerede açar, kaydedince kategori listesine döner",
+    "Kategoriye ürün eklerken tıklanma sırası kasadaki hızlı satış sırası olur"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.90",
+      "tarih": "2026-10-22",
+      "notlar": [
+        "Kasada sepet satırını silme düğmesi küçük ✕ olarak satırın sağına alındı",
+        "Kategori ürünleri listesinde Düzenle ürünü pencerede açar, kaydedince kategori listesine döner",
+        "Kategoriye ürün eklerken tıklanma sırası kasadaki hızlı satış sırası olur"
+      ]
+    },
     {
       "surum": "1.0.89",
       "tarih": "2026-10-22",
@@ -659,5 +669,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "ed7013fcf63c916b25b21b855ed3b60fa9be795948280ff5945f5c816c1a961f"
+  "sha256": "7213dcd93dbbe02789379540491c7a239ebbee99478020a47eaabb321c3cec29"
 }
