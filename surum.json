@@ -1,12 +1,17 @@
 {
-  "surum": "1.0.99",
+  "surum": "1.0.100",
   "tarih": "2026-10-24",
   "notlar": [
-    "Kayıt numarası çakışması düzeltildi: yeni açılan müşteri başka bir müşteriye dönüşmez, açık hesap borcu kaybolmaz",
-    "Buluttan gelen kayıtlar kasanınkilerle çakışmayan ayrı numara alır",
-    "Eşitlemede numarası çakışan yeni kayıtlar atılmaz, yeni numara alır"
+    "Aynı numarayı taşıyan müşteriler (seçince başka isim görünmesi) girişte otomatik ayrılır ve liste olarak gösterilir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.100",
+      "tarih": "2026-10-24",
+      "notlar": [
+        "Aynı numarayı taşıyan müşteriler (seçince başka isim görünmesi) girişte otomatik ayrılır ve liste olarak gösterilir"
+      ]
+    },
     {
       "surum": "1.0.99",
       "tarih": "2026-10-24",
@@ -738,5 +743,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f9059461c0c85ef3f3ed6b9a79d3bbea0cda62fc30d39787e891a6e244276388"
+  "sha256": "6d573a4fee2f25369f5f6801a2fa84f057df56555f0552c65feb9354c8db6d22"
 }
