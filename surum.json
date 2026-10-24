@@ -1,12 +1,17 @@
 {
-  "surum": "1.0.96",
+  "surum": "1.0.97",
   "tarih": "2026-10-24",
   "notlar": [
-    "Açık hesapta müşteri artık aranarak seçilir; önceden ilk müşteri seçili geldiği için satış yanlış kişiye yazılabiliyordu",
-    "Fişlerde ve basılı fişte müşteri adı görünür",
-    "Sağdan açılan ürün/stok paneli boş bir yere tıklanınca kapanır"
+    "Bulut yedeği dosya adında bilgisayar adı var (birden çok kasa aynı OneDrive'a yazınca karışmasın)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.97",
+      "tarih": "2026-10-24",
+      "notlar": [
+        "Bulut yedeği dosya adında bilgisayar adı var (birden çok kasa aynı OneDrive'a yazınca karışmasın)"
+      ]
+    },
     {
       "surum": "1.0.96",
       "tarih": "2026-10-24",
@@ -714,5 +719,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "4c53ee5fd57e35df6c2ba0c3423b36e199d5d272ab4e0df36ab518562d564e26"
+  "sha256": "3c6e8ca35a3061bde8338d4dcfb859d6f092d95f7b9e7922862663b855aa8dd1"
 }
