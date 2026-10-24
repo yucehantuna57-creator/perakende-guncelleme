@@ -1,10 +1,21 @@
 {
-  "surum": "1.0.95",
-  "tarih": "2026-10-22",
+  "surum": "1.0.96",
+  "tarih": "2026-10-24",
   "notlar": [
-    "Parçalı ödeme: bir satış nakit, kart ve açık hesaba bölünebilir (ör. 200 nakit + 100 kart + 200 açık hesap)"
+    "Açık hesapta müşteri artık aranarak seçilir; önceden ilk müşteri seçili geldiği için satış yanlış kişiye yazılabiliyordu",
+    "Fişlerde ve basılı fişte müşteri adı görünür",
+    "Sağdan açılan ürün/stok paneli boş bir yere tıklanınca kapanır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.96",
+      "tarih": "2026-10-24",
+      "notlar": [
+        "Açık hesapta müşteri artık aranarak seçilir; önceden ilk müşteri seçili geldiği için satış yanlış kişiye yazılabiliyordu",
+        "Fişlerde ve basılı fişte müşteri adı görünür",
+        "Sağdan açılan ürün/stok paneli boş bir yere tıklanınca kapanır"
+      ]
+    },
     {
       "surum": "1.0.95",
       "tarih": "2026-10-22",
@@ -703,5 +714,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "d4062e23083891792c7ce1099f58426ffca7fab4e26e74ab3f0c59e93318b4a5"
+  "sha256": "4c53ee5fd57e35df6c2ba0c3423b36e199d5d272ab4e0df36ab518562d564e26"
 }
