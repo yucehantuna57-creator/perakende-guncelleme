@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.97",
+  "surum": "1.0.98",
   "tarih": "2026-10-24",
   "notlar": [
-    "Bulut yedeği dosya adında bilgisayar adı var (birden çok kasa aynı OneDrive'a yazınca karışmasın)"
+    "Açık hesap satışının borcu, aynı anda başka cihazdan veri gelince kaybolabiliyordu; düzeltildi",
+    "Kaybolmuş açık hesap borçları girişte otomatik olarak müşteri carisine işlenir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.98",
+      "tarih": "2026-10-24",
+      "notlar": [
+        "Açık hesap satışının borcu, aynı anda başka cihazdan veri gelince kaybolabiliyordu; düzeltildi",
+        "Kaybolmuş açık hesap borçları girişte otomatik olarak müşteri carisine işlenir"
+      ]
+    },
     {
       "surum": "1.0.97",
       "tarih": "2026-10-24",
@@ -719,5 +728,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "3c6e8ca35a3061bde8338d4dcfb859d6f092d95f7b9e7922862663b855aa8dd1"
+  "sha256": "b90008158a1a314240e0703a4045b84ad3d89853cc6b788941e187bf0f07265f"
 }
