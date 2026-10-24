@@ -1,11 +1,21 @@
 {
-  "surum": "1.0.98",
+  "surum": "1.0.99",
   "tarih": "2026-10-24",
   "notlar": [
-    "Açık hesap satışının borcu, aynı anda başka cihazdan veri gelince kaybolabiliyordu; düzeltildi",
-    "Kaybolmuş açık hesap borçları girişte otomatik olarak müşteri carisine işlenir"
+    "Kayıt numarası çakışması düzeltildi: yeni açılan müşteri başka bir müşteriye dönüşmez, açık hesap borcu kaybolmaz",
+    "Buluttan gelen kayıtlar kasanınkilerle çakışmayan ayrı numara alır",
+    "Eşitlemede numarası çakışan yeni kayıtlar atılmaz, yeni numara alır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.99",
+      "tarih": "2026-10-24",
+      "notlar": [
+        "Kayıt numarası çakışması düzeltildi: yeni açılan müşteri başka bir müşteriye dönüşmez, açık hesap borcu kaybolmaz",
+        "Buluttan gelen kayıtlar kasanınkilerle çakışmayan ayrı numara alır",
+        "Eşitlemede numarası çakışan yeni kayıtlar atılmaz, yeni numara alır"
+      ]
+    },
     {
       "surum": "1.0.98",
       "tarih": "2026-10-24",
@@ -728,5 +738,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "b90008158a1a314240e0703a4045b84ad3d89853cc6b788941e187bf0f07265f"
+  "sha256": "f9059461c0c85ef3f3ed6b9a79d3bbea0cda62fc30d39787e891a6e244276388"
 }
