@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.100",
+  "surum": "1.0.101",
   "tarih": "2026-10-24",
   "notlar": [
-    "Aynı numarayı taşıyan müşteriler (seçince başka isim görünmesi) girişte otomatik ayrılır ve liste olarak gösterilir"
+    "Ekstre yazdır: önce önizleme açılır, yazıcı seçilir; doğrudan yazdırmaz",
+    "Ekstre PDF olarak indirilebilir (Chrome ile)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.101",
+      "tarih": "2026-10-24",
+      "notlar": [
+        "Ekstre yazdır: önce önizleme açılır, yazıcı seçilir; doğrudan yazdırmaz",
+        "Ekstre PDF olarak indirilebilir (Chrome ile)"
+      ]
+    },
     {
       "surum": "1.0.100",
       "tarih": "2026-10-24",
@@ -743,5 +752,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "6d573a4fee2f25369f5f6801a2fa84f057df56555f0552c65feb9354c8db6d22"
+  "sha256": "49266d918b284028c0c60cee603f4e303f1ac2efee903abf3b74c0109c7f538a"
 }
