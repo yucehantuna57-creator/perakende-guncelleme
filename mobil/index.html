@@ -298,7 +298,7 @@ async function cekDukkan() {
       if (k.tablo === "satislar") {
         if (k.silindi) { delete S.dukSatis[id]; continue; }
         if (new Date(v.tarih).getTime() < sinir) continue;
-        S.dukSatis[id] = { id, fis_no: v.fis_no, tarih: v.tarih, toplam: Number(v.toplam || 0), kasa: v.kasa_no || "", durum: v.durum || "tamamlandi", iade: !!(v.iade_fis_id || v.iade) };
+        S.dukSatis[id] = { id, fis_no: v.fis_no, tarih: v.tarih, toplam: Number(v.toplam || 0), kasa: v.kasa_no || "", durum: v.durum || "tamamlandi", iade: !!(v.iade_fis_id || v.iade), musteri_id: v.musteri_id || null };
       } else if (k.tablo === "odemeler") {
         // Bir satışın birden çok ödemesi olabilir (parçalı): her ödeme kendi numarasıyla tutulur
         S.dukParca = S.dukParca || {};
@@ -917,9 +917,13 @@ function satisKaydet(yontem, musteriId, parcalar) {
   parcalar = parcalar || [{ yontem, tutar: top }];
   parcalar.forEach(p => ekle("odemeler", { id: yeniId("odemeler"), satis_id: satis.id, yontem: p.yontem, tutar: p.tutar }));
   const acik = parcalar.filter(p => p.yontem === "acik_hesap").reduce((t, p) => t + p.tutar, 0);
-  if (acik > 0) ekle("cari_hareketler", { id: yeniId("cari_hareketler"), musteri_id: musteriId, tur: "borc", tutar: acik, satis_id: satis.id, aciklama: fisNo + (parcalar.length > 1 ? " (parçalı)" : ""), islem: "satis", yontem: null, kullanici_id: S.kullanici.id, tarih });
+  if (acik > 0) {
+    const h = ekle("cari_hareketler", { id: yeniId("cari_hareketler"), musteri_id: musteriId, tur: "borc", tutar: acik, satis_id: satis.id, aciklama: fisNo + (parcalar.length > 1 ? " (parçalı)" : ""), islem: "satis", yontem: null, kullanici_id: S.kullanici.id, tarih });
+    // Bulut bu telefona kendi gönderdiğini geri yollamaz: borç müşterinin carisine burada da yazılır
+    S.cari.push({ id: h.id, musteri_id: musteriId, tur: "borc", tutar: acik, tarih, aciklama: h.aciklama });
+  }
   const kalemler = sepet.map(s => ({ ad: s.ad, adet: s.adet, fiyat: s.fiyat }));
-  S.satislarim.unshift({ fis_no: fisNo, tarih, toplam: top, yontem, id: satis.id, kalemler, parcalar: parcalar.length > 1 ? parcalar : undefined });
+  S.satislarim.unshift({ fis_no: fisNo, tarih, toplam: top, yontem, id: satis.id, musteri_id: musteriId || null, kalemler, parcalar: parcalar.length > 1 ? parcalar : undefined });
   S.satislarim = S.satislarim.slice(0, 300);
   sepet = []; kaydet(); ekranCiz(); durumYaz();
   fisGoster(fisNo, tarih, kalemler, top, odemeYazisi(parcalar, yontem));
@@ -971,7 +975,7 @@ document.addEventListener("click", e => { const r = e.target.closest("[data-fis]
 let fisFiltre = "hepsi", fisAra = "";
 function fislerSayfasi() {
   const hepsi = new Map(), benim = new Set(S.satislarim.map(x => x.fis_no));
-  S.satislarim.forEach(x => hepsi.set(x.fis_no, { fis_no: x.fis_no, tarih: x.tarih, toplam: x.toplam, kasa: "M" + S.cihaz, yontem: x.yontem, id: x.id, durum: "tamamlandi" }));
+  S.satislarim.forEach(x => hepsi.set(x.fis_no, { fis_no: x.fis_no, tarih: x.tarih, toplam: x.toplam, kasa: "M" + S.cihaz, yontem: x.yontem, id: x.id, durum: "tamamlandi", musteri_id: x.musteri_id }));
   Object.values(S.dukSatis).forEach(x => { if (!hepsi.has(x.fis_no)) hepsi.set(x.fis_no, { ...x, yontem: S.dukOdeme[x.id] || "" }); });
   const bekleyen = new Set(S.kuyruk.filter(k => k.tablo === "satislar").map(k => k.kid));
   const urunAdlari = x => { const b = S.satislarim.find(s => s.fis_no === x.fis_no); return b && b.kalemler ? b.kalemler.map(k => k.ad) : (S.dukKalem[x.id] || []).map(k => k.ad || (S.urunler.find(u => u.id === k.urun_id) || {}).ad || ""); };
@@ -979,7 +983,7 @@ function fislerSayfasi() {
   const l = [...hepsi.values()].filter(x => (fisFiltre === "hepsi" || benim.has(x.fis_no)) && (!q || x.fis_no.toLocaleLowerCase("tr").includes(q) || urunAdlari(x).some(a => a.toLocaleLowerCase("tr").includes(q))))
     .sort((a, b) => new Date(b.tarih) - new Date(a.tarih));
   const gunler = new Map(); l.forEach(x => { const g = yerelGun(x.tarih); if (!gunler.has(g)) gunler.set(g, []); gunler.get(g).push(x); });
-  const satir = x => `<div class="liste-satir" data-fis="${kac(x.fis_no)}"><div class="bilgi"><b>${kac(x.fis_no)}${x.durum === "iptal" ? " · iptal" : x.iade ? " · iade" : ""}</b><small>${new Date(x.tarih).toLocaleTimeString("tr-TR", { timeStyle: "short" })} · ${kac(x.kasa)} · ${YONTEM[x.yontem] || x.yontem || ""}${bekleyen.has(x.id) ? " · gönderilmedi" : ""}</small></div><b>${para(x.toplam)}</b></div>`;
+  const satir = x => `<div class="liste-satir" data-fis="${kac(x.fis_no)}"><div class="bilgi"><b>${kac(x.fis_no)}${x.durum === "iptal" ? " · iptal" : x.iade ? " · iade" : ""}</b><small>${new Date(x.tarih).toLocaleTimeString("tr-TR", { timeStyle: "short" })} · ${kac(x.kasa)} · ${YONTEM[x.yontem] || x.yontem || ""}${x.musteri_id ? " · 👤 " + kac((S.musteriler.find(m => m.id === x.musteri_id) || {}).ad_soyad || "Müşteri") : ""}${bekleyen.has(x.id) ? " · gönderilmedi" : ""}</small></div><b>${para(x.toplam)}</b></div>`;
   sayfaAc(`<h2>Fişler <button class="btn" id="fl-kapat" style="height:36px">Kapat</button></h2>
     <div class="arama-satir" style="margin:0 0 8px"><input id="fl-ara" placeholder="Fiş no veya ürün ara" autocomplete="off" value="${kac(fisAra)}"></div>
     <div class="iki" style="margin-bottom:8px"><button class="btn ${fisFiltre === "hepsi" ? "ana" : ""}" data-ff="hepsi">Tüm kasalar</button><button class="btn ${fisFiltre === "ben" ? "ana" : ""}" data-ff="ben">Bu telefon</button></div>
@@ -1101,7 +1105,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261022142342";
+const SURUM = "20261024124736";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
