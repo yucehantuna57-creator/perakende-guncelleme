@@ -1,11 +1,17 @@
 {
-  "surum": "1.0.101",
-  "tarih": "2026-10-24",
+  "surum": "1.0.102",
+  "tarih": "2026-10-25",
   "notlar": [
-    "Ekstre yazdır: önce önizleme açılır, yazıcı seçilir; doğrudan yazdırmaz",
-    "Ekstre PDF olarak indirilebilir (Chrome ile)"
+    "Müşteri listesinde her satırda Ekstre düğmesi: önizleme, yazıcı seçimi, PDF"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.102",
+      "tarih": "2026-10-25",
+      "notlar": [
+        "Müşteri listesinde her satırda Ekstre düğmesi: önizleme, yazıcı seçimi, PDF"
+      ]
+    },
     {
       "surum": "1.0.101",
       "tarih": "2026-10-24",
@@ -752,5 +758,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "49266d918b284028c0c60cee603f4e303f1ac2efee903abf3b74c0109c7f538a"
+  "sha256": "3af70e714b7fcb684a417196d447b9e3042c48713f1dff5e3ac8b813fe6be449"
 }
