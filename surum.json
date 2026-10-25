@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.102",
+  "surum": "1.0.103",
   "tarih": "2026-10-25",
   "notlar": [
-    "Müşteri listesinde her satırda Ekstre düğmesi: önizleme, yazıcı seçimi, PDF"
+    "Toplu cari ekstresi: tüm müşteri/firmaların borç, alacak ve bakiyesi tek belgede; tarih aralığı, yazdırma ve PDF"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.103",
+      "tarih": "2026-10-25",
+      "notlar": [
+        "Toplu cari ekstresi: tüm müşteri/firmaların borç, alacak ve bakiyesi tek belgede; tarih aralığı, yazdırma ve PDF"
+      ]
+    },
     {
       "surum": "1.0.102",
       "tarih": "2026-10-25",
@@ -758,5 +765,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "3af70e714b7fcb684a417196d447b9e3042c48713f1dff5e3ac8b813fe6be449"
+  "sha256": "2d99fb7a79f941b8c8487a598254dc87ad4964098cf20034e4a6339bcd129866"
 }
