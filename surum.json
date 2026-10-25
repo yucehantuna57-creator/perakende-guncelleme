@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.103",
+  "surum": "1.0.104",
   "tarih": "2026-10-25",
   "notlar": [
-    "Toplu cari ekstresi: tüm müşteri/firmaların borç, alacak ve bakiyesi tek belgede; tarih aralığı, yazdırma ve PDF"
+    "Fiş düzenleme: Fişler sayfasında ve fiş detayında 'Düzenle'; fiş iptal edilip ürünleri, fiyatları ve müşterisiyle kasaya yüklenir, değiştirip yeniden kesilir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.104",
+      "tarih": "2026-10-25",
+      "notlar": [
+        "Fiş düzenleme: Fişler sayfasında ve fiş detayında 'Düzenle'; fiş iptal edilip ürünleri, fiyatları ve müşterisiyle kasaya yüklenir, değiştirip yeniden kesilir"
+      ]
+    },
     {
       "surum": "1.0.103",
       "tarih": "2026-10-25",
@@ -765,5 +772,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "2d99fb7a79f941b8c8487a598254dc87ad4964098cf20034e4a6339bcd129866"
+  "sha256": "4bdf222c248befc3b0115692b68d03788d00db970767e96d1de355d7f066dbc0"
 }
