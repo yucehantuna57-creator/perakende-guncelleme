@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.110",
+  "surum": "1.0.111",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi: sitedeki Türkçe karakterler düzgün görünür (Fır&#231;a → Fırça); görseli olmayan ürünlerde kırık görsel gizlenir"
+    "Fiyat takibi: sitede olmayan ürünler eşleştirme listesinden gizlenebilir (tek tek ya da sayfa sayfa); ürünler silinmez, geri alınabilir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.111",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi: sitede olmayan ürünler eşleştirme listesinden gizlenebilir (tek tek ya da sayfa sayfa); ürünler silinmez, geri alınabilir"
+      ]
+    },
     {
       "surum": "1.0.110",
       "tarih": "2026-10-26",
@@ -815,5 +822,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "2f229dc931976b78a7a5ffa683faa1e0235299535110794d44a9f21eedf8426c"
+  "sha256": "bc7d91a93a418ceed7ec0bb5245586cc31eb342326f0171dcdbe0422b34e1489"
 }
