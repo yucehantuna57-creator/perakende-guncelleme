@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.120",
+  "surum": "1.0.121",
   "tarih": "2026-10-26",
   "notlar": [
-    "Ürünler sayfasında fotoğraf sütunu"
+    "Fiyat takibi eşleştirme: öneriler ayırt edici kelimelere göre ağırlıklandırıldı, yeterince benzemeyen ürünler gösterilmez"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.121",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi eşleştirme: öneriler ayırt edici kelimelere göre ağırlıklandırıldı, yeterince benzemeyen ürünler gösterilmez"
+      ]
+    },
     {
       "surum": "1.0.120",
       "tarih": "2026-10-26",
@@ -889,5 +896,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "3bf23b3da80f6f1f136226fe9a03d5e4a46be4b02ea648844f9c4ff88d888f88"
+  "sha256": "f78f03770be1d8b32d813db625ff649f311c976225d25cfc53d361185220b262"
 }
