@@ -1,11 +1,17 @@
 {
-  "surum": "1.0.112",
+  "surum": "1.0.113",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat raporunda satış fiyatı değiştirilebilir; kârı koruyan öneri gösterilir",
-    "Alışı artan ürünlere önerilen satış fiyatı toplu uygulanabilir (önce liste ve onay)"
+    "Fiyat takibi eşleştirme: ürünün kaç kez satıldığı görünür; hiç satılmayanlar süzülüp programdan silinebilir (geçmiş kayıtlar bozulmaz)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.113",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi eşleştirme: ürünün kaç kez satıldığı görünür; hiç satılmayanlar süzülüp programdan silinebilir (geçmiş kayıtlar bozulmaz)"
+      ]
+    },
     {
       "surum": "1.0.112",
       "tarih": "2026-10-26",
@@ -831,5 +837,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "c40b74583cd0d96e3f1e59f67a3531e0bf8ab1c43980b7ad1a4f0d5689471661"
+  "sha256": "fc7dfb80763d2a99c81daff1e308abac49f58aa07899f09096aa10c77e7ea01b"
 }
