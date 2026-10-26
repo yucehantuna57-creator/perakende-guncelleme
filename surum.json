@@ -1,12 +1,17 @@
 {
-  "surum": "1.0.115",
+  "surum": "1.0.116",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi: Tedarikçi seçimi (Yamanlar / Samsun Yapı Market); her sitenin ayarı ve eşleştirmeleri ayrı",
-    "Samsun Yapı Market okuyucusu (SMS istenirse net hata verir)",
-    "Barkod karşılaştırması düzeltildi: harfli kodlar barkod sayılmaz"
+    "Fiyat takibi: 'Sitede ara ve ürünlerime ekle' — sitedeki ürün adı/kod/barkodla aranır, programda yoksa ürün ve açılış stoğu olarak kaydedilir (kâr oranına göre satış fiyatı, görsel isteğe bağlı)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.116",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi: 'Sitede ara ve ürünlerime ekle' — sitedeki ürün adı/kod/barkodla aranır, programda yoksa ürün ve açılış stoğu olarak kaydedilir (kâr oranına göre satış fiyatı, görsel isteğe bağlı)"
+      ]
+    },
     {
       "surum": "1.0.115",
       "tarih": "2026-10-26",
@@ -856,5 +861,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "aa5db56231adee965dee8be28b96959f2fc450c5011d47c27b36d3bd8e79efaa"
+  "sha256": "73f656a50d4624bb532b5a83cbb3b1f14996db34fcc5e1c34478050cf9cb6b98"
 }
