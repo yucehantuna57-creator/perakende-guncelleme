@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.104",
-  "tarih": "2026-10-25",
+  "surum": "1.0.105",
+  "tarih": "2026-10-26",
   "notlar": [
-    "Fiş düzenleme: Fişler sayfasında ve fiş detayında 'Düzenle'; fiş iptal edilip ürünleri, fiyatları ve müşterisiyle kasaya yüklenir, değiştirip yeniden kesilir"
+    "Fiyat takibi (test): Yamanlar B2B'deki alış fiyatları okunur, programdaki ürünlerle barkoddan eşleştirilip karşılaştırılır; ürünlerde hiçbir şey değiştirilmez"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.105",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi (test): Yamanlar B2B'deki alış fiyatları okunur, programdaki ürünlerle barkoddan eşleştirilip karşılaştırılır; ürünlerde hiçbir şey değiştirilmez"
+      ]
+    },
     {
       "surum": "1.0.104",
       "tarih": "2026-10-25",
@@ -772,5 +779,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "4bdf222c248befc3b0115692b68d03788d00db970767e96d1de355d7f066dbc0"
+  "sha256": "bac06be5d0e58fd4a6c001916d7e6eaaa39a48690d917a9caf7f34288595f2e3"
 }
