@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.107",
+  "surum": "1.0.108",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi menüsü yöneticide görünmüyordu; düzeltildi"
+    "Fiyat takibi: eşleştirme ekranı — barkodu bulunamayan ürünlere isim önerisi, bağlantı kalıcı kaydedilir",
+    "Sitedeki barkodu ürüne alma ve barkodu okutarak düzeltme"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.108",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi: eşleştirme ekranı — barkodu bulunamayan ürünlere isim önerisi, bağlantı kalıcı kaydedilir",
+        "Sitedeki barkodu ürüne alma ve barkodu okutarak düzeltme"
+      ]
+    },
     {
       "surum": "1.0.107",
       "tarih": "2026-10-26",
@@ -793,5 +802,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "698fb95164a5157413ac6f0241be7e952d43b3150ab68724b6de951147839888"
+  "sha256": "a5a30d43c94a60a4bd5ff5342babd6d47f376a962afddffb5444bb11fef3fd82"
 }
