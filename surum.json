@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.116",
+  "surum": "1.0.117",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi: 'Sitede ara ve ürünlerime ekle' — sitedeki ürün adı/kod/barkodla aranır, programda yoksa ürün ve açılış stoğu olarak kaydedilir (kâr oranına göre satış fiyatı, görsel isteğe bağlı)"
+    "Samsun Yapı Market: fiyatlar (yeni fiyat) ve ürün görselleri doğru okunur"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.117",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Samsun Yapı Market: fiyatlar (yeni fiyat) ve ürün görselleri doğru okunur"
+      ]
+    },
     {
       "surum": "1.0.116",
       "tarih": "2026-10-26",
@@ -861,5 +868,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "73f656a50d4624bb532b5a83cbb3b1f14996db34fcc5e1c34478050cf9cb6b98"
+  "sha256": "3cd528da359b7f8d3e618f645c0ec51f81473c74f13a1cc506bb10d2d2bf7dad"
 }
