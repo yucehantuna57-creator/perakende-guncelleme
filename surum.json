@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.111",
+  "surum": "1.0.112",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi: sitede olmayan ürünler eşleştirme listesinden gizlenebilir (tek tek ya da sayfa sayfa); ürünler silinmez, geri alınabilir"
+    "Fiyat raporunda satış fiyatı değiştirilebilir; kârı koruyan öneri gösterilir",
+    "Alışı artan ürünlere önerilen satış fiyatı toplu uygulanabilir (önce liste ve onay)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.112",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat raporunda satış fiyatı değiştirilebilir; kârı koruyan öneri gösterilir",
+        "Alışı artan ürünlere önerilen satış fiyatı toplu uygulanabilir (önce liste ve onay)"
+      ]
+    },
     {
       "surum": "1.0.111",
       "tarih": "2026-10-26",
@@ -822,5 +831,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "bc7d91a93a418ceed7ec0bb5245586cc31eb342326f0171dcdbe0422b34e1489"
+  "sha256": "c40b74583cd0d96e3f1e59f67a3531e0bf8ab1c43980b7ad1a4f0d5689471661"
 }
