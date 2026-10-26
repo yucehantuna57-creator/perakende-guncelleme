@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.117",
+  "surum": "1.0.118",
   "tarih": "2026-10-26",
   "notlar": [
-    "Samsun Yapı Market: fiyatlar (yeni fiyat) ve ürün görselleri doğru okunur"
+    "Fiyat takibi 'Sitede ara': ürünler işaretlenip (ya da Hepsini seç) fotoğraflarıyla birlikte toplu olarak ürün ve stok olarak eklenebilir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.118",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi 'Sitede ara': ürünler işaretlenip (ya da Hepsini seç) fotoğraflarıyla birlikte toplu olarak ürün ve stok olarak eklenebilir"
+      ]
+    },
     {
       "surum": "1.0.117",
       "tarih": "2026-10-26",
@@ -868,5 +875,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "3cd528da359b7f8d3e618f645c0ec51f81473c74f13a1cc506bb10d2d2bf7dad"
+  "sha256": "cf2de0a34e308fdb6ef8fdd600f20da3d95738627d753524b4f8760282afd1b6"
 }
