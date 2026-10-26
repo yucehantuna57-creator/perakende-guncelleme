@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.121",
+  "surum": "1.0.122",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi eşleştirme: öneriler ayırt edici kelimelere göre ağırlıklandırıldı, yeterince benzemeyen ürünler gösterilmez"
+    "Fiyat takibi eşleştirme: ürün adının ayırt edici kelimeleri sitede yoksa öneri gösterilmez (buji anahtarı - batarya anahtarı gibi eşleşmeler kalktı)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.122",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi eşleştirme: ürün adının ayırt edici kelimeleri sitede yoksa öneri gösterilmez (buji anahtarı - batarya anahtarı gibi eşleşmeler kalktı)"
+      ]
+    },
     {
       "surum": "1.0.121",
       "tarih": "2026-10-26",
@@ -896,5 +903,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f78f03770be1d8b32d813db625ff649f311c976225d25cfc53d361185220b262"
+  "sha256": "cbb7702a2ac0ad85b96cb0a4d46d321d547f74f44ec0839f6d059ca36de59fd7"
 }
