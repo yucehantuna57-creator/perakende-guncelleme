@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.113",
+  "surum": "1.0.114",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi eşleştirme: ürünün kaç kez satıldığı görünür; hiç satılmayanlar süzülüp programdan silinebilir (geçmiş kayıtlar bozulmaz)"
+    "Fiyat raporunda sitedeki alışın KDV dahil hâli ayrı sütunda",
+    "Eşleştirmede toplu silme kaldırıldı; ürünler işaretlenip yalnızca seçilenler silinir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.114",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat raporunda sitedeki alışın KDV dahil hâli ayrı sütunda",
+        "Eşleştirmede toplu silme kaldırıldı; ürünler işaretlenip yalnızca seçilenler silinir"
+      ]
+    },
     {
       "surum": "1.0.113",
       "tarih": "2026-10-26",
@@ -837,5 +846,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "fc7dfb80763d2a99c81daff1e308abac49f58aa07899f09096aa10c77e7ea01b"
+  "sha256": "c14a0fdc26c437275ef2ace1bc805e4711f68150147155992073fb2e409e94dc"
 }
