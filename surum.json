@@ -1,11 +1,17 @@
 {
-  "surum": "1.0.108",
+  "surum": "1.0.109",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi: eşleştirme ekranı — barkodu bulunamayan ürünlere isim önerisi, bağlantı kalıcı kaydedilir",
-    "Sitedeki barkodu ürüne alma ve barkodu okutarak düzeltme"
+    "Fiyat takibi daha hızlı: 1000'lik parçalar, aynı anda 3 parça; hata veren parça yeniden denenir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.109",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi daha hızlı: 1000'lik parçalar, aynı anda 3 parça; hata veren parça yeniden denenir"
+      ]
+    },
     {
       "surum": "1.0.108",
       "tarih": "2026-10-26",
@@ -802,5 +808,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "a5a30d43c94a60a4bd5ff5342babd6d47f376a962afddffb5444bb11fef3fd82"
+  "sha256": "dea2245447ab7bcb41d42078e40832c29aa0e575da1b21dc3f7696ef80c592e8"
 }
