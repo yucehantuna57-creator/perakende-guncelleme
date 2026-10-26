@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.106",
+  "surum": "1.0.107",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi: tedarikçi ürün görselleri raporda görünür; tek tek ya da toplu olarak ürünlere eklenebilir (stok ve fiyata dokunmaz)"
+    "Fiyat takibi menüsü yöneticide görünmüyordu; düzeltildi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.107",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi menüsü yöneticide görünmüyordu; düzeltildi"
+      ]
+    },
     {
       "surum": "1.0.106",
       "tarih": "2026-10-26",
@@ -786,5 +793,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "ae8965edeca6160be170f716a7796ca24e14e5f1098084edc1bea5102a0b6970"
+  "sha256": "698fb95164a5157413ac6f0241be7e952d43b3150ab68724b6de951147839888"
 }
