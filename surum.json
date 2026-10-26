@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.109",
+  "surum": "1.0.110",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi daha hızlı: 1000'lik parçalar, aynı anda 3 parça; hata veren parça yeniden denenir"
+    "Fiyat takibi: sitedeki Türkçe karakterler düzgün görünür (Fır&#231;a → Fırça); görseli olmayan ürünlerde kırık görsel gizlenir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.110",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi: sitedeki Türkçe karakterler düzgün görünür (Fır&#231;a → Fırça); görseli olmayan ürünlerde kırık görsel gizlenir"
+      ]
+    },
     {
       "surum": "1.0.109",
       "tarih": "2026-10-26",
@@ -808,5 +815,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "dea2245447ab7bcb41d42078e40832c29aa0e575da1b21dc3f7696ef80c592e8"
+  "sha256": "2f229dc931976b78a7a5ffa683faa1e0235299535110794d44a9f21eedf8426c"
 }
