@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.119",
+  "surum": "1.0.120",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat takibi eşleştirme: her site önerisinin yanında 'Stoğa ekle' (ürün + stok + fotoğraf)"
+    "Ürünler sayfasında fotoğraf sütunu"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.120",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Ürünler sayfasında fotoğraf sütunu"
+      ]
+    },
     {
       "surum": "1.0.119",
       "tarih": "2026-10-26",
@@ -882,5 +889,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "d7f06c13469a091277d62edb93dfbbf31c3a77d36c4aa567592663971a1d54c4"
+  "sha256": "3bf23b3da80f6f1f136226fe9a03d5e4a46be4b02ea648844f9c4ff88d888f88"
 }
