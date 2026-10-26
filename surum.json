@@ -1,11 +1,21 @@
 {
-  "surum": "1.0.114",
+  "surum": "1.0.115",
   "tarih": "2026-10-26",
   "notlar": [
-    "Fiyat raporunda sitedeki alışın KDV dahil hâli ayrı sütunda",
-    "Eşleştirmede toplu silme kaldırıldı; ürünler işaretlenip yalnızca seçilenler silinir"
+    "Fiyat takibi: Tedarikçi seçimi (Yamanlar / Samsun Yapı Market); her sitenin ayarı ve eşleştirmeleri ayrı",
+    "Samsun Yapı Market okuyucusu (SMS istenirse net hata verir)",
+    "Barkod karşılaştırması düzeltildi: harfli kodlar barkod sayılmaz"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.115",
+      "tarih": "2026-10-26",
+      "notlar": [
+        "Fiyat takibi: Tedarikçi seçimi (Yamanlar / Samsun Yapı Market); her sitenin ayarı ve eşleştirmeleri ayrı",
+        "Samsun Yapı Market okuyucusu (SMS istenirse net hata verir)",
+        "Barkod karşılaştırması düzeltildi: harfli kodlar barkod sayılmaz"
+      ]
+    },
     {
       "surum": "1.0.114",
       "tarih": "2026-10-26",
@@ -846,5 +856,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "c14a0fdc26c437275ef2ace1bc805e4711f68150147155992073fb2e409e94dc"
+  "sha256": "aa5db56231adee965dee8be28b96959f2fc450c5011d47c27b36d3bd8e79efaa"
 }
