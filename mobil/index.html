@@ -220,7 +220,7 @@ const SUPA = "https://dbpbssdrwolssrdaypzw.supabase.co/rest/v1/rpc/";
 const ANAHTAR = "sb_publishable_XHbSoSAa11HFP9AAEM3esQ_ziAMPbqX";
 const DEPO = "softnest_mobil_v1";
 const $ = id => document.getElementById(id);
-const kac = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const kac = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const para = n => Number(n || 0).toLocaleString("tr-TR", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " TL";
 const sayi = n => Number(n || 0).toLocaleString("tr-TR", { maximumFractionDigits: 3 });
 
@@ -1105,7 +1105,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261024124736";
+const SURUM = "20261027062556";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
