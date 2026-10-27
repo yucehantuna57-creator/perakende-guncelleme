@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.123",
+  "surum": "1.0.124",
   "tarih": "2026-10-27",
   "notlar": [
-    "Güvenlik: kayıtla yönetici rolü verilmez, kasiyer kullanıcı/ayar değiştiremez, giriş hız sınırı, statik dosya koruması, lisans yalnızca yerelden, XSS kaçışı"
+    "Güvenlik: güncelleme paketleri ed25519 ile imzalanır, imzasız paket kurulmaz"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.124",
+      "tarih": "2026-10-27",
+      "notlar": [
+        "Güvenlik: güncelleme paketleri ed25519 ile imzalanır, imzasız paket kurulmaz"
+      ]
+    },
     {
       "surum": "1.0.123",
       "tarih": "2026-10-27",
@@ -910,5 +917,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "aacca0934de86503e2b640cda95f16d43e51c8ab33190e342f5ce855a911433a"
+  "sha256": "4a233f74646eda809aa3048a403f52f2c3763e0153375bf11a7e6f776c399845",
+  "imza": "L318IeHwfAxsj0MEPdkZVnTG0qO9cwdO78fYDkJRGTjq5ApJ8uYHIFt8pu602mGiaRtU1xh6dItO5VY+igFBAw=="
 }
