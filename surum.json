@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.122",
-  "tarih": "2026-10-26",
+  "surum": "1.0.123",
+  "tarih": "2026-10-27",
   "notlar": [
-    "Fiyat takibi eşleştirme: ürün adının ayırt edici kelimeleri sitede yoksa öneri gösterilmez (buji anahtarı - batarya anahtarı gibi eşleşmeler kalktı)"
+    "Güvenlik: kayıtla yönetici rolü verilmez, kasiyer kullanıcı/ayar değiştiremez, giriş hız sınırı, statik dosya koruması, lisans yalnızca yerelden, XSS kaçışı"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.123",
+      "tarih": "2026-10-27",
+      "notlar": [
+        "Güvenlik: kayıtla yönetici rolü verilmez, kasiyer kullanıcı/ayar değiştiremez, giriş hız sınırı, statik dosya koruması, lisans yalnızca yerelden, XSS kaçışı"
+      ]
+    },
     {
       "surum": "1.0.122",
       "tarih": "2026-10-26",
@@ -903,5 +910,5 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "cbb7702a2ac0ad85b96cb0a4d46d321d547f74f44ec0839f6d059ca36de59fd7"
+  "sha256": "aacca0934de86503e2b640cda95f16d43e51c8ab33190e342f5ce855a911433a"
 }
