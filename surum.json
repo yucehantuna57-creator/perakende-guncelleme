@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.125",
+  "surum": "1.0.126",
   "tarih": "2026-10-28",
   "notlar": [
-    "Fiyat takibi: alışı farklı ürünler kırmızı satır; Satışı değiştir ve Alışı güncelle, programdaki alışı sitedeki fiyata çeker, ürün listeden çıkar"
+    "Fiyat takibi: satış fiyatı değişen ürünler etiket bekleyenlere düşer; raporda ve Toplu etiket penceresinde 'Fiyatı değişenler' seçili gelir, yazdırılınca listeden çıkar"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.126",
+      "tarih": "2026-10-28",
+      "notlar": [
+        "Fiyat takibi: satış fiyatı değişen ürünler etiket bekleyenlere düşer; raporda ve Toplu etiket penceresinde 'Fiyatı değişenler' seçili gelir, yazdırılınca listeden çıkar"
+      ]
+    },
     {
       "surum": "1.0.125",
       "tarih": "2026-10-28",
@@ -924,6 +931,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "7d14cbc7dd91a4de7807a76b167923b962f6501e4ee5f791cbca3885be698577",
-  "imza": "6BtxKYqBTk475KVbZLexiCa9thEQJFHTCOm82k7TuJ+EXFuiLjc+tcGbcy2ZuJJn4md67K/JTqCOR+E/RhanCw=="
+  "sha256": "ec748aae2f49fbe9f6806d377ac2bc61823343a3519d0989a79c5e884abc7074",
+  "imza": "c3zfUBgv6oNsg63p7heuhTQ5uHwoZCQURRCDrVRPh5XUKihAhTmhQqC/Dw/d/zuCWHrO54q6HCpnE75uFegkDA=="
 }
