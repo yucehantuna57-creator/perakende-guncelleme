@@ -1,11 +1,17 @@
 {
-  "surum": "1.0.127",
+  "surum": "1.0.128",
   "tarih": "2026-10-28",
   "notlar": [
-    "Fiyat takibi: Bağla, ürünün fotoğrafı yoksa sitedeki fotoğrafı ürüne kaydeder",
-    "Ürünler: alış fiyatı KDV hariç ve KDV dahil iki sütun; ürün formunda iki alan birbirini hesaplar"
+    "Fiyat takibi: alış fiyatları sitedeki fiyata otomatik güncellenir; değişenler eski alışla kırmızı görünür, satış değişince ya da Tamam ile listeden çıkar; çok büyük farklar (yarıdan az / iki katından fazla) onay bekler"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.128",
+      "tarih": "2026-10-28",
+      "notlar": [
+        "Fiyat takibi: alış fiyatları sitedeki fiyata otomatik güncellenir; değişenler eski alışla kırmızı görünür, satış değişince ya da Tamam ile listeden çıkar; çok büyük farklar (yarıdan az / iki katından fazla) onay bekler"
+      ]
+    },
     {
       "surum": "1.0.127",
       "tarih": "2026-10-28",
@@ -940,6 +946,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "6d2bed9012d4dc479bd39c49fcfd68608a1d808ed2db7a994b468a81314e91f5",
-  "imza": "6U4nzQat4NUPLhfRTWvYQYrdEJkfFrljXujne8Zx/pJBGltOjTJTwMvNDnhVWd0xqq0tglDd3UlX/rXS3EQUDA=="
+  "sha256": "8c7fe7879a375fb51b33cf8f1d63ee851df582c635bfa8fed355062bdc5d7702",
+  "imza": "hnQQEKqqw8rjkhhGA5RQWliSsmD5R+/lmq/BhuMo0PIRTC88n+4CH+czSpZujOsO1mRgiQQHx4QPFeNdc2/XAw=="
 }
