@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.128",
+  "surum": "1.0.129",
   "tarih": "2026-10-28",
   "notlar": [
-    "Fiyat takibi: alış fiyatları sitedeki fiyata otomatik güncellenir; değişenler eski alışla kırmızı görünür, satış değişince ya da Tamam ile listeden çıkar; çok büyük farklar (yarıdan az / iki katından fazla) onay bekler"
+    "Fiyat takibi: otomatik alış güncellemesi geri alındı; alış yalnızca satış fiyatını değiştirdiğiniz ürünlerde sitedeki fiyata güncellenir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.129",
+      "tarih": "2026-10-28",
+      "notlar": [
+        "Fiyat takibi: otomatik alış güncellemesi geri alındı; alış yalnızca satış fiyatını değiştirdiğiniz ürünlerde sitedeki fiyata güncellenir"
+      ]
+    },
     {
       "surum": "1.0.128",
       "tarih": "2026-10-28",
@@ -946,6 +953,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "8c7fe7879a375fb51b33cf8f1d63ee851df582c635bfa8fed355062bdc5d7702",
-  "imza": "hnQQEKqqw8rjkhhGA5RQWliSsmD5R+/lmq/BhuMo0PIRTC88n+4CH+czSpZujOsO1mRgiQQHx4QPFeNdc2/XAw=="
+  "sha256": "0f30a70403c3d57b8cd4e3eff0d5378df0d4bee160c09542420624dcab63837e",
+  "imza": "YZ6YSUI6eOp6XnLnHpyf/oPWQqfEqRRCWAaphwMRfRa991F3u3HTe1/9gjeargmrKHdtMTvR+20U+Ivjotd3Cw=="
 }
