@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.124",
-  "tarih": "2026-10-27",
+  "surum": "1.0.125",
+  "tarih": "2026-10-28",
   "notlar": [
-    "Güvenlik: güncelleme paketleri ed25519 ile imzalanır, imzasız paket kurulmaz"
+    "Fiyat takibi: alışı farklı ürünler kırmızı satır; Satışı değiştir ve Alışı güncelle, programdaki alışı sitedeki fiyata çeker, ürün listeden çıkar"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.125",
+      "tarih": "2026-10-28",
+      "notlar": [
+        "Fiyat takibi: alışı farklı ürünler kırmızı satır; Satışı değiştir ve Alışı güncelle, programdaki alışı sitedeki fiyata çeker, ürün listeden çıkar"
+      ]
+    },
     {
       "surum": "1.0.124",
       "tarih": "2026-10-27",
@@ -917,6 +924,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "4a233f74646eda809aa3048a403f52f2c3763e0153375bf11a7e6f776c399845",
-  "imza": "L318IeHwfAxsj0MEPdkZVnTG0qO9cwdO78fYDkJRGTjq5ApJ8uYHIFt8pu602mGiaRtU1xh6dItO5VY+igFBAw=="
+  "sha256": "7d14cbc7dd91a4de7807a76b167923b962f6501e4ee5f791cbca3885be698577",
+  "imza": "6BtxKYqBTk475KVbZLexiCa9thEQJFHTCOm82k7TuJ+EXFuiLjc+tcGbcy2ZuJJn4md67K/JTqCOR+E/RhanCw=="
 }
