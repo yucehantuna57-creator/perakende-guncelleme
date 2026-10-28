@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.126",
+  "surum": "1.0.127",
   "tarih": "2026-10-28",
   "notlar": [
-    "Fiyat takibi: satış fiyatı değişen ürünler etiket bekleyenlere düşer; raporda ve Toplu etiket penceresinde 'Fiyatı değişenler' seçili gelir, yazdırılınca listeden çıkar"
+    "Fiyat takibi: Bağla, ürünün fotoğrafı yoksa sitedeki fotoğrafı ürüne kaydeder",
+    "Ürünler: alış fiyatı KDV hariç ve KDV dahil iki sütun; ürün formunda iki alan birbirini hesaplar"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.127",
+      "tarih": "2026-10-28",
+      "notlar": [
+        "Fiyat takibi: Bağla, ürünün fotoğrafı yoksa sitedeki fotoğrafı ürüne kaydeder",
+        "Ürünler: alış fiyatı KDV hariç ve KDV dahil iki sütun; ürün formunda iki alan birbirini hesaplar"
+      ]
+    },
     {
       "surum": "1.0.126",
       "tarih": "2026-10-28",
@@ -931,6 +940,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "ec748aae2f49fbe9f6806d377ac2bc61823343a3519d0989a79c5e884abc7074",
-  "imza": "c3zfUBgv6oNsg63p7heuhTQ5uHwoZCQURRCDrVRPh5XUKihAhTmhQqC/Dw/d/zuCWHrO54q6HCpnE75uFegkDA=="
+  "sha256": "6d2bed9012d4dc479bd39c49fcfd68608a1d808ed2db7a994b468a81314e91f5",
+  "imza": "6U4nzQat4NUPLhfRTWvYQYrdEJkfFrljXujne8Zx/pJBGltOjTJTwMvNDnhVWd0xqq0tglDd3UlX/rXS3EQUDA=="
 }
