@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.131",
+  "surum": "1.0.132",
   "tarih": "2026-10-28",
   "notlar": [
-    "Bulut eşitleme: bu bilgisayarda henüz gönderilmemiş değişiklik (örneğin kategori ya da fiyat) buluttaki eski kayıtla ezilmez; Kategori yok kaydedilmiyordu"
+    "Ürün düzenlemeleri artık kaybolmuyor: kayıt sırasında bulut eşitlemesiyle çakışınca (409) düzenlenen alanlar sunucu verisinin üzerine yeniden uygulanır (Kategori yok kaydedilmiyordu)",
+    "Sağdan açılan ürünler panelinde ürün fotoğrafları"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.132",
+      "tarih": "2026-10-28",
+      "notlar": [
+        "Ürün düzenlemeleri artık kaybolmuyor: kayıt sırasında bulut eşitlemesiyle çakışınca (409) düzenlenen alanlar sunucu verisinin üzerine yeniden uygulanır (Kategori yok kaydedilmiyordu)",
+        "Sağdan açılan ürünler panelinde ürün fotoğrafları"
+      ]
+    },
     {
       "surum": "1.0.131",
       "tarih": "2026-10-28",
@@ -967,6 +976,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "87818d7c2cc162753fc9878dd4978d75cdf346a8358c18c67fcd1b43e382c35f",
-  "imza": "g/BfeuNZZ9zKAuZw3nkWVoDx6MWKTgwZtN3d9TuqVPobgrml653FVXrReeoXI22jw0HQSGhkRohRzUneZA3OBA=="
+  "sha256": "ee5fe6a83ef2f37551516ba630354bb8a902a1742b6cebe09ecc680ad0916d62",
+  "imza": "Z4HxXeRun7xMPX/p/EKTAELmgh9Zr+50RXWrBLciiwM4ygJNONasP5WnW8plCH7pVenC5kxqh2TjqFJyjj+pDw=="
 }
