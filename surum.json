@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.130",
+  "surum": "1.0.131",
   "tarih": "2026-10-28",
   "notlar": [
-    "Fiyat takibi: eşleşen ürünlerin (bağlı ya da barkodla) fotoğrafı yoksa sitedeki fotoğraf arka planda ürüne kaydedilir, Ürünler sayfasında görünür"
+    "Bulut eşitleme: bu bilgisayarda henüz gönderilmemiş değişiklik (örneğin kategori ya da fiyat) buluttaki eski kayıtla ezilmez; Kategori yok kaydedilmiyordu"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.131",
+      "tarih": "2026-10-28",
+      "notlar": [
+        "Bulut eşitleme: bu bilgisayarda henüz gönderilmemiş değişiklik (örneğin kategori ya da fiyat) buluttaki eski kayıtla ezilmez; Kategori yok kaydedilmiyordu"
+      ]
+    },
     {
       "surum": "1.0.130",
       "tarih": "2026-10-28",
@@ -960,6 +967,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "af0337342f001b149fd25eed50ac286c99e37a1972c723d7e169767c0515f469",
-  "imza": "DeJJdw7ulRX4IJMlssPSjZ1ILIORw0UyZTXBRiE8g0VI5C53b23FMknWenzmoHr5OKN4fKuIeYD9f7KQ3uDWDQ=="
+  "sha256": "87818d7c2cc162753fc9878dd4978d75cdf346a8358c18c67fcd1b43e382c35f",
+  "imza": "g/BfeuNZZ9zKAuZw3nkWVoDx6MWKTgwZtN3d9TuqVPobgrml653FVXrReeoXI22jw0HQSGhkRohRzUneZA3OBA=="
 }
