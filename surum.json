@@ -1,12 +1,21 @@
 {
-  "surum": "1.0.133",
+  "surum": "1.0.134",
   "tarih": "2026-10-29",
   "notlar": [
-    "Kasalar arası: diğer kasalardaki fiyat/ürün değişiklikleri açık ekrana 15 sn içinde gelir (önceden program yeniden açılınca geliyordu)",
-    "Ürün fotoğrafları da bulut üzerinden diğer kasalara gider",
-    "Buluttan gelen değişikliği atlatan kural geri alındı"
+    "Fiyat takibi > Fiyat listesi (PDF / Excel): tedarikçi listesi yüklenir, ürünler eşleştirilir, alış farkları gösterilir",
+    "Eşleştirmede benzeri bulunan ürünler başta",
+    "Müşteriler: borcumuz olanlar hep en altta; Ödeme düğmesi ile borcumuz ödenir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.134",
+      "tarih": "2026-10-29",
+      "notlar": [
+        "Fiyat takibi > Fiyat listesi (PDF / Excel): tedarikçi listesi yüklenir, ürünler eşleştirilir, alış farkları gösterilir",
+        "Eşleştirmede benzeri bulunan ürünler başta",
+        "Müşteriler: borcumuz olanlar hep en altta; Ödeme düğmesi ile borcumuz ödenir"
+      ]
+    },
     {
       "surum": "1.0.133",
       "tarih": "2026-10-29",
@@ -986,6 +995,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "27c98706b340f24242b26774fce7dc5c4d7d03f8029f715576c3c8c85a7db399",
-  "imza": "eoXVHP/ZTYf7/1hAQKp+yg4gyGUgXBFx51q+wzT4I6tg3qmi5V9RuwbXHiy8t27V/3mhv7duASqgYUuIaQbuCg=="
+  "sha256": "2f2ac14d61249ff18bcef3639d12a29b2b8b62751fc4de58e4fd0c3c6105520b",
+  "imza": "LjX5kWznebcP0f2DMt4FiKSxxkU5YrZbA6uUh3plw5eOdeZt3RKex++zUK/F5Al8llIbhJfgtFy46MlFY3fEAQ=="
 }
