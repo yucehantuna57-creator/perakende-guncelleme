@@ -676,7 +676,7 @@ function musteriDetay(id) {
   sayfaAc(`<h2>${kac(m.ad_soyad)} <button class="btn" id="md-kapat" style="height:36px">Kapat</button></h2><div class="icerik">
     <div class="kutu" style="text-align:center;margin-bottom:10px"><small style="color:var(--soluk)">${b < -0.005 ? "Müşterinin alacağı (borcumuz)" : "Güncel bakiye (borç)"}</small><div style="font-size:30px;font-weight:800;color:${b > 0.005 ? "var(--kirmizi)" : b < -0.005 ? "#2d5ea8" : "var(--yesil)"}">${para(Math.abs(b))}</div><small style="color:var(--soluk)">${kac(m.telefon || "Telefon yok")}</small></div>
     <div style="font-weight:700;margin:6px 0">Son hareketler</div>
-    ${son.map(h => `<div class="satir"><div class="bilgi"><b>${h.tur === "borc" ? (h.islem === "borc_duzeltme" ? "Borç" : "Açık hesap satışı") : h.tur === "alacak" ? "Alacak" : "Tahsilat"}</b><small>${new Date(h.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} ${kac(h.aciklama || "")}</small></div><b style="color:${h.tur === "borc" ? "var(--kirmizi)" : "var(--yesil)"}">${h.tur === "borc" ? "+" : "−"}${para(h.tutar)}</b></div>`).join("") || '<div class="bos" style="padding:16px 0">Hareket yok</div>'}</div>
+    ${son.map(h => `<div class="satir"><div class="bilgi"><b>${h.tur === "borc" ? (h.islem === "borc_duzeltme" ? "Borç" : h.islem === "musteri_odeme" ? "Ödeme (borcumuz)" : h.islem === "tedarikci_odeme" ? "Tedarikçi ödemesi" : "Açık hesap satışı") : h.tur === "alacak" ? "Alacak" : "Tahsilat"}</b><small>${new Date(h.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} ${kac(h.aciklama || "")}</small></div><b style="color:${h.tur === "borc" ? "var(--kirmizi)" : "var(--yesil)"}">${h.tur === "borc" ? "+" : "−"}${para(h.tutar)}</b></div>`).join("") || '<div class="bos" style="padding:16px 0">Hareket yok</div>'}</div>
     <div class="alt"><button class="btn" id="md-satis">Satış yap</button><button class="btn yesil" id="md-tahsilat">Tahsilat al</button></div>`, () => {
     $("md-kapat").onclick = kapat;
     $("md-satis").onclick = () => { kapat(); sekmeyeGec("kasa"); bildir("Ürünleri ekleyin, ödemede 'Açık hesap' ile " + m.ad_soyad + " seçin", 3200); };
@@ -1105,7 +1105,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261027062556";
+const SURUM = "20261029133951";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
