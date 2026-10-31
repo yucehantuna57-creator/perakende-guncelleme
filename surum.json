@@ -1,10 +1,19 @@
 {
-  "surum": "1.0.137",
+  "surum": "1.0.138",
   "tarih": "2026-10-31",
   "notlar": [
-    "Eşitlemede kopya kayıt oluşması ve tablo yansıma hatası düzeltildi"
+    "Raporlara Kâr sekmesi eklendi",
+    "Sunucunun bellek yüzünden kapanması önlendi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.138",
+      "tarih": "2026-10-31",
+      "notlar": [
+        "Raporlara Kâr sekmesi eklendi",
+        "Sunucunun bellek yüzünden kapanması önlendi"
+      ]
+    },
     {
       "surum": "1.0.137",
       "tarih": "2026-10-31",
@@ -1014,6 +1023,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "5fdbd97ad01fc6f6f5d5aa8962fe851b3fcec6be3f0e7306792bfe0556e6c357",
-  "imza": "ev0Ij4ox3ppDxDUMbXiIoN4NhshvvpOvo+pj9Rz1JSJGAVplEUZiZOkZqPXIbwhFzVrItuLRqoB+zmZrTKHXDA=="
+  "sha256": "ae86480f873a1263575e20f2c82f64bfa96d0990858395baa948921cab9f0112",
+  "imza": "DyfA8NUmuhMEpPNRO4DglKA6IfLc6/nRKZaHaApoV1OswM8LniY3lVG95PU413S2avdlNCTu1QWu9uqlRXuTBQ=="
 }
