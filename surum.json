@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.136",
+  "surum": "1.0.137",
   "tarih": "2026-10-31",
   "notlar": [
-    "Finans Yönetimi: kasa işlemleri, düzenlenebilir tahsilat ve ödemeler, elle borç ekleme"
+    "Eşitlemede kopya kayıt oluşması ve tablo yansıma hatası düzeltildi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.137",
+      "tarih": "2026-10-31",
+      "notlar": [
+        "Eşitlemede kopya kayıt oluşması ve tablo yansıma hatası düzeltildi"
+      ]
+    },
     {
       "surum": "1.0.136",
       "tarih": "2026-10-31",
@@ -1007,6 +1014,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "d2d92ce48a6cf6fb6a65eb83c938f1bb127e12159e104c3aa14177ed92312092",
-  "imza": "zSVg5stKQKFr3IbyrCv59GkuLQfvbfeRryHjh1w+1jkGFsMAbDeeE/kkkwlJp2m6yDijT9FJcga6riXG+2LaDg=="
+  "sha256": "5fdbd97ad01fc6f6f5d5aa8962fe851b3fcec6be3f0e7306792bfe0556e6c357",
+  "imza": "ev0Ij4ox3ppDxDUMbXiIoN4NhshvvpOvo+pj9Rz1JSJGAVplEUZiZOkZqPXIbwhFzVrItuLRqoB+zmZrTKHXDA=="
 }
