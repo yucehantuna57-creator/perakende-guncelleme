@@ -1,12 +1,17 @@
 {
-  "surum": "1.0.134",
-  "tarih": "2026-10-29",
+  "surum": "1.0.135",
+  "tarih": "2026-10-31",
   "notlar": [
-    "Fiyat takibi > Fiyat listesi (PDF / Excel): tedarikçi listesi yüklenir, ürünler eşleştirilir, alış farkları gösterilir",
-    "Eşleştirmede benzeri bulunan ürünler başta",
-    "Müşteriler: borcumuz olanlar hep en altta; Ödeme düğmesi ile borcumuz ödenir"
+    "Fiyat listesi: katalog biçimli PDF okunur (kod, ürün adı, fiyat), fotoğraflar PDF'ten gösterilir, Bağla ile ve toplu düğmeyle ürünlere kaydedilir; 'KDV dahil değildir' notu doğru algılanır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.135",
+      "tarih": "2026-10-31",
+      "notlar": [
+        "Fiyat listesi: katalog biçimli PDF okunur (kod, ürün adı, fiyat), fotoğraflar PDF'ten gösterilir, Bağla ile ve toplu düğmeyle ürünlere kaydedilir; 'KDV dahil değildir' notu doğru algılanır"
+      ]
+    },
     {
       "surum": "1.0.134",
       "tarih": "2026-10-29",
@@ -995,6 +1000,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "2f2ac14d61249ff18bcef3639d12a29b2b8b62751fc4de58e4fd0c3c6105520b",
-  "imza": "LjX5kWznebcP0f2DMt4FiKSxxkU5YrZbA6uUh3plw5eOdeZt3RKex++zUK/F5Al8llIbhJfgtFy46MlFY3fEAQ=="
+  "sha256": "06bf72df2386c5bef5a39de6d23b35cfa8998fdb138773e5f206342d28b571cd",
+  "imza": "ehq5pLq7mb3mC3iDsrQflA3/NNvl5Gh9UKbAYbIZhsGD3JOJ9fvKlcxf9BSoqUVKERmmjPpQbCpHzxYl9AUlCA=="
 }
