@@ -276,7 +276,7 @@ async function cek() {
       if (!dizi) continue;
       const i = dizi.findIndex(x => x.id === id);
       if (k.silindi) { if (i >= 0) dizi.splice(i, 1); continue; }
-      const kayit = k.tablo === "cari_hareketler" ? { id, musteri_id: k.veri.musteri_id, tur: k.veri.tur, tutar: Number(k.veri.tutar || 0), tarih: k.veri.tarih, aciklama: k.veri.aciklama || "" } : { ...k.veri };
+      const kayit = k.tablo === "cari_hareketler" ? { id, musteri_id: k.veri.musteri_id, tur: k.veri.tur, tutar: Number(k.veri.tutar || 0), tarih: k.veri.tarih, aciklama: k.veri.aciklama || "", islem: k.veri.islem, yontem: k.veri.yontem } : { ...k.veri };
       if (k.tablo === "urunler") { S.tabanStok[id] = Number(k.veri.stok || 0); guncellenen.add(id); }
       if (i >= 0) dizi[i] = kayit; else dizi.push(kayit);
     }
@@ -677,26 +677,29 @@ function musteriDetay(id) {
     <div class="kutu" style="text-align:center;margin-bottom:10px"><small style="color:var(--soluk)">${b < -0.005 ? "Müşterinin alacağı (borcumuz)" : "Güncel bakiye (borç)"}</small><div style="font-size:30px;font-weight:800;color:${b > 0.005 ? "var(--kirmizi)" : b < -0.005 ? "#2d5ea8" : "var(--yesil)"}">${para(Math.abs(b))}</div><small style="color:var(--soluk)">${kac(m.telefon || "Telefon yok")}</small></div>
     <div style="font-weight:700;margin:6px 0">Son hareketler</div>
     ${son.map(h => `<div class="satir"><div class="bilgi"><b>${h.tur === "borc" ? (h.islem === "borc_duzeltme" ? "Borç" : h.islem === "musteri_odeme" ? "Ödeme (borcumuz)" : h.islem === "tedarikci_odeme" ? "Tedarikçi ödemesi" : "Açık hesap satışı") : h.tur === "alacak" ? "Alacak" : "Tahsilat"}</b><small>${new Date(h.tarih).toLocaleString("tr-TR", { dateStyle: "short", timeStyle: "short" })} ${kac(h.aciklama || "")}</small></div><b style="color:${h.tur === "borc" ? "var(--kirmizi)" : "var(--yesil)"}">${h.tur === "borc" ? "+" : "−"}${para(h.tutar)}</b></div>`).join("") || '<div class="bos" style="padding:16px 0">Hareket yok</div>'}</div>
-    <div class="alt"><button class="btn" id="md-satis">Satış yap</button><button class="btn yesil" id="md-tahsilat">Tahsilat al</button></div>`, () => {
+    <div class="alt"><button class="btn" id="md-satis">Satış yap</button><button class="btn yesil" id="md-tahsilat">Tahsilat al</button></div><div class="alt"><button class="btn" id="md-odeme">Ödeme yap</button><button class="btn" id="md-borc">Borç ekle</button></div>`, () => {
     $("md-kapat").onclick = kapat;
     $("md-satis").onclick = () => { kapat(); sekmeyeGec("kasa"); bildir("Ürünleri ekleyin, ödemede 'Açık hesap' ile " + m.ad_soyad + " seçin", 3200); };
-    $("md-tahsilat").onclick = () => tahsilatSayfasi(id);
+    $("md-tahsilat").onclick = () => cariIslemSayfasi(id, "tahsilat");
+    $("md-odeme").onclick = () => cariIslemSayfasi(id, "musteri_odeme");
+    $("md-borc").onclick = () => cariIslemSayfasi(id, "borc_duzeltme");
   });
 }
-function tahsilatSayfasi(id) {
-  const m = S.musteriler.find(x => x.id === id), b = Math.max(0, cariBakiye(id));
-  sayfaAc(`<h2>Tahsilat · ${kac(m.ad_soyad)}</h2><div class="icerik"><div class="toplam-satir"><span>Mevcut borç</span><span>${para(b)}</span></div>
-    <input id="th-tutar" type="number" inputmode="decimal" placeholder="Tahsil edilen tutar" value="${b || ""}">
-    <select id="th-yontem"><option value="nakit">Nakit</option><option value="kart">Kart</option><option value="havale">Havale / EFT</option></select><div class="hata" id="th-hata"></div></div>
-    <div class="alt"><button class="btn" id="th-geri">Geri</button><button class="btn yesil" id="th-kaydet">Tahsilatı kaydet</button></div>`, () => {
+// Tahsilat, ödeme ve borç ekleme: tutar sınırı yoktur. Ödeme borcumuzu düşürür, borcumuz yoksa kişinin borcuna eklenir
+const CARI_FORM = { tahsilat: { ad: "Tahsilat", tur: "tahsilat" }, musteri_odeme: { ad: "Ödeme", tur: "borc" }, borc_duzeltme: { ad: "Borç ekle", tur: "borc" } };
+function cariIslemSayfasi(id, islem) {
+  const m = S.musteriler.find(x => x.id === id), b = cariBakiye(id), c = CARI_FORM[islem], yontemli = islem !== "borc_duzeltme";
+  sayfaAc(`<h2>${c.ad} · ${kac(m.ad_soyad)}</h2><div class="icerik"><div class="toplam-satir"><span>${b < -0.005 ? "Borcumuz" : "Mevcut borç"}</span><span>${para(Math.abs(b))}</span></div>
+    <input id="th-tutar" type="number" inputmode="decimal" placeholder="Tutar">
+    ${yontemli ? '<select id="th-yontem"><option value="nakit">Nakit</option><option value="kart">Kart</option><option value="havale">Havale / EFT</option></select>' : ""}<input id="th-not" placeholder="Açıklama (isteğe bağlı)"><div class="hata" id="th-hata"></div></div>
+    <div class="alt"><button class="btn" id="th-geri">Geri</button><button class="btn yesil" id="th-kaydet">Kaydet</button></div>`, () => {
     $("th-geri").onclick = () => musteriDetay(id);
     $("th-kaydet").onclick = () => {
       const t = Math.round(Number($("th-tutar").value) * 100) / 100;
       if (!(t > 0)) return ($("th-hata").textContent = "Tutarı girin");
-      if (t > b + 0.005) return ($("th-hata").textContent = "Tahsilat mevcut borçtan büyük olamaz");
-      const h = kuyrugaEkle("cari_hareketler", { id: yeniId("cari_hareketler"), musteri_id: id, tur: "tahsilat", tutar: t, satis_id: null, aciklama: "Tahsilat (mobil)", islem: "tahsilat", yontem: $("th-yontem").value, kullanici_id: S.kullanici.id, tarih: new Date().toISOString() });
-      S.cari.push({ id: h.id, musteri_id: id, tur: "tahsilat", tutar: t, tarih: h.tarih, aciklama: h.aciklama });
-      kaydet(); kapat(); ekranCiz(); durumYaz(); bildir("Tahsilat kaydedildi: " + para(t)); esitle(true);
+      const h = kuyrugaEkle("cari_hareketler", { id: yeniId("cari_hareketler"), musteri_id: id, tur: c.tur, tutar: t, satis_id: null, aciklama: $("th-not").value.trim() || c.ad + " (mobil)", islem, yontem: yontemli ? $("th-yontem").value : null, kullanici_id: S.kullanici.id, tarih: new Date().toISOString() });
+      S.cari.push({ id: h.id, musteri_id: id, tur: c.tur, tutar: t, tarih: h.tarih, aciklama: h.aciklama, islem, yontem: h.yontem });
+      kaydet(); kapat(); ekranCiz(); durumYaz(); bildir(c.ad + " kaydedildi: " + para(t)); esitle(true);
     };
   });
 }
@@ -1105,7 +1108,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261029133951";
+const SURUM = "20261031165247";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
