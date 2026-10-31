@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.135",
+  "surum": "1.0.136",
   "tarih": "2026-10-31",
   "notlar": [
-    "Fiyat listesi: katalog biçimli PDF okunur (kod, ürün adı, fiyat), fotoğraflar PDF'ten gösterilir, Bağla ile ve toplu düğmeyle ürünlere kaydedilir; 'KDV dahil değildir' notu doğru algılanır"
+    "Finans Yönetimi: kasa işlemleri, düzenlenebilir tahsilat ve ödemeler, elle borç ekleme"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.136",
+      "tarih": "2026-10-31",
+      "notlar": [
+        "Finans Yönetimi: kasa işlemleri, düzenlenebilir tahsilat ve ödemeler, elle borç ekleme"
+      ]
+    },
     {
       "surum": "1.0.135",
       "tarih": "2026-10-31",
@@ -1000,6 +1007,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "06bf72df2386c5bef5a39de6d23b35cfa8998fdb138773e5f206342d28b571cd",
-  "imza": "ehq5pLq7mb3mC3iDsrQflA3/NNvl5Gh9UKbAYbIZhsGD3JOJ9fvKlcxf9BSoqUVKERmmjPpQbCpHzxYl9AUlCA=="
+  "sha256": "d2d92ce48a6cf6fb6a65eb83c938f1bb127e12159e104c3aa14177ed92312092",
+  "imza": "zSVg5stKQKFr3IbyrCv59GkuLQfvbfeRryHjh1w+1jkGFsMAbDeeE/kkkwlJp2m6yDijT9FJcga6riXG+2LaDg=="
 }
