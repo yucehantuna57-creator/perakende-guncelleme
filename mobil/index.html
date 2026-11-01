@@ -169,6 +169,7 @@
   <input id="g-sifre" type="password" placeholder="Şifre" autocomplete="current-password">
   <div class="hata" id="g-hata"></div>
   <button class="btn ana" id="g-giris">Giriş yap</button>
+  <button class="btn" type="button" id="g-yasal" style="margin-top:8px">KVKK ve kullanım şartları</button>
   <small style="color:var(--soluk);text-align:center">Lisans anahtarını ve kullanıcı bilgilerini bilgisayardaki programın Ayarlar → Telefon uygulaması bölümünden öğrenebilirsiniz.</small>
 </section>
 
@@ -1090,6 +1091,8 @@ function kameraKapat() { clearInterval(kameraDongu); if (kameraAkis) kameraAkis.
 
 // ---------- Olaylar ----------
 $("g-giris").onclick = girisYap;
+const YASAL_METIN = "TASLAK METİN - hukuki kontrolden geçirilecektir.\n\nKVKK AYDINLATMA METNİ\nSOFTNEST-satış, işletmelerin satış, stok ve cari hesap işlemleri için kullandığı bir programdır. Programa girilen müşteri adı, telefon, e-posta, adres, vergi numarası ve hesap hareketleri; satış, fatura, tahsilat ve borç takibi amacıyla, sözleşmenin ifası, hukuki yükümlülük ve meşru menfaat hukuki sebeplerine dayanılarak işlenir. Bu verilerden işletme veri sorumlusudur. Veriler işletmenin bilgisayarında tutulur; eşitleme açıksa telefon ve kasalar arası aktarım için bulut hizmetine (Supabase) gönderilir ve bu hizmet yurt dışında bulunabilir. Mevzuatın öngördüğü saklama süreleri sonunda veriler silinir veya anonim hale getirilir. Kişiler, KVKK 11. madde kapsamındaki bilgi alma, düzeltme, silme ve itiraz haklarını işletmeye başvurarak kullanabilir.\n\nGİZLİLİK POLİTİKASI\nGirdiğiniz veriler satılmaz ve reklam amacıyla kullanılmaz. Yalnızca programın çalışması, eşitleme, güncelleme ve lisans kontrolü için işlenir. Web sitesi gönderimi açıksa yalnızca ürün bilgileri paylaşılır.\n\nKULLANIM ŞARTLARI\nProgram lisans kapsamında kullanılır; kopyalanamaz ve yeniden satılamaz. Programın fişleri mali belge değildir, resmi fiş ve fatura yükümlülüğü işletmeye aittir. Kullanıcı, girdiği verilerin doğruluğundan, müşterilerini bilgilendirmekten ve düzenli yedek almaktan sorumludur.\n\nSAĞLAYICI: [şirket unvanı, adres ve iletişim bilgisi eklenecek]";
+$("g-yasal").addEventListener("click", () => alert(YASAL_METIN));
 ["g-kadi", "g-sifre"].forEach(i => $(i).addEventListener("keydown", e => { if (e.key === "Enter") girisYap(); }));
 $("arama").addEventListener("input", e => { aramaMetni = e.target.value; ekranCiz(); });
 $("arama").addEventListener("keydown", e => { if (e.key === "Enter") { const v = e.target.value; if (barkodIsle(v)) { e.target.value = ""; aramaMetni = ""; ekranCiz(); } else { const l = urunSuz(); if (l.length === 1) { sepeteEkle(l[0]); e.target.value = ""; aramaMetni = ""; ekranCiz(); } } } });
@@ -1108,7 +1111,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261031165247";
+const SURUM = "20261101065300";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
