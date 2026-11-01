@@ -1,11 +1,23 @@
 {
-  "surum": "1.0.138",
-  "tarih": "2026-10-31",
+  "surum": "1.0.139",
+  "tarih": "2026-11-01",
   "notlar": [
-    "Raporlara Kâr sekmesi eklendi",
-    "Sunucunun bellek yüzünden kapanması önlendi"
+    "Fişe mali değer uyarısı",
+    "KVKK ve yasal metinler",
+    "Kişisel bilgi silme",
+    "Şifre artık bilgisayarda saklanmıyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.139",
+      "tarih": "2026-11-01",
+      "notlar": [
+        "Fişe mali değer uyarısı",
+        "KVKK ve yasal metinler",
+        "Kişisel bilgi silme",
+        "Şifre artık bilgisayarda saklanmıyor"
+      ]
+    },
     {
       "surum": "1.0.138",
       "tarih": "2026-10-31",
@@ -1023,6 +1035,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "ae86480f873a1263575e20f2c82f64bfa96d0990858395baa948921cab9f0112",
-  "imza": "DyfA8NUmuhMEpPNRO4DglKA6IfLc6/nRKZaHaApoV1OswM8LniY3lVG95PU413S2avdlNCTu1QWu9uqlRXuTBQ=="
+  "sha256": "d74adb9c7ed41075de37a8583c531566659558c70af25e36ac747e5d29303c13",
+  "imza": "YQ0BI3v0IIv2KG+olyPhbs7acPa1XWP/9ih4ZPvrJvH1OLRNuZoJSD0gbv6nwayHgjqVC05WgElXg7yGbJqsDA=="
 }
