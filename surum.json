@@ -1,13 +1,17 @@
 {
-  "surum": "1.0.139",
-  "tarih": "2026-11-01",
+  "surum": "1.0.140",
+  "tarih": "2026-11-02",
   "notlar": [
-    "Fişe mali değer uyarısı",
-    "KVKK ve yasal metinler",
-    "Kişisel bilgi silme",
-    "Şifre artık bilgisayarda saklanmıyor"
+    "Alış faturası: üstteki kutudan barkod okutma, okutulan barkod ürüne yazılır, 4 haneli KDV'li fiyat kabul edilir, stok aramada ve eşleşmede ürün fotoğrafı"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.140",
+      "tarih": "2026-11-02",
+      "notlar": [
+        "Alış faturası: üstteki kutudan barkod okutma, okutulan barkod ürüne yazılır, 4 haneli KDV'li fiyat kabul edilir, stok aramada ve eşleşmede ürün fotoğrafı"
+      ]
+    },
     {
       "surum": "1.0.139",
       "tarih": "2026-11-01",
@@ -1035,6 +1039,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "d74adb9c7ed41075de37a8583c531566659558c70af25e36ac747e5d29303c13",
-  "imza": "YQ0BI3v0IIv2KG+olyPhbs7acPa1XWP/9ih4ZPvrJvH1OLRNuZoJSD0gbv6nwayHgjqVC05WgElXg7yGbJqsDA=="
+  "sha256": "cb31da9f1c4bf5f43fca1fd7bd7a3ec59e5d9e1d05023143d67178294723812c",
+  "imza": "SvBIHuCbB76BIGPueRZYUuN3wH3e9MPhr9mqovfqQI7K5PZhcwRIB7w6VL0YC5QSY12Fj+nFh8vwAeH1prlOCw=="
 }
