@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.144",
+  "surum": "1.0.145",
   "tarih": "2026-11-02",
   "notlar": [
-    "Alış faturası: seçilen ürünün kayıtlı barkodu kutuda görünür, değiştirilebilir"
+    "Fiyat takibi: programdaki alış KDV dahil gösterilir, KDV hariç tutar altında yazar"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.145",
+      "tarih": "2026-11-02",
+      "notlar": [
+        "Fiyat takibi: programdaki alış KDV dahil gösterilir, KDV hariç tutar altında yazar"
+      ]
+    },
     {
       "surum": "1.0.144",
       "tarih": "2026-11-02",
@@ -1067,6 +1074,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "e43334262ee7aec7cc26edfa2590d1315178b2dd5d91cfa20e568cc62ee985e1",
-  "imza": "VarLr8bg0eF8NiEj2pWzzBEJt3rJ6N40ptgz3HgQBMA7hY54WGxGMXv2bAdC4WtRGlpiXTdUHMKSFr9YHIdBBw=="
+  "sha256": "d7a40193da37bb17d75fdede08a584c1d9cffa10f9d2112bb098bbfa93d1b272",
+  "imza": "yjdG/Q5CyxtV35hRaPdqdd3D3Qbirdrk/6qiO4KELlMZn+0BK+KUHVEmhJLp1J9sIZPOkGXuY2BXb0g9UyHQCA=="
 }
