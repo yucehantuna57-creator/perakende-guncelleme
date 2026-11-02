@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.141",
+  "surum": "1.0.142",
   "tarih": "2026-11-02",
   "notlar": [
-    "Alış faturası ekranı yenilendi: ürünler kart düzeninde, fatura bilgisi ve toplam sağ panelde"
+    "Alış faturası: sağ panel kaldırıldı, ürün alanları büyütüldü, Yeni satır ekle düğmesi eklendi"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.142",
+      "tarih": "2026-11-02",
+      "notlar": [
+        "Alış faturası: sağ panel kaldırıldı, ürün alanları büyütüldü, Yeni satır ekle düğmesi eklendi"
+      ]
+    },
     {
       "surum": "1.0.141",
       "tarih": "2026-11-02",
@@ -1046,6 +1053,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "61d595b8364c32292a61be2aece9e3bedd769bc28462bf8ec261027cc020f5b5",
-  "imza": "QWeBcZa9Wns1b1nyrHg8eo4PYZMuVEuab0y4OoeCpuj4vie3l31//UWmzHjr0SBDlH048oyA7xgh+ULDH9m9AA=="
+  "sha256": "5ff6eff9c5ad39ad20d80ff4372993c4bf899cbbbea23a2aa9c6199a3b6ae5c0",
+  "imza": "4mWIwjnqUrVsUjK+3jNGFx252kD+49sUqU3HNMeHh1t4lFjHS5RYlCX7o6kHeBFGLkI0qFNL6TtfCWYsqptTBg=="
 }
