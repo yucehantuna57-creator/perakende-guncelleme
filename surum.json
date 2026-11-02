@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.140",
+  "surum": "1.0.141",
   "tarih": "2026-11-02",
   "notlar": [
-    "Alış faturası: üstteki kutudan barkod okutma, okutulan barkod ürüne yazılır, 4 haneli KDV'li fiyat kabul edilir, stok aramada ve eşleşmede ürün fotoğrafı"
+    "Alış faturası ekranı yenilendi: ürünler kart düzeninde, fatura bilgisi ve toplam sağ panelde"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.141",
+      "tarih": "2026-11-02",
+      "notlar": [
+        "Alış faturası ekranı yenilendi: ürünler kart düzeninde, fatura bilgisi ve toplam sağ panelde"
+      ]
+    },
     {
       "surum": "1.0.140",
       "tarih": "2026-11-02",
@@ -1039,6 +1046,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "cb31da9f1c4bf5f43fca1fd7bd7a3ec59e5d9e1d05023143d67178294723812c",
-  "imza": "SvBIHuCbB76BIGPueRZYUuN3wH3e9MPhr9mqovfqQI7K5PZhcwRIB7w6VL0YC5QSY12Fj+nFh8vwAeH1prlOCw=="
+  "sha256": "61d595b8364c32292a61be2aece9e3bedd769bc28462bf8ec261027cc020f5b5",
+  "imza": "QWeBcZa9Wns1b1nyrHg8eo4PYZMuVEuab0y4OoeCpuj4vie3l31//UWmzHjr0SBDlH048oyA7xgh+ULDH9m9AA=="
 }
