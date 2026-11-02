@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.142",
+  "surum": "1.0.143",
   "tarih": "2026-11-02",
   "notlar": [
-    "Alış faturası: sağ panel kaldırıldı, ürün alanları büyütüldü, Yeni satır ekle düğmesi eklendi"
+    "Alış faturası: KDV hariç alanı kaldırıldı, adet ve fiyat kutuları küçültüldü, stoktaki ürün büyütüldü"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.143",
+      "tarih": "2026-11-02",
+      "notlar": [
+        "Alış faturası: KDV hariç alanı kaldırıldı, adet ve fiyat kutuları küçültüldü, stoktaki ürün büyütüldü"
+      ]
+    },
     {
       "surum": "1.0.142",
       "tarih": "2026-11-02",
@@ -1053,6 +1060,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "5ff6eff9c5ad39ad20d80ff4372993c4bf899cbbbea23a2aa9c6199a3b6ae5c0",
-  "imza": "4mWIwjnqUrVsUjK+3jNGFx252kD+49sUqU3HNMeHh1t4lFjHS5RYlCX7o6kHeBFGLkI0qFNL6TtfCWYsqptTBg=="
+  "sha256": "2481703d6e37674e00b3ef36a987855d689baf1557bcd00981b3d0daccab9aad",
+  "imza": "q5B2fWJgBY6KmrzVQH35feyyuTXPwtk1ms8En6hXB6JnpnSn+f5NdQWDB6UFGyKlz2E+sraOQgdtE6HUbaT+AA=="
 }
