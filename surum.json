@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.145",
+  "surum": "1.0.146",
   "tarih": "2026-11-02",
   "notlar": [
-    "Fiyat takibi: programdaki alış KDV dahil gösterilir, KDV hariç tutar altında yazar"
+    "Müşteriler bakiyeye göre sıralı: en borçlu üstte, borcumuz olanlar en altta"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.146",
+      "tarih": "2026-11-02",
+      "notlar": [
+        "Müşteriler bakiyeye göre sıralı: en borçlu üstte, borcumuz olanlar en altta"
+      ]
+    },
     {
       "surum": "1.0.145",
       "tarih": "2026-11-02",
@@ -1074,6 +1081,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "d7a40193da37bb17d75fdede08a584c1d9cffa10f9d2112bb098bbfa93d1b272",
-  "imza": "yjdG/Q5CyxtV35hRaPdqdd3D3Qbirdrk/6qiO4KELlMZn+0BK+KUHVEmhJLp1J9sIZPOkGXuY2BXb0g9UyHQCA=="
+  "sha256": "7c9fb7dcaa78f45e9d8032640c4771a828065df3f337b5af9da64ff67248c3e3",
+  "imza": "WggWUhFHSwr6A4ExW9jKbHVAslWpcR3nMf8gOmf57ExswcKL2EGFkHiQ6X9Ng3s4MTBGPbW3j4C7i8wYMabiBA=="
 }
