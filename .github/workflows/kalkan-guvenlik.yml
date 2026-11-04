@@ -1,0 +1,141 @@
+# Kalkan Güvenlik Taraması — gitleaks + Trivy + Semgrep
+# Konum: .github/workflows/kalkan-guvenlik.yml
+# Sadece RAPORLAR: koda dokunmaz, commit/PR açmaz, build'i kırmaz.
+# Araçlar sabit sürüm + SHA256 doğrulamasıyla indirilir (tedarik zinciri saldırılarına karşı).
+
+name: Kalkan Guvenlik Taramasi
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+  schedule:
+    - cron: "23 2 * * *" # her gece (UTC 02:23 = TR 05:23)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kalkan-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tara:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Kodu al
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0 # gitleaks tüm commit geçmişini tarasın
+          persist-credentials: false
+
+      - name: Araçları kur (sabit sürüm + SHA256)
+        env:
+          GITLEAKS_VERSION: "8.30.1"
+          GITLEAKS_SHA256: "551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb"
+          TRIVY_VERSION: "0.76.1"
+          TRIVY_SHA256: "c7cbe3137fb8a48a17574bede3dd6beb16742d1e9772929940fc90082c39d9c0"
+          SEMGREP_VERSION: "1.183.0"
+        run: |
+          set -euo pipefail
+          BIN="$RUNNER_TEMP/kalkan-bin"; mkdir -p "$BIN"; cd "$RUNNER_TEMP"
+          curl -fsSL --retry 3 -o gitleaks.tgz "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          echo "${GITLEAKS_SHA256}  gitleaks.tgz" | sha256sum -c -
+          tar -xzf gitleaks.tgz -C "$BIN" gitleaks
+          curl -fsSL --retry 3 -o trivy.tgz "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
+          echo "${TRIVY_SHA256}  trivy.tgz" | sha256sum -c -
+          tar -xzf trivy.tgz -C "$BIN" trivy
+          python3 -m venv "$RUNNER_TEMP/sg" && "$RUNNER_TEMP/sg/bin/pip" install --quiet "semgrep==${SEMGREP_VERSION}"
+          ln -s "$RUNNER_TEMP/sg/bin/semgrep" "$BIN/semgrep"
+          echo "$BIN" >> "$GITHUB_PATH"
+
+      - name: Gizli anahtar taraması (gitleaks, tüm geçmiş)
+        continue-on-error: true
+        run: gitleaks git --redact --no-banner --exit-code 0 --report-format json --report-path "$RUNNER_TEMP/gitleaks.json" .
+
+      - name: Paket açıkları + yapılandırma (Trivy)
+        continue-on-error: true
+        run: trivy fs --quiet --scanners vuln,misconfig,secret --severity CRITICAL,HIGH,MEDIUM --format json --output "$RUNNER_TEMP/trivy.json" --exit-code 0 .
+
+      - name: Kod açıkları (Semgrep)
+        continue-on-error: true
+        run: semgrep scan --config p/default --config p/owasp-top-ten --metrics=off --quiet --json --output "$RUNNER_TEMP/semgrep.json" . || true
+
+      - name: Rapor oluştur
+        env:
+          KALKAN_TG_TOKEN: ${{ secrets.KALKAN_TG_TOKEN }}
+          KALKAN_TG_CHAT: ${{ secrets.KALKAN_TG_CHAT }}
+          EVENT: ${{ github.event_name }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request, urllib.parse
+          T = os.environ["RUNNER_TEMP"]
+          def load(n):
+              try:
+                  with open(os.path.join(T, n), encoding="utf-8") as f: return json.load(f)
+              except Exception: return None
+          items = []
+          tsev = {"CRITICAL": "kritik", "HIGH": "yuksek", "MEDIUM": "orta", "LOW": "dusuk"}
+          for g in load("gitleaks.json") or []:
+              items.append(dict(tool="gitleaks", severity="kritik", title="Kodda gizli anahtar: " + g.get("Description", g.get("RuleID", "")),
+                  file=g.get("File", ""), line=g.get("StartLine", 0),
+                  detail="Commit " + g.get("Commit", "")[:8] + " (" + g.get("Date", "")[:10] + "). Silinmiş olsa bile git geçmişinde duruyor.",
+                  fix="Anahtarı servis panelinden iptal edip yenile; yenisini .env / GitHub Secrets'ta tut, .env'i .gitignore'a ekle."))
+          tv = load("trivy.json") or {}
+          for r in tv.get("Results") or []:
+              tgt = r.get("Target", "")
+              for v in r.get("Vulnerabilities") or []:
+                  fixv = v.get("FixedVersion") or ""
+                  items.append(dict(tool="trivy", severity=tsev.get(v.get("Severity"), "orta"),
+                      title=f'{v.get("PkgName")} {v.get("InstalledVersion")} — {v.get("VulnerabilityID")}', file=tgt, line=0,
+                      detail=(v.get("Title") or "")[:300],
+                      fix=(f'{v.get("PkgName")} paketini {fixv} sürümüne güncelle.' if fixv else "Henüz yama yok; paketi değiştirmeyi düşün.")))
+              for m in r.get("Misconfigurations") or []:
+                  items.append(dict(tool="trivy", severity=tsev.get(m.get("Severity"), "orta"), title=m.get("Title", m.get("ID", "")),
+                      file=tgt, line=(m.get("CauseMetadata") or {}).get("StartLine", 0), detail=(m.get("Message") or "")[:300], fix=(m.get("Resolution") or "")[:300]))
+              for s in r.get("Secrets") or []:
+                  items.append(dict(tool="trivy", severity=tsev.get(s.get("Severity"), "yuksek"), title="Gizli anahtar: " + s.get("Title", s.get("RuleID", "")),
+                      file=tgt, line=s.get("StartLine", 0), detail="Dosyada açık metin gizli bilgi bulundu.", fix="Anahtarı iptal et/yenile ve koddan çıkar."))
+          ssev = {"ERROR": "yuksek", "WARNING": "orta", "INFO": "dusuk"}
+          for s in (load("semgrep.json") or {}).get("results") or []:
+              ex = s.get("extra") or {}
+              items.append(dict(tool="semgrep", severity=ssev.get(ex.get("severity"), "orta"), title=s.get("check_id", "").split(".")[-1],
+                  file=s.get("path", ""), line=(s.get("start") or {}).get("line", 0), detail=(ex.get("message") or "")[:400],
+                  fix="Satırı incele; mesajdaki öneriyi uygula."))
+          rank = {"kritik": 5, "yuksek": 4, "orta": 3, "dusuk": 2, "bilgi": 1}
+          items.sort(key=lambda i: -rank.get(i["severity"], 0))
+          c = {k: sum(1 for i in items if i["severity"] == k) for k in rank}
+          with open("kalkan-ozet.json", "w", encoding="utf-8") as f:
+              json.dump({"repo": os.environ["REPO"], "counts": c, "items": items}, f, ensure_ascii=False)
+          lab = {"kritik": "🔴 Kritik", "yuksek": "🟠 Yüksek", "orta": "🟡 Orta", "dusuk": "🔵 Düşük"}
+          with open(os.environ["GITHUB_STEP_SUMMARY"], "a", encoding="utf-8") as f:
+              f.write("## 🛡 Kalkan güvenlik raporu\n\n" + " · ".join(f"{lab[k]}: **{c[k]}**" for k in lab) + "\n\n")
+              if items:
+                  f.write("| Seviye | Araç | Bulgu | Dosya |\n|---|---|---|---|\n")
+                  for i in items[:60]:
+                      t = i["title"].replace("|", "\\|")
+                      f.write(f'| {i["severity"]} | {i["tool"]} | {t} | `{i["file"]}:{i["line"]}` |\n')
+              else:
+                  f.write("✅ Sorun bulunamadı.\n")
+          tok, chat = os.environ.get("KALKAN_TG_TOKEN"), os.environ.get("KALKAN_TG_CHAT")
+          if tok and chat and os.environ.get("EVENT") != "pull_request" and (c["kritik"] or c["yuksek"]):
+              msg = (f'🛡 <b>Kalkan — {os.environ["REPO"]}</b>\n🔴 {c["kritik"]} kritik · 🟠 {c["yuksek"]} yüksek · 🟡 {c["orta"]} orta\n\n'
+                     + "\n".join(f'• [{i["tool"]}] {i["title"][:90]}' for i in items[:8])
+                     + f'\n\n<a href="{os.environ["RUN_URL"]}">Raporu aç</a>')
+              msg = msg.replace("&", "&amp;").replace("<b>", "\x01").replace("</b>", "\x02").replace("<a ", "\x03").replace("</a>", "\x04").replace("<", "&lt;").replace("\x01", "<b>").replace("\x02", "</b>").replace("\x03", "<a ").replace("\x04", "</a>")
+              data = urllib.parse.urlencode({"chat_id": chat, "text": msg, "parse_mode": "HTML", "disable_web_page_preview": "true"}).encode()
+              try: urllib.request.urlopen(f"https://api.telegram.org/bot{tok}/sendMessage", data, timeout=20)
+              except Exception as e: print("Telegram gönderilemedi:", type(e).__name__)
+          print(f"Toplam {len(items)} bulgu:", c)
+          PY
+
+      - name: Raporu sakla (Kalkan paneli buradan okur)
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: kalkan-rapor
+          path: kalkan-ozet.json
+          retention-days: 14
