@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.146",
-  "tarih": "2026-11-02",
+  "surum": "1.0.147",
+  "tarih": "2026-11-06",
   "notlar": [
-    "Müşteriler bakiyeye göre sıralı: en borçlu üstte, borcumuz olanlar en altta"
+    "Bulut eşitleme hatası artık sunucuyu kapatmaz; sunucu kapalıyken girişte doğru uyarı gösterilir"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.147",
+      "tarih": "2026-11-06",
+      "notlar": [
+        "Bulut eşitleme hatası artık sunucuyu kapatmaz; sunucu kapalıyken girişte doğru uyarı gösterilir"
+      ]
+    },
     {
       "surum": "1.0.146",
       "tarih": "2026-11-02",
@@ -1081,6 +1088,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "7c9fb7dcaa78f45e9d8032640c4771a828065df3f337b5af9da64ff67248c3e3",
-  "imza": "WggWUhFHSwr6A4ExW9jKbHVAslWpcR3nMf8gOmf57ExswcKL2EGFkHiQ6X9Ng3s4MTBGPbW3j4C7i8wYMabiBA=="
+  "sha256": "6054821555552b5428c107faa3588bc168815c7d82e486cbd33bd3b6c2a18820",
+  "imza": "fYemvuDqGUC6BNkajb8OUKXA12rmnVrx5yc+11xzsAU/R6XySuSj8GlhFr/uHXQA+mh8QUOwM+85XPQj97SnCQ=="
 }
