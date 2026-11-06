@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.147",
+  "surum": "1.0.148",
   "tarih": "2026-11-06",
   "notlar": [
-    "Bulut eşitleme hatası artık sunucuyu kapatmaz; sunucu kapalıyken girişte doğru uyarı gösterilir"
+    "Güncelleyici düzeltildi: dosyalar 'file exists' hatası vermeden yazılır"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.148",
+      "tarih": "2026-11-06",
+      "notlar": [
+        "Güncelleyici düzeltildi: dosyalar 'file exists' hatası vermeden yazılır"
+      ]
+    },
     {
       "surum": "1.0.147",
       "tarih": "2026-11-06",
@@ -1088,6 +1095,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "6054821555552b5428c107faa3588bc168815c7d82e486cbd33bd3b6c2a18820",
-  "imza": "fYemvuDqGUC6BNkajb8OUKXA12rmnVrx5yc+11xzsAU/R6XySuSj8GlhFr/uHXQA+mh8QUOwM+85XPQj97SnCQ=="
+  "sha256": "67a8b8de9f60015b59094a5a1b1b7721c560ece7d98f9c5977b387949aff1cee",
+  "imza": "Z7XZ0cmXlD5EO3qBe76kzCcEzgerXXBYd911goLy7hD7d/G3aO1IarQqe6STRSMBteXGDafYWbHUDjj3WPUoBQ=="
 }
