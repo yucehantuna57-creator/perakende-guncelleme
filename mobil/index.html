@@ -232,7 +232,11 @@ try { const k = JSON.parse(localStorage.getItem(DEPO) || "null"); if (k) S = { .
 if (!S.dukKalem || S.dukKalemSurum !== 2) { S.dukKalem = {}; S.dukSira = 0; S.dukKalemSurum = 2; }
 if (!S.cihaz) S.cihaz = 1 + Math.floor(Math.random() * 998);
 let sepet = [], seciliKategori = "", aramaMetni = "", cevrimici = navigator.onLine;
-function kaydet() { try { localStorage.setItem(DEPO, JSON.stringify(S)); } catch (e) { bildir("Kayıt alanı dolu"); } }
+// Ürün fotoğrafları telefonda saklanmaz: telefon belleğini doldurup kayıtların (ve numara sayacının) kaydedilmesini engelliyordu
+function kaydet() {
+  try { localStorage.setItem(DEPO, JSON.stringify(S, (k, v) => (k === "resim" ? undefined : v))); }
+  catch (e) { alert("Telefonun kayıt alanı dolu, son işlem kaydedilemedi. Ayarlar > Yenile ile verileri yeniden indirin."); }
+}
 
 function bildir(m, ms) { const b = $("bildirim"); b.textContent = m; b.hidden = false; clearTimeout(bildir.z); bildir.z = setTimeout(() => b.hidden = true, ms || 2200); }
 
@@ -904,7 +908,13 @@ function parcaliOdeme(top) {
 }
 function dukParcalar(satisId) { const l = Object.values((S.dukParca || {})[satisId] || {}); return l.length > 1 ? l.map(x => ({ yontem: x[0], tutar: x[1] })) : null; }
 function odemeYazisi(parcalar, yontem) { return parcalar && parcalar.length > 1 ? parcalar.map(p => YONTEM[p.yontem] + " " + para(p.tutar)).join(" + ") : YONTEM[yontem] || yontem || ""; }
-function yeniId(tablo) { S.sayac[tablo] = (S.sayac[tablo] || 0) + 1; return 1000000000 + S.cihaz * 1000000 + S.sayac[tablo]; }
+// Numara zamana bağlıdır (2026 başından beri geçen saniye onda biri): telefon kaydı eski hâline dönse bile aynı numara
+// iki kayda verilmez. Eskiden sayaç geri dönünce yeni satış önceki satışın üzerine yazılıyordu.
+function yeniId(tablo) {
+  const zaman = Math.floor((Date.now() - Date.UTC(2026, 0, 1)) / 100);
+  S.sayac[tablo] = Math.max((S.sayac[tablo] || 0) + 1, zaman);
+  return 10000000000000 + S.cihaz * 10000000000 + S.sayac[tablo];
+}
 function satisKaydet(yontem, musteriId, parcalar) {
   if (!sepet.length) return;
   const simdi = Date.now(), tarih = new Date(simdi).toISOString(), top = sepet.reduce((t, s) => t + s.adet * s.fiyat, 0);
@@ -1111,7 +1121,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261101065300";
+const SURUM = "20261108061240";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
