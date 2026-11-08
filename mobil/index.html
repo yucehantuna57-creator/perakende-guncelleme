@@ -919,7 +919,10 @@ function satisKaydet(yontem, musteriId, parcalar) {
   if (!sepet.length) return;
   const simdi = Date.now(), tarih = new Date(simdi).toISOString(), top = sepet.reduce((t, s) => t + s.adet * s.fiyat, 0);
   const gun = tarih.slice(0, 10).replace(/-/g, "");
-  S.sayac.fis = (S.sayac.fis || 0) + 1;
+  // Fiş numarası bugün bu telefonda verilmiş en büyük numaradan devam eder, asla tekrarlanmaz
+  const fisOn = `M${gun}-${String(S.cihaz).padStart(3, "0")}-`;
+  const enBuyuk = Math.max(0, ...S.satislarim.filter(x => String(x.fis_no || "").startsWith(fisOn)).map(x => Number(String(x.fis_no).slice(fisOn.length)) || 0));
+  S.sayac.fis = Math.max((S.sayac.fis || 0) + 1, enBuyuk + 1);
   const fisNo = `M${gun}-${String(S.cihaz).padStart(3, "0")}-${String(S.sayac.fis).padStart(5, "0")}`;
   const ekle = (tablo, veri) => { S.kuyruk.push({ tablo, kid: veri.id, veri, g: Date.now() }); return veri; };
   const satis = ekle("satislar", { id: yeniId("satislar"), fis_no: fisNo, kasa_no: "M" + S.cihaz, kullanici_id: S.kullanici.id, musteri_id: musteriId, ara_toplam: top, indirim: 0, toplam: top, durum: "tamamlandi", tarih });
@@ -1121,7 +1124,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261108061240";
+const SURUM = "20261108061947";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
