@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.149",
-  "tarih": "2026-11-06",
+  "surum": "1.0.150",
+  "tarih": "2026-11-08",
   "notlar": [
-    "Güncelleyici düzeltildi; bulut eşitleme hatası sunucuyu kapatmaz; sunucu kapalıyken girişte doğru uyarı"
+    "Sunucu kapanırsa program onu kendiliğinden yeniden başlatır; satışlar cariye işlenmeden birikmez"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.150",
+      "tarih": "2026-11-08",
+      "notlar": [
+        "Sunucu kapanırsa program onu kendiliğinden yeniden başlatır; satışlar cariye işlenmeden birikmez"
+      ]
+    },
     {
       "surum": "1.0.149",
       "tarih": "2026-11-06",
@@ -1102,6 +1109,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "f52f0fd910acc0ff99fa50b381e60949407596dfdcbebe40e9e56e40d49771e9",
-  "imza": "PBKCRtGBuI0MqNtTdOmnTkEqzadnftHoKy5ybCXnRwK46xvfxQDCT0GUWA2bwE6WRNuXHYDGngnGL1UzlPpyBg=="
+  "sha256": "7227f3eb234bace684b78a8540b1c90e719854cfe5dff58a407c46b3b75a20fe",
+  "imza": "TMC9aguCZYbUL2Q1LhYzER5VD17UOgW0QfTfEnLnSZB0H+XwAq4HPCU1TyHSg7vs0oYm41/rjaaCdJN8rx7eAA=="
 }
