@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.151",
+  "surum": "1.0.152",
   "tarih": "2026-11-08",
   "notlar": [
-    "Telefon kayıt numaraları çakışmayacak şekilde ayrıldı (telefon satışlarının birbirinin üzerine yazılması düzeltildi)"
+    "Eşitlemede numara çakışan kayıtlar artık ezilmiyor, ayrı tutuluyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.152",
+      "tarih": "2026-11-08",
+      "notlar": [
+        "Eşitlemede numara çakışan kayıtlar artık ezilmiyor, ayrı tutuluyor"
+      ]
+    },
     {
       "surum": "1.0.151",
       "tarih": "2026-11-08",
@@ -1116,6 +1123,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "1988721e3d88ec7e6add3ce3ed4077e0b2fb9059128c2beb77e138aa2d7fe39b",
-  "imza": "l5NmHmknHq9AwmFQlz8MRKRBzbg85OD6lSHDAl4aJnkBUMaPwUi0pQ9IZSrqTcHlLfhtM7ALFGLoj6EA8aCbDw=="
+  "sha256": "585a29ea86fdfac64b21d3de5a9476592b06b4058548f1fc9334bd16af1d9322",
+  "imza": "YJDYGmdpBdwVnK1Fd3KWZyawSONSwqUMjN7TlkRCQUXnFM6oKMuPf+zJzK0026kh3hpAaGW/YJXVJc0l7UXaDw=="
 }
