@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.153",
+  "surum": "1.0.154",
   "tarih": "2026-11-12",
   "notlar": [
-    "Web gönderiminde fotoğraflar görünüyor, yalnızca fotoğraflı ürünler seçilebiliyor"
+    "Web sitesine ürünler fotoğraflarıyla gönderiliyor (site adresi ve anahtarı Ayarlar'dan)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.154",
+      "tarih": "2026-11-12",
+      "notlar": [
+        "Web sitesine ürünler fotoğraflarıyla gönderiliyor (site adresi ve anahtarı Ayarlar'dan)"
+      ]
+    },
     {
       "surum": "1.0.153",
       "tarih": "2026-11-12",
@@ -1130,6 +1137,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "87d9ab2a84c086461f7a908d10e268de0241af94067c76886a22a8bbcd3ffcf7",
-  "imza": "PmUi4uqMUKRulKKlznVPqVzjQUN/wdpXXOYl6zQyjupyzZRAG82AHX1GB2NQQHHNJfUwPeaLzbbjwjngh6sjDw=="
+  "sha256": "214511a668d7d2405eab3362c8b982a5e3f6d3e77868a9a5b49c8a55a6e2a05f",
+  "imza": "3xNKhuydDgVpU2zRluclR8GmJ4TDZNCpxFwmqna4IVAfA4tM2IpEwSBcf1PECngjR2XsV5xf1Un/FFBM7aIhCA=="
 }
