@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.152",
-  "tarih": "2026-11-08",
+  "surum": "1.0.153",
+  "tarih": "2026-11-12",
   "notlar": [
-    "Eşitlemede numara çakışan kayıtlar artık ezilmiyor, ayrı tutuluyor"
+    "Web gönderiminde fotoğraflar görünüyor, yalnızca fotoğraflı ürünler seçilebiliyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.153",
+      "tarih": "2026-11-12",
+      "notlar": [
+        "Web gönderiminde fotoğraflar görünüyor, yalnızca fotoğraflı ürünler seçilebiliyor"
+      ]
+    },
     {
       "surum": "1.0.152",
       "tarih": "2026-11-08",
@@ -1123,6 +1130,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "585a29ea86fdfac64b21d3de5a9476592b06b4058548f1fc9334bd16af1d9322",
-  "imza": "YJDYGmdpBdwVnK1Fd3KWZyawSONSwqUMjN7TlkRCQUXnFM6oKMuPf+zJzK0026kh3hpAaGW/YJXVJc0l7UXaDw=="
+  "sha256": "87d9ab2a84c086461f7a908d10e268de0241af94067c76886a22a8bbcd3ffcf7",
+  "imza": "PmUi4uqMUKRulKKlznVPqVzjQUN/wdpXXOYl6zQyjupyzZRAG82AHX1GB2NQQHHNJfUwPeaLzbbjwjngh6sjDw=="
 }
