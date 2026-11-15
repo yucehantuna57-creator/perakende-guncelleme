@@ -1,10 +1,21 @@
 {
-  "surum": "1.0.154",
-  "tarih": "2026-11-12",
+  "surum": "1.0.155",
+  "tarih": "2026-11-15",
   "notlar": [
-    "Web sitesine ürünler fotoğraflarıyla gönderiliyor (site adresi ve anahtarı Ayarlar'dan)"
+    "Aramada büyük/küçük harf ve ı-i, ş-s, ü-u gibi farklar yok sayılıyor; tam ad, yarım ad, kelime sırası fark etmez",
+    "Stok listesinde ve ürün çekmecesinde alış fiyatı görünüyor",
+    "Kasa ürün kartlarında ürün adı tam görünüyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.155",
+      "tarih": "2026-11-15",
+      "notlar": [
+        "Aramada büyük/küçük harf ve ı-i, ş-s, ü-u gibi farklar yok sayılıyor; tam ad, yarım ad, kelime sırası fark etmez",
+        "Stok listesinde ve ürün çekmecesinde alış fiyatı görünüyor",
+        "Kasa ürün kartlarında ürün adı tam görünüyor"
+      ]
+    },
     {
       "surum": "1.0.154",
       "tarih": "2026-11-12",
@@ -1137,6 +1148,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "214511a668d7d2405eab3362c8b982a5e3f6d3e77868a9a5b49c8a55a6e2a05f",
-  "imza": "3xNKhuydDgVpU2zRluclR8GmJ4TDZNCpxFwmqna4IVAfA4tM2IpEwSBcf1PECngjR2XsV5xf1Un/FFBM7aIhCA=="
+  "sha256": "cca61d8e0001fc3dda10dd8f3eaf9f23e34298f86c604f782cdaba060e868213",
+  "imza": "ommwMYbXbN+Xv8+idUtc8xcNDJ9m80Yse21EJKgRZ5rQplUopKbPXlljex3JQgkpTMpH8eWiduNrLyO3w+eRCw=="
 }
