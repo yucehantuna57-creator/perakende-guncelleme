@@ -1,12 +1,19 @@
 {
-  "surum": "1.0.155",
+  "surum": "1.0.156",
   "tarih": "2026-11-15",
   "notlar": [
-    "Aramada büyük/küçük harf ve ı-i, ş-s, ü-u gibi farklar yok sayılıyor; tam ad, yarım ad, kelime sırası fark etmez",
-    "Stok listesinde ve ürün çekmecesinde alış fiyatı görünüyor",
-    "Kasa ürün kartlarında ürün adı tam görünüyor"
+    "Fiyat takibine Sözenler Hırdavat eklendi",
+    "Bir tedarikçide eşleştirilen ürün diğer tedarikçilerde gösterilmiyor (fiyatlar çakışmasın)"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.156",
+      "tarih": "2026-11-15",
+      "notlar": [
+        "Fiyat takibine Sözenler Hırdavat eklendi",
+        "Bir tedarikçide eşleştirilen ürün diğer tedarikçilerde gösterilmiyor (fiyatlar çakışmasın)"
+      ]
+    },
     {
       "surum": "1.0.155",
       "tarih": "2026-11-15",
@@ -1148,6 +1155,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "cca61d8e0001fc3dda10dd8f3eaf9f23e34298f86c604f782cdaba060e868213",
-  "imza": "ommwMYbXbN+Xv8+idUtc8xcNDJ9m80Yse21EJKgRZ5rQplUopKbPXlljex3JQgkpTMpH8eWiduNrLyO3w+eRCw=="
+  "sha256": "4b926dfb202af4dd52e82ad915a1ccf5d82aa067d9167f86eb91eed9877b99e7",
+  "imza": "n0RwNJd0esZ237xinuB041nN+Mn+E7nb3x5NWZCDPDuMMt9AItvlF1LmQg/z3f15e9HwD565wYMeUcBOJDRfAQ=="
 }
