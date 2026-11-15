@@ -1,11 +1,19 @@
 {
-  "surum": "1.0.156",
+  "surum": "1.0.157",
   "tarih": "2026-11-15",
   "notlar": [
-    "Fiyat takibine Sözenler Hırdavat eklendi",
-    "Bir tedarikçide eşleştirilen ürün diğer tedarikçilerde gösterilmiyor (fiyatlar çakışmasın)"
+    "Her yayından önce otomatik denemeler çalışıyor (satış eşitleme, arama, telefon numaraları, tedarikçi)",
+    "Telefon, dükkân bilgisayarı uzun süre eşitlenmezse uyarı gösteriyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.157",
+      "tarih": "2026-11-15",
+      "notlar": [
+        "Her yayından önce otomatik denemeler çalışıyor (satış eşitleme, arama, telefon numaraları, tedarikçi)",
+        "Telefon, dükkân bilgisayarı uzun süre eşitlenmezse uyarı gösteriyor"
+      ]
+    },
     {
       "surum": "1.0.156",
       "tarih": "2026-11-15",
@@ -1155,6 +1163,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "4b926dfb202af4dd52e82ad915a1ccf5d82aa067d9167f86eb91eed9877b99e7",
-  "imza": "n0RwNJd0esZ237xinuB041nN+Mn+E7nb3x5NWZCDPDuMMt9AItvlF1LmQg/z3f15e9HwD565wYMeUcBOJDRfAQ=="
+  "sha256": "8792e22b7b771ef980828b6eb97f3846d74723e8cf21d7c6281cb674c508a523",
+  "imza": "2w5ZLI6U6jVN9Lhwi8ChTF9savAtYrOjVlxzbsHhVVyX82PufotEj5/+t5K/JOW/oTqV0lJpYkDv7g2enEL6Dw=="
 }
