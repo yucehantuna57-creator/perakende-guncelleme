@@ -178,6 +178,7 @@
     <div class="ad"><b id="u-isletme">SOFTNEST-satış</b><small><span class="durum" id="u-durum"></span><span id="u-durum-yazi">Eşitleniyor</span> · <span id="u-kim"></span></small></div>
     <button id="u-menu" aria-label="Ayarlar">⚙ Ayarlar</button>
   </header>
+  <div id="u-pc-uyari" hidden style="margin:8px 12px 0;padding:10px 12px;border-radius:12px;background:#fdecea;color:#a12a1e;font-size:14px;font-weight:600"></div>
   <main id="sekmeler">
     <div class="sekme" id="t-ana"></div>
     <div class="sekme" id="t-kasa" hidden>
@@ -276,7 +277,7 @@ async function cek() {
     if (!r.ok) throw new Error(r.hata || "Alınamadı");
     for (const k of r.kayitlar) {
       const id = Number(k.kid);
-      if (k.tablo === "ayarlar") { S.isletme = (k.veri && k.veri.isletmeAdi) || ""; $("u-isletme").textContent = S.isletme || "SOFTNEST-satış"; continue; }
+      if (k.tablo === "ayarlar") { S.isletme = (k.veri && k.veri.isletmeAdi) || ""; S.pcSon = (k.veri && k.veri.pcSon) || S.pcSon || 0; S.pcHata = (k.veri && k.veri.pcHata) || ""; $("u-isletme").textContent = S.isletme || "SOFTNEST-satış"; continue; }
       const dizi = k.tablo === "urunler" ? S.urunler : k.tablo === "kategoriler" ? S.kategoriler : k.tablo === "musteriler" ? S.musteriler : k.tablo === "cari_hareketler" ? S.cari : null;
       if (!dizi) continue;
       const i = dizi.findIndex(x => x.id === id);
@@ -348,6 +349,16 @@ async function esitle(sessiz) {
 function durumYaz(hata) {
   $("u-durum").className = "durum " + (cevrimici ? "acik" : "kapali");
   $("u-durum-yazi").textContent = (cevrimici ? "Çevrimiçi" : "Çevrimdışı") + (S.kuyruk.length ? " · " + S.kuyruk.filter(k => k.tablo === "satislar").length + " satış bekliyor" : "");
+  pcUyariYaz();
+}
+// Dükkân bilgisayarı uzun süredir eşitlenmiyorsa telefonda uyarı: telefondan yapılan satışlar buluta gider ama programa geçmez
+function pcUyariYaz() {
+  const k = $("u-pc-uyari"); if (!k) return;
+  const dk = S.pcSon ? Math.floor((Date.now() - S.pcSon) / 60000) : 0;
+  let m = "";
+  if (S.pcSon && dk > 20) m = `⚠ Dükkân bilgisayarı ${dk >= 120 ? Math.floor(dk / 60) + " saattir" : dk + " dakikadır"} eşitlenmiyor. Telefondan yaptığınız satışlar kaybolmaz ama programa geçmez; bilgisayardaki programı kontrol edin.`;
+  else if (S.pcHata) m = "⚠ Bilgisayarda eşitleme hatası: " + S.pcHata;
+  k.textContent = m; k.hidden = !m;
 }
 
 // ---------- Giriş ----------
@@ -1124,7 +1135,7 @@ document.addEventListener("visibilitychange", () => { if (!document.hidden) esit
 setInterval(() => esitle(true), 15000);
 
 // ---------- Sürüm denetimi: yeni sürüm yayınlanınca "güncellensin mi?" diye sorar (adres hep aynı kalır) ----------
-const SURUM = "20261108061947";
+const SURUM = "20261115123748";
 let guncellemeSoruldu = false;
 async function surumDenetle(zorla) {
   if (SURUM === "__SURUM__" || !/^https?:/.test(location.protocol) || (guncellemeSoruldu && !zorla)) return;
