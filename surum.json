@@ -1,10 +1,17 @@
 {
-  "surum": "1.0.158",
+  "surum": "1.0.159",
   "tarih": "2026-11-17",
   "notlar": [
-    "Detaylı ekstrede iptal edilen fişler artık görünmüyor"
+    "Ekstrede ve cari hareketlerde 'Ödeme (borcumuz)' yerine 'Ödeme' yazıyor"
   ],
   "gecmis": [
+    {
+      "surum": "1.0.159",
+      "tarih": "2026-11-17",
+      "notlar": [
+        "Ekstrede ve cari hareketlerde 'Ödeme (borcumuz)' yerine 'Ödeme' yazıyor"
+      ]
+    },
     {
       "surum": "1.0.158",
       "tarih": "2026-11-17",
@@ -1169,6 +1176,6 @@
     }
   ],
   "dosya": "uygulama.zip",
-  "sha256": "5a3f3e77580aed27d73bdbe01b0790a010a183aba25c0b9a0e88be64be2aea06",
-  "imza": "mf+70ZBHaHjpoljZEVBCcCQiRHVCWZIrCw91EOG2nX7xeBm/nCq2DL7DdedrJ+8UoHkRIXASIh5dbSamp7GvCA=="
+  "sha256": "b07705e79c97ed357c3a00fb24c8ffe90bf63fb4a411a451bd3a4c3064c7d3e2",
+  "imza": "gmvd1jLSG+svr82auUWEDM9YvLA08Tb9pLkTMyxp51HgNgMsANtNI91fTfCZxE2az8bYv90m+80oHYRpj9HtAQ=="
 }
